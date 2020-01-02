@@ -1,5 +1,7 @@
 # ignore all 
 * 
+*/
 # but not this one 
-README.MD
+!.gitignore
+!README.MD
 

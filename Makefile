@@ -14,7 +14,7 @@ OBJ      = ./obj/
 INC      = ./incl/
 BIN		= ./bin/
 
-CC = g++ 
+CC = gcc
 
 INCLPATH =  -I $(INC) 
 

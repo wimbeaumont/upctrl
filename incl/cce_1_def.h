@@ -47,6 +47,7 @@ const int P5=12;
 const int P6=8;
 const int P7=24;
 
+const int MUXSEL2 = 22;// use GPIO 22 for 8 input mux 
 
 //  end pin def 
 
@@ -78,6 +79,7 @@ int init_pin2( iopin *thispin, unsigned pin, unsigned mode  ) {
 typedef struct cce_1pins_struct {
 	iopin mux_out_s0;
 	iopin mux_out_s1;
+	iopin mux_out_s2;
 	iopin led[8];
 } cce_1pins;
 
@@ -101,6 +103,15 @@ int init_cce_1() {
 	return err; 
 }
 
+
+int init_cce_2() {
+	// do all init as for pr1  + 
+	int err= init_cce_1();
+	if (err <0) return err;
+	err = init_pin2( &iopins.mux_out_s2,MUXSEL2,PI_OUTPUT ) ;
+	if (err <0) return err;
+	return err;
+}
 				
 		
 int get_led_status_bin( unsigned* ls, int size ){
@@ -136,38 +147,112 @@ void set_outputs( unsigned pins[], const int nrpins , int value ){
 
 
 
-
-	
-int set_muxout( char  a ) {
+int set_muxout2( int a, int nrinp ) {
 	int err=0; 
 	//printf( "init status s0  %d , s2  %d \n\r", iopins.mux_out_s0.initialized ,  iopins.mux_out_s1.initialized);
 	if (iopins.mux_out_s0.initialized &&  iopins.mux_out_s1.initialized ){
+	 if (nrinp ==4 ) {	
 		switch ( a ) { 
-			case 'A'  : { 
+			case 0  : { 
 				gpioWrite(iopins.mux_out_s0.pin,0);
 				gpioWrite(iopins.mux_out_s1.pin,0);				
 			}			
 			break;			
-			case 'B'  : { 
+			case 1  : { 
 				gpioWrite(iopins.mux_out_s0.pin,1);
 				gpioWrite(iopins.mux_out_s1.pin,0);
 			}
 			break;	
-			case 'C'  : { 
+			case 2  : { 
 				gpioWrite(iopins.mux_out_s0.pin,0);
 				gpioWrite(iopins.mux_out_s1.pin,1);
 			}
 			break;	
-			case 'D'  : { 
+			case 3  : { 
 				gpioWrite(iopins.mux_out_s0.pin,1);
 				gpioWrite(iopins.mux_out_s1.pin,1);
 			}
 			break;	
+			default :  err =-3 ;
+		}// end switch
+	 }else 
+      if( nrinp==8) {
+		  switch ( a ) {
+			case 0  : { 
+				gpioWrite(iopins.mux_out_s0.pin,0);
+				gpioWrite(iopins.mux_out_s1.pin,0);
+				gpioWrite(iopins.mux_out_s2.pin,0);					
+			}			
+			break;			
+			case 1  : { 
+				gpioWrite(iopins.mux_out_s0.pin,1);
+				gpioWrite(iopins.mux_out_s1.pin,0);
+				gpioWrite(iopins.mux_out_s2.pin,0);				
+			}
+			break;	
+			case 2  : { 
+				gpioWrite(iopins.mux_out_s0.pin,0);
+				gpioWrite(iopins.mux_out_s1.pin,1);
+				gpioWrite(iopins.mux_out_s2.pin,0);		
+			}
+			break;	
+			case 3  : { 
+				gpioWrite(iopins.mux_out_s0.pin,1);
+				gpioWrite(iopins.mux_out_s1.pin,1);
+				gpioWrite(iopins.mux_out_s2.pin,0);
+			}
+			break;
+			case 4  : { 
+				gpioWrite(iopins.mux_out_s0.pin,0);
+				gpioWrite(iopins.mux_out_s1.pin,0);
+				gpioWrite(iopins.mux_out_s2.pin,1);								
+			}			
+			break;			
+			case 5  : { 
+				gpioWrite(iopins.mux_out_s0.pin,1);
+				gpioWrite(iopins.mux_out_s1.pin,0);
+				gpioWrite(iopins.mux_out_s2.pin,1);
+			}
+			break;	
+			case 6  : { 
+				gpioWrite(iopins.mux_out_s0.pin,0);
+				gpioWrite(iopins.mux_out_s1.pin,1);
+				gpioWrite(iopins.mux_out_s2.pin,1);
+			}
+			break;	
+			case 7  : { 
+				gpioWrite(iopins.mux_out_s0.pin,1);
+				gpioWrite(iopins.mux_out_s1.pin,1);
+				gpioWrite(iopins.mux_out_s2.pin,1);
+			}
 			default :  err =-2 ;
-		}
-	}	
-	else { err =-1; }
+		 }	// end switch
+	  }else  { err = -2; }
+	  //printf( "a   %d %d ,%d ,%d \n\r ",a, gpioRead(iopins.mux_out_s2.pin) ,	gpioRead(iopins.mux_out_s1.pin) ,gpioRead(iopins.mux_out_s0.pin) );
+	 } else { err =-1; }  //end if initialized 
 	return err;
 }
+
+
+int set_muxout( char a  ) {
+		int err,inpnr=0;
+		switch ( a ) { 
+			case 'A'  : { inpnr=0; }
+			break;
+			case 'B'  : { inpnr=1; }
+			break;
+			case 'C'  : { inpnr=2; }
+			break;
+			case 'D'  : { inpnr=3; }
+			break;
+			default :  err =-3 ;
+		}
+		if ( err == 0) {
+			err=set_muxout2( inpnr, 4) ;
+		}
+		return err;
+}
+
+
 
 #endif 

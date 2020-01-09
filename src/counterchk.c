@@ -31,6 +31,10 @@ int main(int argc, char *argv[])
 	gpioSetMode(D1, PI_OUTPUT); 
 	gpioSetMode(D2, PI_OUTPUT);
 	// start (enable counters) 
+	gpioSetMode(GPIO18,PI_OUTPUT);
+	gpioWrite (GPIO18, 1) ;	 //clear counters 
+	gpioWrite (GPIO18, 0) ;		
+	
 	gpioWrite (D2, 1) ;		
 	for (int lc=0 ;lc < 2000; lc++) {
 		gpioWrite (D0, 1) ;	
@@ -48,7 +52,7 @@ int main(int argc, char *argv[])
 	// read the counters 
 	for (int  cnt=0;cnt < 6; cnt++){
 		set_muxout2( cnt,8);
-		printf( "cnt %d %d ,%d ,%d \n\r",cnt, gpioRead(MUXSEL2) ,	gpioRead(MUXSEL1) ,gpioRead(MUXSEL0) );
+		//printf( "cnt %d %d ,%d ,%d \n\r",cnt, gpioRead(MUXSEL2) ,	gpioRead(MUXSEL1) ,gpioRead(MUXSEL0) );
 		get_led_status_bin(ls,8);
 		counts[cnt]=  ar2decvalue(ls,8);
 	}

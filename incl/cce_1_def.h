@@ -47,8 +47,9 @@ const int P5=12;
 const int P6=8;
 const int P7=24;
 
-const int MUXSEL2 = 22;// use GPIO 22 for 8 input mux 
-
+const int MUXSEL2 = 22;// use GPIO 22 for 8 input mux
+const int GPIO15=15;
+const int GPIO18=18;
 //  end pin def 
 
 typedef struct iopin_struct  {
@@ -57,6 +58,7 @@ typedef struct iopin_struct  {
 	unsigned initialized;
 
 } iopin ;
+
 
 int init_pin( iopin *thispin ) {
 	int err = gpioSetMode( thispin->pin, thispin->mode );
@@ -114,10 +116,17 @@ int init_cce_2() {
 }
 				
 		
-int get_led_status_bin( unsigned* ls, int size ){
+void  get_led_status_bin( unsigned* ls, int size ){
 	for ( int cnt=0 ; cnt<size  ; cnt++) {
 		*ls++ = gpioRead( iopins.led[cnt].pin); 
 
+	}
+}
+
+// read back the input of a pin array, result is stored in stat 
+void get_inp_status_bin( unsigned *stat, int *pinno, int size ) {
+	for ( int cnt=0 ; cnt<size  ; cnt++) {
+		*stat++ = gpioRead( pinno[cnt]); 
 	}
 }
 
@@ -130,6 +139,32 @@ int print_led_status (int print) {
 	if( print > 1) { printf ( "\n\r" );}
 	return ar2decvalue(ls, sizeof(ls)/sizeof(ls[0]));
 }
+
+
+// standard input for FPGA 
+int  Dpins[] = {  13, 26,19,6,11,10,9,5 };
+
+  //D0=13;D1=26; D2=19;D3=6;D4=11; D5=10;D6=9;D7=5;
+ 
+iopin Ds[8]; 
+// function to initiate  a array of outputs  ( inputs for the FPGA) 
+int setup_output_array( int* pinarry , int size ) {
+	int err=0;
+	if ( size > 8 ) { err=-20; }
+	else {
+		for ( int c =0 ; c <  size ; c++) {
+			init_pin2( &Ds[c], pinarry[c], PI_OUTPUT  );
+			err= init_pin(&Ds[c]) ;
+			if ( err) break;
+		}
+	}
+	return err;
+}
+
+
+
+
+
 /* function to set a number of output
 	pins :  array of  pin numbers  of the io's  to be set  
 	nrpins : nr pins to be set ( should be equal as the  size of the pins array )

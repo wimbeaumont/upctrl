@@ -27,9 +27,11 @@ const int LEDgreen=18;
 const int MUXSEL0=17;
 const int MUXSEL1=4;
 
+const int SEL0=17;
+const int SEL1=4;
 
 
-const int SEL=22;
+const int SEL2=22;
 
 
 
@@ -92,9 +94,9 @@ int init_cce_1() {
 	
 	int err= gpioInitialise();
 	if (err <0) return err;
-	err = init_pin2( &iopins.mux_out_s0,MUXSEL0,PI_OUTPUT ) ;
+	err = init_pin2( &iopins.mux_out_s0,SEL0,PI_OUTPUT ) ;
 	if (err <0) return err; 	
-	err = init_pin2( &iopins.mux_out_s1,MUXSEL1,PI_OUTPUT ) ;
+	err = init_pin2( &iopins.mux_out_s1,SEL1,PI_OUTPUT ) ;
 	if (err <0) return err;
     unsigned ledpinnr[8] ={ P0 ,P1,P2 ,P3,P4,P5,P6,P7 };
 	for ( int cnt=0 ; cnt<8 ; cnt++) {
@@ -110,7 +112,7 @@ int init_cce_2() {
 	// do all init as for pr1  + 
 	int err= init_cce_1();
 	if (err <0) return err;
-	err = init_pin2( &iopins.mux_out_s2,MUXSEL2,PI_OUTPUT ) ;
+	err = init_pin2( &iopins.mux_out_s2,SEL2,PI_OUTPUT ) ;
 	if (err <0) return err;
 	return err;
 }

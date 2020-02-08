@@ -13,10 +13,10 @@ gcc -o counting_polling counting_polling.c -lpigpio -lpthread
 */
 
 
-int main(int argc, char *argv[])
-{
-	int counts[6];
-   int ls[8];// read status led status
+int main(int argc, char *argv[]){
+	
+
+	int ls[8];// read status led status
    
 	int clkdiv=200;
     if ( argc > 1) {
@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
 	}
 	set_outputs(Dpins,8,clkdiv); // set dividing value 
 	err=gpioSetMode (GPIO15, PI_OUTPUT );
-	gpioWrite (GPIO15, 1) ;	
-	gpioWrite (GPIO15, 0) ;	
+	gpioWrite (GPIO15, 1) ;	//enable writing register
+	gpioWrite (GPIO15, 0) ;	// disabe writing register
 	/* 
 	int Dstat[8];
 	get_inp_status_bin(Dstat,Dpins,8);
@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
 	int coinc=0; int c_onedet=0;
 	int andcnt=0;
 	while ( lcnt++ < (long)3*10e6 ) {
-			get_led_status_bin( ls, 3);
-			for ( int lc=0; lc <3 ;lc++){
+			get_led_status_bin( ls, 3); // led status == P
+			for ( int lc=0; lc <3 ;lc++){ // there are pulse inputs 
 				if ( ls[lc]  ) {
 						if ( onedet[lc ] == 0 ){
 							 onedet[lc ]=1;
@@ -74,8 +74,8 @@ int main(int argc, char *argv[])
 			//printf(" andcnt %d \n\r",andcnt);
 	}
 
-	for ( int lc=0; lc <3 ;lc++){printf ( "cnt %d =  %d " , lc, counter[lc]);}
-	printf(" andcnt %d \n\r",andcnt);
+	for ( int lc=0; lc <3 ;lc++){ printf ( "cnt %d =  %d " , lc, counter[lc]); }
+	printf(" andcnt = %d \n\r",andcnt);
    gpioTerminate();
    return 0;
 }

@@ -32,6 +32,7 @@ const int SEL1=4;
 
 
 const int SEL2=22;
+const int clk1=27;
 
 
 
@@ -52,7 +53,10 @@ const int P7=24;
 const int MUXSEL2 = 22;// use GPIO 22 for 8 input mux
 const int GPIO15=15;
 const int GPIO18=18;
-//  end pin def 
+//  end automatic pin def 
+
+//extra pin def
+const int GPIO22=22;
 
 typedef struct iopin_struct  {
 	unsigned  pin ;
@@ -132,7 +136,7 @@ void get_inp_status_bin( unsigned *stat, int *pinno, int size ) {
 	}
 }
 
-// reads the pins that are called led 0 .. 4 and print the  satatus if print > 0 
+// reads the pins that are called led 0 .. 7 and print the  satatus if print > 0 
 int print_led_status (int print) {
 	// no check if it is initialized for the moment 
 	unsigned ls[8] ;

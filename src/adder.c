@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
 	}
    
    // define the selection output 
-    
+  
    
    // the output are defined in the general hardware setup 		
    // we need only 1 output but we use 2 , msb is always 1 in the simulation so we get errors in the test 
@@ -77,9 +77,9 @@ int main(int argc, char *argv[]){
 	// itterate  over all combinations 
     for (int  inpcomb=0 ; inpcomb < nr_inpcomb ; inpcomb++) {
 		int A= inpcomb & 0xFF, B=0x38;
-		gpioWrite( SEL, 0);
+		gpioWrite( SEL2, 0);
 		set_outputs( inputs, nr_inputs , A) ;
-		gpioWrite( SEL, 1);
+		gpioWrite( SEL2, 1);
 		set_outputs( inputs, nr_inputs , B) ;
 		// convert to bin array for the simulation 
 		decvalue2binar(A ,simulations_inputsA  ,nr_inputs );

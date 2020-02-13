@@ -8,11 +8,7 @@
 
 /*
 
-
 gcc -o rbpi_blink rbpi_blink.c -lpigpio -lpthread
-
-
-
 
 */
 
@@ -29,7 +25,7 @@ int main(int argc, char *argv[])
 		return err; 
 	}
    
-	gpioSetMode(LEDgreen, PI_OUTPUT); // Set GPIO18 as output.
+	gpioSetMode(LEDgreen, PI_OUTPUT); // Set LEDgreen== GPIO18 as output.
 	
 for (;;)
   {

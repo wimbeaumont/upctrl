@@ -42,10 +42,10 @@ char  dummyc[10];
    
 //     
 //  alias,  to have the names in the schematic the same as in the program 
-#define P0 21   // the output P0  is effectively connected to raspberry GPIO 16  
-#define P1 20   // the output P1  is effectively connected to raspberry GPIO 20  
-#define P2 21   // the output P2  is effectively connected to raspberry GPIO 21  
-#define P3 12   // the output P3  is effectively connected to raspberry GPIO 12  
+#define P0 21   // the output P0  is effectively connected to raspberry GPIO 21  
+#define P1 16   // the output P1  is effectively connected to raspberry GPIO 16   
+#define P2  7   // the output P2  is effectively connected to raspberry GPIO 21  
+#define P3 15   // the output P3  is effectively connected to raspberry GPIO 15  
 // the output ports of the FPGA have to be read by the PI  so in the program
 // these should be defined as input ports. 
    gpioSetMode(P0, PI_INPUT);
@@ -65,24 +65,31 @@ char  dummyc[10];
 
 
 printf("| |-----GPIO------|   |\n\r");
-printf("|x| 13| 19| 26| P1| P0|\n\r");
+printf("|x| 19| 26| 13| P1| P0|\n\r");
 gpioWrite (GPIO19, 0);gpioWrite (GPIO26, 0) ;gpioWrite (GPIO13, 0);
 printf("|0| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 0);gpioWrite (GPIO26, 0) ;gpioWrite (GPIO13, 1);
 printf("|1| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 0);gpioWrite (GPIO26, 1) ;gpioWrite (GPIO13, 0);
 printf("|2| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 0);gpioWrite (GPIO26, 1) ;gpioWrite (GPIO13, 1);
 printf("|3| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 1);gpioWrite (GPIO26, 0) ;gpioWrite (GPIO13, 0);
 printf("|4| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 1);gpioWrite (GPIO26, 0) ;gpioWrite (GPIO13, 1);
 printf("|5| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 1);gpioWrite (GPIO26, 1) ;gpioWrite (GPIO13, 0);
 printf("|6| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
+sleep(1);
 gpioWrite (GPIO19, 1);gpioWrite (GPIO26, 1) ;gpioWrite (GPIO13, 1);
 printf("|7| %d | %d | %d | %d | %d |\n\r",gpioRead(GPIO19),gpioRead(GPIO26),gpioRead(GPIO13),gpioRead(P1),gpioRead(P0));
-
+sleep(1);
 
 
 

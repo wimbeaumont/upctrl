@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	int err= gpioInitialise(); 
 	if (err <0) return err; 
  
-   printf("Monitoring gpios");
+   printf("Control Green LED ");
  
 	gpioSetMode(LEDgreen, PI_OUTPUT); // Set GPIO18 as output.
 	

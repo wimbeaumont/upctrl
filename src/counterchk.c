@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
 	gpioSetMode(D2, PI_OUTPUT);
 	// start (enable counters) 
 	gpioSetMode(GPIO18,PI_OUTPUT);
-	gpioWrite (GPIO18, 1) ;	 //clear counters 
 	gpioWrite (GPIO18, 0) ;		
 	
 	gpioWrite (D2, 1) ;		

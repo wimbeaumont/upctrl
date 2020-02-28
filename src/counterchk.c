@@ -26,6 +26,16 @@ int main(int argc, char *argv[])
 		printf("initialization of hardware failed with err %d \n\r", err);
 		return err; 
 	}
+
+	gpioSetMode(clk3, PI_OUTPUT);
+	gpioSetMode(14, PI_OUTPUT);
+	
+
+	
+	gpioWrite (clk3, 0);
+	gpioWrite (14, 0);
+
+
     set_muxout2( 0,8); 
 	gpioSetMode(D0, PI_OUTPUT); 
 	gpioSetMode(D1, PI_OUTPUT); 
@@ -36,7 +46,7 @@ int main(int argc, char *argv[])
 	gpioWrite (GPIO18, 0) ;		
 	
 	gpioWrite (D2, 1) ;		
-	for (int lc=0 ;lc < 2000; lc++) {
+	for (int lc=0 ;lc < 3000; lc++) {
 		gpioWrite (D0, 1) ;	
 		gpioWrite (D0, 0) ;	
 		gpioWrite (D1, 1) ;	

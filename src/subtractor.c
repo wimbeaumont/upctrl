@@ -10,6 +10,9 @@
 		gcc -o adder adder.c  -lpigpio -lpthread
 	
 */
+//I'm pretty sure this won't work for when the sum is negative, but i'm not really sure
+//We use subtraction by addition. we are in 8 bits so the complement is 2^8 - inpB
+//This means we don't need to change the adder function
 
 int My_logic_function ( int* inpA , int* inpB , int insize, int*  outpA, int* outpB, int outsize  ) {
 	if ( insize > 8 ) return -1; 
@@ -28,6 +31,10 @@ int My_logic_function ( int* inpA , int* inpB , int insize, int*  outpA, int* ou
 	return 0;
 } 
 	
+
+	
+
+
 
 
 int main(int argc, char *argv[]){
@@ -128,18 +135,31 @@ int main(int argc, char *argv[]){
 */
 
 
-
+		//int A= inpcomb & 0xFF, B=0x38;
 		int A = intarg[0]; int B = intarg[1];
+		int Bb = 256 - B;
 		gpioWrite( SEL2, 0);
 		set_outputs( inputs, nr_inputs , A) ;
 		gpioWrite( SEL2, 1);
-		set_outputs( inputs, nr_inputs , B) ;
+		set_outputs( inputs, nr_inputs , Bb) ;
 		//Turn int into binary array
 		decvalue2binar(A, simulations_inputsA, nr_inputs);
 		decvalue2binar(B, simulations_inputsB, nr_inputs);
+		inv_bin_array(simulations_inputsB, nr_inputs);
+		
+		int Onearray[8] = { 1 };
+		My_logic_function ( Onearray , simulations_inputsB ,nr_inputs, 
+							simulations_inputsB, simulations_outputsB, nr_outputs  );
 		// simulate 
 		My_logic_function ( simulations_inputsA , simulations_inputsB ,nr_inputs, 
 							simulations_outputsA, simulations_outputsB, nr_outputs  );
+		//simulations_outputsA = 256 - simulations_outputsA;
+
+		inv_bin_array(simulations_outputsA, nr_inputs);
+		My_logic_function ( simulations_outputsA , Onearray ,nr_inputs, 
+							simulations_outputsA, simulations_outputsB, nr_outputs  );
+
+//I don't really see where the LED's get set to the output
 		// get the outputs of the circuit 
 		get_led_status_bin( bin_outp_arry, 8 ); 
 		// now we print all in a format so we can easy check it with the LED status 

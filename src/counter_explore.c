@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 		}
 	}
     // special  signals 
-	const int DSEL = D5 ; // is a output for loading a preset value 
+	const int DSEL = D5 ; // is an output for loading a preset value 
 	gpioSetMode( DSEL , PI_OUTPUT);
 	gpioWrite (DSEL, 0) ;	
 	const int DCE= D4;  // count enable signal
@@ -75,8 +75,14 @@ int main(int argc, char *argv[]){
 	set_outputs( inputs, nr_inputs , 4) ;	
 	const int nr_status=8; 
 	int bin_outp_arry[nr_status]; // result array 
-// -- here start the test 	
+// -- here start the test 
+	int dur = 0;	
 	for (int cnt =0;cnt < 20;cnt++){
+		/*if ((cnt+1)%5 == 0) { gpioWrite(DCE, 0);
+			dur = cnt + 3;}
+
+		if (cnt == dur) { gpioWrite(DCE, 1);}
+		*/
 		gpioWrite (clk1, 0) ;	
 		printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
 		print_led_status (2);

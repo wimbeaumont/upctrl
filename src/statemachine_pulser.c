@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 	
 	const int start= GPIO18;
 	gpioSetMode(start,PI_OUTPUT); 
-	gpioWrite (start, 0) ;	
+	gpioWrite (start, 1) ;	
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));
 	sleep(1);
 	const int ready= 22;  //gpio22
@@ -42,14 +42,17 @@ int main(int argc, char *argv[]){
 	
 	// load the values 
     set_muxout2( 0,4); // Pulse time 
-	set_outputs(Dpins, 8 , 4) ;
-	gpioWrite (datavalid , 2) ;gpioWrite (datavalid , 0) ;	 //fill register 
+	set_outputs(Dpins, 8 , 2) ;
+	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 1,4); // wait time 
-	set_outputs(Dpins, 8 , 100) ;
+	set_outputs(Dpins, 8 , 20) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 2,4); // Nr pulse 
 	set_outputs(Dpins, 8 , 5) ;
-	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
+	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register
+    set_muxout2( 3,4); //Down time
+	set_outputs(Dpins, 8, 4);
+	gpioWrite (datavalid, 1) ;gpioWrite (datavalid, 0); //fill register 
 
 	gpioWrite ( start,1) ;
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));

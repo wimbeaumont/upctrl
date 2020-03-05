@@ -30,7 +30,7 @@ counting_interrupt :
 SiPmCtrl :	 
 	 g++ $(INCLSIPM) -D${TARGET_FLAG}  $(SRC)$@.cpp   -L $(LIBPATH) -ltstlib -lpigpio   -lpthread    -o $(BIN)/$@
 	 
-MuonCtrl1 :	 
+muonctrl1 :	 
 	 g++ -fpermissive $(INCLSIPM) -D${TARGET_FLAG}  $(SRC)$@.cpp   -L $(LIBPATH) -ltstlib -lpigpio   -lpthread    -o $(BIN)/$@
 	 
 	 

@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 	// this is just to get LED1 off 
 	gpioSetMode(D2, PI_OUTPUT);  // the D input 
 	gpioWrite(D2,1);
-	const unsigned CE= D5;  // this is the RP pin connected tot the CE of the FF 
+	const unsigned CE= D4;  // this is the RP pin connected tot the CE of the FF 
 	
 	gpioSetMode(CE, PI_OUTPUT); 
 	gpioSetMode(clk3, PI_OUTPUT); 

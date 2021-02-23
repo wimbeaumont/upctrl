@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
 	// the mux control  for the mux4_2
 	const int m42SEL= GPIO22 ;
 	gpioSetMode( m42SEL  , PI_OUTPUT);
-	gpioWrite (m42SEL, 1) ;	
+	gpioWrite (m42SEL, 0) ;	
 
 	set_outputs( inputs, nr_inputs , 4) ;	
 	const int nr_status=8; 

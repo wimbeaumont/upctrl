@@ -25,5 +25,9 @@ test :
 counting_interrupt :
 	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@   -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
 
+digpr_pinchk :
+	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@   -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
+
+
 % :
 	 $(CC) $(INCLPATH) $(SRC)$@.c   -lpigpio -lpthread   -o $(BIN)/$@

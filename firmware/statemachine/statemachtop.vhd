@@ -41,7 +41,7 @@ entity statemachtop is
 			  GPIO22 :in  STD_LOGIC; -- ready signal 
            RstN	:	IN	STD_LOGIC; 
 			  Lid	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0); 
-			  GPIO18	:	IN	STD_LOGIC;-- start signal
+			  GPIO14	:	IN	STD_LOGIC;-- start signal
            SYSCLK	:	IN	STD_LOGIC
 			  );
 end statemachtop;
@@ -49,7 +49,7 @@ end statemachtop;
 
 architecture Behavioral of statemachtop is
 -- name changes of input pins 
-alias  start : std_logic is GPIO18;
+alias  start : std_logic is GPIO14;
 alias  ready : std_logic is GPIO22;
 alias  data_valid : std_logic is GPIO15;
 
@@ -167,9 +167,18 @@ LED(5)  <= en_ptime ;
 LED(6)  <= en_pcnt	;
 LED(7) <= start;
 
+P(1) <= pcnt;
+P(2) <=ptime;
+P(3)  <=LcntWait;
+P(4) <= LcntPon;
+P(5)  <= en_ptime ;
+P(6)  <= en_pcnt	;
+P(7) <= start;
+
+
  
 -- just more id 
 --LED(7 downto 1 ) <= (others =>'1');
-P(7 downto 1 ) <= (others =>'1');
+
 end Behavioral;
 

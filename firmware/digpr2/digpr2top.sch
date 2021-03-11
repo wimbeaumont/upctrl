@@ -10,8 +10,6 @@
         <signal name="D0(7:0)" />
         <signal name="D0(15:8)" />
         <signal name="D1(7:0)" />
-        <signal name="MUXSEL0" />
-        <signal name="MUXSEL1" />
         <signal name="GPIO22" />
         <signal name="P(7:0)" />
         <signal name="D1(15:8)" />
@@ -49,8 +47,9 @@
         <signal name="SYSCLK" />
         <signal name="GPIO18" />
         <signal name="CNTCLR" />
-        <port polarity="Input" name="MUXSEL0" />
-        <port polarity="Input" name="MUXSEL1" />
+        <signal name="SEL(1:0)" />
+        <signal name="SEL(1)" />
+        <signal name="SEL(0)" />
         <port polarity="Input" name="GPIO22" />
         <port polarity="Output" name="P(7:0)" />
         <port polarity="Output" name="LED(7:0)" />
@@ -60,6 +59,7 @@
         <port polarity="Input" name="GPIO15" />
         <port polarity="Input" name="SYSCLK" />
         <port polarity="Input" name="GPIO18" />
+        <port polarity="Input" name="SEL(1:0)" />
         <blockdef name="fd">
             <timestamp>2000-1-1T10:10:10</timestamp>
             <rect width="256" x="64" y="-320" height="256" />
@@ -183,8 +183,8 @@
             <line x2="48" y1="-48" y2="-48" x1="112" />
         </blockdef>
         <block symbolname="mux4_8_1" name="XLXI_37">
-            <blockpin signalname="MUXSEL0" name="sel0" />
-            <blockpin signalname="MUXSEL1" name="sel1" />
+            <blockpin signalname="SEL(0)" name="sel0" />
+            <blockpin signalname="SEL(1)" name="sel1" />
             <blockpin signalname="GPIO22" name="sel2" />
             <blockpin signalname="D0(7:0)" name="D0(7:0)" />
             <blockpin signalname="D0(15:8)" name="D1(7:0)" />
@@ -328,21 +328,13 @@
             <wire x2="2112" y1="1456" y2="1504" x1="2112" />
             <wire x2="2112" y1="1504" y2="1520" x1="2112" />
         </branch>
-        <branch name="MUXSEL0">
-            <wire x2="2800" y1="384" y2="384" x1="2768" />
-        </branch>
-        <branch name="MUXSEL1">
-            <wire x2="2800" y1="448" y2="448" x1="2768" />
-        </branch>
         <branch name="GPIO22">
             <wire x2="2800" y1="512" y2="512" x1="2768" />
         </branch>
         <branch name="P(7:0)">
             <wire x2="3216" y1="384" y2="384" x1="3184" />
         </branch>
-        <iomarker fontsize="28" x="2768" y="384" name="MUXSEL0" orien="R180" />
         <iomarker fontsize="28" x="2768" y="512" name="GPIO22" orien="R180" />
-        <iomarker fontsize="28" x="2768" y="448" name="MUXSEL1" orien="R180" />
         <branch name="D1(7:0)">
             <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="2368" y="704" type="branch" />
             <wire x2="2368" y1="1408" y2="1408" x1="2208" />
@@ -572,35 +564,30 @@
         <instance x="2880" y="1536" name="XLXI_66" orien="R0">
         </instance>
         <branch name="D6(0)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3352" y="1280" type="branch" />
-            <wire x2="3312" y1="1280" y2="1280" x1="3264" />
-            <wire x2="3352" y1="1280" y2="1280" x1="3312" />
-            <wire x2="3392" y1="1280" y2="1280" x1="3352" />
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3280" y="1280" type="branch" />
+            <wire x2="3280" y1="1280" y2="1280" x1="3264" />
+            <wire x2="3392" y1="1280" y2="1280" x1="3280" />
         </branch>
         <bustap x2="3392" y1="1280" y2="1280" x1="3488" />
         <branch name="D6(1)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3352" y="1344" type="branch" />
-            <wire x2="3312" y1="1344" y2="1344" x1="3264" />
-            <wire x2="3352" y1="1344" y2="1344" x1="3312" />
-            <wire x2="3392" y1="1344" y2="1344" x1="3352" />
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3296" y="1344" type="branch" />
+            <wire x2="3296" y1="1344" y2="1344" x1="3264" />
+            <wire x2="3392" y1="1344" y2="1344" x1="3296" />
         </branch>
         <branch name="D6(2)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3360" y="1408" type="branch" />
-            <wire x2="3328" y1="1408" y2="1408" x1="3264" />
-            <wire x2="3360" y1="1408" y2="1408" x1="3328" />
-            <wire x2="3392" y1="1408" y2="1408" x1="3360" />
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3296" y="1408" type="branch" />
+            <wire x2="3296" y1="1408" y2="1408" x1="3264" />
+            <wire x2="3392" y1="1408" y2="1408" x1="3296" />
         </branch>
         <branch name="D6(3)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3360" y="1456" type="branch" />
-            <wire x2="3328" y1="1456" y2="1456" x1="3264" />
-            <wire x2="3360" y1="1456" y2="1456" x1="3328" />
-            <wire x2="3392" y1="1456" y2="1456" x1="3360" />
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3296" y="1456" type="branch" />
+            <wire x2="3296" y1="1456" y2="1456" x1="3264" />
+            <wire x2="3392" y1="1456" y2="1456" x1="3296" />
         </branch>
         <branch name="D6(4)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3352" y="1504" type="branch" />
-            <wire x2="3312" y1="1504" y2="1504" x1="3264" />
-            <wire x2="3352" y1="1504" y2="1504" x1="3312" />
-            <wire x2="3392" y1="1504" y2="1504" x1="3352" />
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="3296" y="1504" type="branch" />
+            <wire x2="3296" y1="1504" y2="1504" x1="3264" />
+            <wire x2="3392" y1="1504" y2="1504" x1="3296" />
         </branch>
         <bustap x2="3392" y1="1504" y2="1504" x1="3488" />
         <bustap x2="3392" y1="1456" y2="1456" x1="3488" />
@@ -631,5 +618,22 @@
             <wire x2="1216" y1="896" y2="896" x1="1184" />
         </branch>
         <iomarker fontsize="28" x="1184" y="896" name="GPIO18" orien="R180" />
+        <branch name="SEL(1:0)">
+            <wire x2="2624" y1="304" y2="304" x1="2416" />
+            <wire x2="2624" y1="304" y2="384" x1="2624" />
+            <wire x2="2624" y1="384" y2="448" x1="2624" />
+            <wire x2="2624" y1="448" y2="464" x1="2624" />
+        </branch>
+        <iomarker fontsize="28" x="2416" y="304" name="SEL(1:0)" orien="R180" />
+        <bustap x2="2720" y1="448" y2="448" x1="2624" />
+        <branch name="SEL(1)">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="2760" y="448" type="branch" />
+            <wire x2="2800" y1="448" y2="448" x1="2720" />
+        </branch>
+        <bustap x2="2720" y1="384" y2="384" x1="2624" />
+        <branch name="SEL(0)">
+            <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="2760" y="384" type="branch" />
+            <wire x2="2800" y1="384" y2="384" x1="2720" />
+        </branch>
     </sheet>
 </drawing>

@@ -34,6 +34,7 @@ entity adderinput is
     Port ( D : in  STD_LOGIC_VECTOR (SIZE-1 downto 0);
            sel : in  STD_LOGIC;
            clk : in  STD_LOGIC;
+			  SUBTR : in STD_LOGIC;
            Y : out  STD_LOGIC_VECTOR (SIZE-1 downto 0);
            Cout : out  STD_LOGIC_VECTOR (SIZE-1 downto 0));
 end adderinput;

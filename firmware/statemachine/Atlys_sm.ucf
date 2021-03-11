@@ -270,9 +270,9 @@ NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
 
 
 #NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
-NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
+#NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
 NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
-#NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
+NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
 
 NET "Lid<0>" LOC = "V6"; #VmodMIPsigname:JD-CLK_N
 NET "Lid<1>" LOC = "T6"; #VmodMIPsigname:JD-CLK_P

@@ -1,0 +1,9 @@
+# ignore all 
+* 
+*/
+# but not this one 
+!.gitignore
+!ipcor_dir
+!clksrc.xco
+
+

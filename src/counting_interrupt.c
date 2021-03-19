@@ -27,9 +27,9 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <wiringPi.h>  // for the interrupt routines 
 #include "pr_utils.h" 
 #include "cce_1_def.h" 
-#include <wiringPi.h>  // for the interrupt routines 
 // globalCounter:
 //	Global variable to count interrupts
 //	Should be declared volatile to make sure the compiler doesn't cache it.
@@ -53,11 +53,10 @@ void myInterrupt2 (void) { ++globalCounter [2] ; }
  */
 
 int main(int argc, char *argv[]){
-	printf("doesn't work as wiringPI use other pin assignment\n\r");
-	exit(-1);
+	
 	int gotOne, pin ;
 	int myCounter [8] ;
-	int ls[8];// read status led status
+
    
 	int clkdiv=200;
     if ( argc > 1) {
@@ -65,12 +64,11 @@ int main(int argc, char *argv[]){
 			if( clkdiv < 1 || clkdiv >256 ) clkdiv=200;
 	}
 	printf("start program with %s clkdiv %d\n\r", argv[0], clkdiv);
-	if (wiringPiSetup () < 0)
-  {
-    fprintf (stderr, "Unable to setup wiringPi: errno : %d\n", errno) ;
-    return 1 ;
-  }
-
+	if (wiringPiSetupGpio () < 0)  {
+		fprintf (stderr, "Unable to setup wiringPi: errno : %d\n", errno) ;
+		return 1 ;
+	}
+	
 	int err= init_cce_2();
 	if (err) {
 		printf("initialization of hardware failed with err %d \n\r", err);
@@ -87,20 +85,36 @@ int main(int argc, char *argv[]){
 	gpioWrite (GPIO15, 1) ;	//enable writing register
 	gpioWrite (GPIO15, 0) ;	// disabe writing register
 	// activate the interrups 
-	wiringPiISR (P0, INT_EDGE_RISING, &myInterrupt0) ;
-	wiringPiISR (P1, INT_EDGE_RISING, &myInterrupt1) ;
-	wiringPiISR (P2, INT_EDGE_RISING, &myInterrupt2) ;
-  
+	
+	if( wiringPiISR (P0, INT_EDGE_RISING, &myInterrupt0) < 0) {
+		//printf ( "Unable to setup ISR: %s\n", strerror (errno)) ;
+		printf ( "Unable to setup ISR P0: %s\n", errno) ;
+		return 1 ;
+	}
+	if( wiringPiISR (P1, INT_EDGE_RISING, &myInterrupt1) < 0) {
+		//printf ( "Unable to setup ISR: %s\n", strerror (errno)) ;
+		printf ( "Unable to setup ISR P1: %s\n", errno) ;
+		return 1 ;
+	}
+	if( wiringPiISR (P2, INT_EDGE_RISING, &myInterrupt2) < 0) {
+		//printf ( "Unable to setup ISR: %s\n", strerror (errno)) ;
+		printf ( "Unable to setup ISR P2: %s\n", errno) ;
+		return 1 ;
+	}
+	
     gotOne = 0 ;
     printf ("Waiting ... ") ; fflush (stdout) ;
 	sleep(2);
+	printf ("done\n\r") ; fflush (stdout) ;
+	printf( "counters : %d  %d %d \n\r", globalCounter[0], globalCounter[1],globalCounter[2]);
+	
 	//deactivate interrupts 
 	
 	wiringPiISR (P0, INT_EDGE_RISING, 0) ;
 	wiringPiISR (P1, INT_EDGE_RISING, 0) ;
 	wiringPiISR (P2, INT_EDGE_RISING, 0) ;
   
-	printf( "counters : %d  %d %d \n\r", globalCounter[0], globalCounter[1],globalCounter[2]);
+	
 	//deactivate interrupts 
 	
 	

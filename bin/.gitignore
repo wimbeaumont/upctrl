@@ -1,7 +1,0 @@
-# ignore all 
-* 
-*/
-# but not this one 
-!.gitignore
-!README.MD
-

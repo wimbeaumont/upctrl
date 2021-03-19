@@ -52,6 +52,7 @@ const int P7=24;
 
 const int MUXSEL2 = 22;// use GPIO 22 for 8 input mux
 const int GPIO15=15;
+const int GPIO14=14;
 const int GPIO18=18;
 //  end automatic pin def 
 

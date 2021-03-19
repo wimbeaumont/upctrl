@@ -1,4 +1,4 @@
-#.PHONY: clean
+.PHONY: clean
 
 #.PHONY : help
 
@@ -31,3 +31,6 @@ digpr_pinchk :
 
 % :
 	 $(CC) $(INCLPATH) $(SRC)$@.c   -lpigpio -lpthread   -o $(BIN)/$@
+
+clean : 
+	find bin  -perm /100 -type f  -delete 

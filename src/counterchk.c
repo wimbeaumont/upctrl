@@ -26,16 +26,20 @@ int main(int argc, char *argv[])
 		printf("initialization of hardware failed with err %d \n\r", err);
 		return err; 
 	}
-    set_muxout2( 0,8); 
+    set_muxout2( 6,8); 
 	gpioSetMode(D0, PI_OUTPUT); 
 	gpioSetMode(D1, PI_OUTPUT); 
 	gpioSetMode(D2, PI_OUTPUT);
-	// start (enable counters) 
-	gpioSetMode(GPIO18,PI_OUTPUT);
-	gpioWrite (GPIO18, 0) ;		
+	gpioSetMode(D4, PI_OUTPUT);
+	gpioWrite (D4,1	 );
 	
+	gpioSetMode(GPIO15,PI_OUTPUT);
+	gpioWrite (GPIO15, 1) ;
+	gpioWrite (GPIO15, 0) ;
+			
+	// start (enable counters) 
 	gpioWrite (D2, 1) ;		
-	for (int lc=0 ;lc < 2000; lc++) {
+	for (int lc=0 ;lc < 2000; lc++) {	
 		gpioWrite (D0, 1) ;	
 		gpioWrite (D0, 0) ;	
 		gpioWrite (D1, 1) ;	
@@ -51,9 +55,10 @@ int main(int argc, char *argv[])
 	// read the counters 
 	for (int  cnt=0;cnt < 6; cnt++){
 		set_muxout2( cnt,8);
-		//printf( "cnt %d %d ,%d ,%d \n\r",cnt, gpioRead(MUXSEL2) ,	gpioRead(MUXSEL1) ,gpioRead(MUXSEL0) );
+		//printf( "cnt %d %d ,%d ,%d ",cnt, gpioRead(MUXSEL2) ,	gpioRead(MUXSEL1) ,gpioRead(MUXSEL0) );
 		get_led_status_bin(ls,8);
 		counts[cnt]=  ar2decvalue(ls,8);
+		//printf(" count[%1d]: %d \n\r", cnt, counts[cnt]);
 	}
 	
 	printf("%d %d count1= %d\n\r", counts[1], counts[0],counts[0]+256*counts[1]);

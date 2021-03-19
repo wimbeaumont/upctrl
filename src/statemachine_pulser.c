@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
 	gpioSetMode(datavalid,PI_OUTPUT); 
 	gpioWrite (datavalid , 0) ;	 
 	
-	const int start= GPIO18;
+	const int start= GPIO14;
 	gpioSetMode(start,PI_OUTPUT); 
 	gpioWrite (start, 0) ;	
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));

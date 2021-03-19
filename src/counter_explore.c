@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 		}
 	}
     // special  signals 
-	const int DSEL = D5 ; // is a output for loading a preset value 
+	const int DSEL = D5 ; // is an output for loading a preset value 
 	gpioSetMode( DSEL , PI_OUTPUT);
 	gpioWrite (DSEL, 0) ;	
 	const int DCE= D4;  // count enable signal

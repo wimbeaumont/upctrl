@@ -51,10 +51,8 @@
         <signal name="D(4)" />
         <signal name="D(0)" />
         <signal name="Pin1" />
-        <signal name="XLXN_363" />
         <signal name="D(1)" />
         <signal name="Pin2" />
-        <signal name="XLXN_392" />
         <signal name="TD2" />
         <signal name="Pout3" />
         <signal name="Pout4" />
@@ -315,20 +313,6 @@
             <blockpin signalname="GPIO15" name="I1" />
             <blockpin signalname="CNTCLR" name="O" />
         </block>
-        <block symbolname="mux4_8_1" name="XLXI_135">
-            <blockpin signalname="SEL(0)" name="sel0" />
-            <blockpin signalname="SEL(1)" name="sel1" />
-            <blockpin signalname="GPIO22" name="sel2" />
-            <blockpin signalname="D0(7:0)" name="D0(7:0)" />
-            <blockpin signalname="D0(15:8)" name="D1(7:0)" />
-            <blockpin signalname="D1(7:0)" name="D2(7:0)" />
-            <blockpin signalname="D1(15:8)" name="D3(7:0)" />
-            <blockpin signalname="D2(7:0)" name="D4(7:0)" />
-            <blockpin signalname="D2(15:8)" name="D5(7:0)" />
-            <blockpin signalname="P(7:0)" name="P(7:0)" />
-            <blockpin signalname="LED(7:0)" name="LED(7:0)" />
-            <blockpin signalname="D6(7:0)" name="D6(7:0)" />
-        </block>
         <block symbolname="m2_1" name="XLXI_136">
             <blockpin signalname="D(0)" name="D0" />
             <blockpin signalname="Pin1" name="D1" />
@@ -348,6 +332,20 @@
         <block symbolname="inv" name="XLXI_142">
             <blockpin signalname="TD2" name="I" />
             <blockpin signalname="Pout3" name="O" />
+        </block>
+        <block symbolname="mux4_8_1" name="XLXI_143">
+            <blockpin signalname="SEL(0)" name="sel0" />
+            <blockpin signalname="SEL(1)" name="sel1" />
+            <blockpin signalname="GPIO22" name="sel2" />
+            <blockpin signalname="D0(7:0)" name="D0(7:0)" />
+            <blockpin signalname="D0(15:8)" name="D1(7:0)" />
+            <blockpin signalname="D1(7:0)" name="D2(7:0)" />
+            <blockpin signalname="D1(15:8)" name="D3(7:0)" />
+            <blockpin signalname="D2(7:0)" name="D4(7:0)" />
+            <blockpin signalname="D2(15:8)" name="D5(7:0)" />
+            <blockpin signalname="P(7:0)" name="P(7:0)" />
+            <blockpin signalname="LED(7:0)" name="LED(7:0)" />
+            <blockpin signalname="D6(7:0)" name="D6(7:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -679,8 +677,6 @@
             <wire x2="560" y1="240" y2="384" x1="560" />
             <wire x2="608" y1="240" y2="240" x1="560" />
         </branch>
-        <instance x="2800" y="1088" name="XLXI_135" orien="R0">
-        </instance>
         <instance x="176" y="512" name="XLXI_136" orien="R0" />
         <branch name="D(0)">
             <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="96" y="352" type="branch" />
@@ -732,5 +728,7 @@
             <wire x2="864" y1="240" y2="240" x1="832" />
         </branch>
         <iomarker fontsize="28" x="864" y="240" name="Pout4" orien="R0" />
+        <instance x="2800" y="1088" name="XLXI_143" orien="R0">
+        </instance>
     </sheet>
 </drawing>

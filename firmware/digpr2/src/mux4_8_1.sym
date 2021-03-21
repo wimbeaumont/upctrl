@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="mux4_8_1">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2021-3-18T15:26:16</timestamp>
+    <pin polarity="Input" x="0" y="-704" name="sel0" />
+    <pin polarity="Input" x="0" y="-640" name="sel1" />
+    <pin polarity="Input" x="0" y="-576" name="sel2" />
+    <pin polarity="Input" x="0" y="-512" name="D0(7:0)" />
+    <pin polarity="Input" x="0" y="-448" name="D1(7:0)" />
+    <pin polarity="Input" x="0" y="-384" name="D2(7:0)" />
+    <pin polarity="Input" x="0" y="-320" name="D3(7:0)" />
+    <pin polarity="Input" x="0" y="-256" name="D4(7:0)" />
+    <pin polarity="Input" x="0" y="-192" name="D5(7:0)" />
+    <pin polarity="Output" x="384" y="-704" name="P(7:0)" />
+    <pin polarity="Output" x="384" y="-640" name="LED(7:0)" />
+    <pin polarity="Input" x="0" y="-144" name="D6(7:0)" />
+    <graph>
+        <rect width="256" x="64" y="-736" height="632" />
+        <attrtext style="alignment:BCENTER;fontsize:56;fontname:Arial" attrname="SymbolName" x="192" y="-744" type="symbol" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-704" type="pin sel0" />
+        <line x2="0" y1="-704" y2="-704" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-640" type="pin sel1" />
+        <line x2="0" y1="-640" y2="-640" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-576" type="pin sel2" />
+        <line x2="0" y1="-576" y2="-576" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-512" type="pin D0(7:0)" />
+        <rect width="64" x="0" y="-524" height="24" />
+        <line x2="0" y1="-512" y2="-512" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-448" type="pin D1(7:0)" />
+        <rect width="64" x="0" y="-460" height="24" />
+        <line x2="0" y1="-448" y2="-448" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-384" type="pin D2(7:0)" />
+        <rect width="64" x="0" y="-396" height="24" />
+        <line x2="0" y1="-384" y2="-384" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-320" type="pin D3(7:0)" />
+        <rect width="64" x="0" y="-332" height="24" />
+        <line x2="0" y1="-320" y2="-320" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-256" type="pin D4(7:0)" />
+        <rect width="64" x="0" y="-268" height="24" />
+        <line x2="0" y1="-256" y2="-256" x1="64" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="72" y="-192" type="pin D5(7:0)" />
+        <rect width="64" x="0" y="-204" height="24" />
+        <line x2="0" y1="-192" y2="-192" x1="64" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="312" y="-704" type="pin P(7:0)" />
+        <rect width="64" x="320" y="-716" height="24" />
+        <line x2="384" y1="-704" y2="-704" x1="320" />
+        <line x2="384" y1="-640" y2="-640" x1="320" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="320" y="-640" type="pin LED(7:0)" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="64" y="-144" type="pin D6(7:0)" />
+        <rect width="64" x="0" y="-156" height="24" />
+        <line x2="4" y1="-144" y2="-144" x1="68" />
+    </graph>
+</symbol>

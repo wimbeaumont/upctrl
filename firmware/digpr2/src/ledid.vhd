@@ -47,7 +47,7 @@ begin
 	end if;
   end process togleff;
 	
-  Id <=  "001";
+  Id <=  "100";
   Lid(3)  <= q;
   Lid(2 downto 0 ) <= not Id; -- 0 == LED on 
 

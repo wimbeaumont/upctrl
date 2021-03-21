@@ -215,6 +215,16 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
  #NET "AUDRST"   LOC = "T17"; # Bank = 1, Pin name = IO_L51P_M1DQ12,      Sch name = AUD-RESET
  
 # PMOD Connector
+ NET "Pin1"  LOC = "T3"; # Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
+ NET "Pin2"  LOC = "V9"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
+# for checking 
+ #NET "Pout3"  LOC = "R3"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
+ #NET "Pout4"  LOC = "T9"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-CLK_P
+# on the HDMI to avoid conflicts . 
+ NET "Pout3"  LOC = "C13"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
+ NET "Pout4"  LOC = "A13"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-CLK_P
+ 
+
  #NET "JB<0>"  LOC = "T3"; # Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
  #NET "JB<1>"  LOC = "R3"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
  #NET "JB<2>"  LOC = "P6"; # Bank = 2,  Pin name = IO_L64N_D9,     Sch name = JA-D2_N
@@ -248,10 +258,8 @@ NET "D<5>" LOC = "T12"; #VmodMIPsigname:JA-D1_P
 
 NET "GPIO22" LOC = "N9"; #VmodMIPsigname:JB-D0_N
 #NET "clk1" LOC = "M10"; #VmodMIPsigname:JB-D0_P
-NET "MUXSEL0" LOC = "T8"; #VmodMIPsigname:JB-D2_N
-NET "MUXSEL1" LOC = "R8"; #VmodMIPsigname:JB-D2_P
-
-
+NET "SEL<0>" LOC = "T8"; #VmodMIPsigname:JB-D2_N
+NET "SEL<1>" LOC = "R8"; #VmodMIPsigname:JB-D2_P
 
 
 
@@ -273,7 +281,7 @@ NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
 
 
 #NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
-NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
+#NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
 NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
 #NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
 

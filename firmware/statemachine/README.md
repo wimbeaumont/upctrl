@@ -1,6 +1,6 @@
-# firmware upcntr. meetopstelling_2
+# firmware upcntr. state machine
 
-This is the firmware for the practical exercise 2. 
+This is the firmware for the statemachine  exercise 
 
 To start the project import pract2.xise into ise 14.7 
 

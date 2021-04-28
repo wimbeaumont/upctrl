@@ -280,10 +280,10 @@ NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
 
 
 
-#NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
+NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
 #NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
 NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
-#NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
+NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
 
 NET "Lid<0>" LOC = "V6"; #VmodMIPsigname:JD-CLK_N
 NET "Lid<1>" LOC = "T6"; #VmodMIPsigname:JD-CLK_P
@@ -293,65 +293,6 @@ NET "Lid<3>" LOC = "N6"; #VmodMIPsigname:JD-D1_P
 
 
 #end spreadsheet
-
-
-#NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
-#NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
-#NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
-
-
-
-
-#NET "GPIO6"   LOC = "T11"; # VmodMIP sig name :JA-D0_N
-#NET "GPIO13"   LOC = "R11"; # VmodMIP sig name :JA-D0_P
-#NET "GPIO19"   LOC = "P11"; # VmodMIP sig name :JA-D2_N
-#NET "GPIO26"   LOC = "N10"; # VmodMIP sig name :JA-D2_P
-
-#NET "GPIO10"   LOC = "T10"; # VmodMIP sig name :JA-CLK_N
-#NET "GPIO9"   LOC = "R10"; # VmodMIP sig name :JA-CLK_P
-#NET "GPIO11"   LOC = "V12"; # VmodMIP sig name :JA-D1_N
-#NET "RST"   LOC = "V12"; # VmodMIP sig name :JA-CLK_P
-#NET "GPIO5"   LOC = "T12"; # VmodMIP sig name :JA-D1_P
-#NET "CLK3"   LOC = "T12"; # VmodMIP sig name :JA-CLK_N				
-
-
-
-
-#NET "GPIO4"   LOC = "N9"; # VmodMIP sig name :JB-D0_N
-#NET "GPIO17"   LOC = "M10"; # VmodMIP sig name :JB-D0_P
-#NET "GPIO27"   LOC = "T8"; # VmodMIP sig name :JB-D2_N
-#NET "CLK1"   LOC = "T8"; # VmodMIP sig name :JB-D0_P
-
-#NET "GPIO22"   LOC = "R8"; # VmodMIP sig name :JB-D2_P
-
-
-
-
-
-#NET "GPIO16"   LOC = "V15"; # VmodMIP sig name :JC-D0_N
-#NET "GPIO20"   LOC = "U15"; # VmodMIP sig name :JC-D0_P
-#NET "GPIO21"   LOC = "N11"; # VmodMIP sig name :JC-D2_N
-#NET "GPIO12"   LOC = "M11"; # VmodMIP sig name :JC-D2_P
-
-#NET "MOUT<0>"   LOC = "V15"; # VmodMIP sig name :JC-D0_N				
-#NET "MOUT<1>"   LOC = "U15"; # VmodMIP sig name :JC-D0_P				
-#NET "MOUT<2>"   LOC = "N11"; # VmodMIP sig name :JC-D2_N				
-#NET "MOUT<3>"   LOC = "M11"; # VmodMIP sig name :JC-D2_P				
-
-
-
-
-#NET "GPIO24"   LOC = "V16"; # VmodMIP sig name :JC-CLK_N
-#NET "GPIO25"   LOC = "U16"; # VmodMIP sig name :JC-CLK_P
-#NET "GPIO8"   LOC = "V13"; # VmodMIP sig name :JC-D1_N
-#NET "GPIO7"   LOC = "U13"; # VmodMIP sig name :JC-D1_P
-
-
-
-#NET "GPIO14"   LOC = "T7"; # VmodMIP sig name :JD-D0_N
-#NET "GPIO15"   LOC = "R7"; # VmodMIP sig name :JD-D0_P
-#NET "GPIO18"   LOC = "V5"; # VmodMIP sig name :JD-D2_N
-#NET "GPIO23"   LOC = "U5"; # VmodMIP sig name :JD-D2_P
 
 # USB UART Connector
  #NET "UartRx" LOC = "A16"; # Bank = 0, Pin name = IO_L66N_SCP0, Sch name = USBB-RXD

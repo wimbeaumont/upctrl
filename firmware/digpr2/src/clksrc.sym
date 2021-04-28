@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<symbol version="7" name="clksrc">
+    <symboltype>BLOCK</symboltype>
+    <timestamp>2020-1-5T13:21:49</timestamp>
+    <pin polarity="Input" x="0" y="32" name="clk_in1" />
+    <pin polarity="Input" x="0" y="64" name="reset" />
+    <pin polarity="Output" x="256" y="16" name="clk_out1" />
+    <pin polarity="Output" x="256" y="48" name="clk_out2" />
+    <pin polarity="Output" x="256" y="80" name="clk_out3" />
+    <pin polarity="Output" x="256" y="112" name="locked" />
+    <graph>
+        <rect width="188" x="36" y="0" height="128" />
+        <line x2="0" y1="32" y2="32" x1="32" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="36" y="32" type="pin clk_in1" />
+        <line x2="32" y1="64" y2="64" x1="0" />
+        <attrtext style="fontsize:24;fontname:Arial" attrname="PinName" x="36" y="64" type="pin reset" />
+        <line x2="224" y1="16" y2="16" x1="256" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="220" y="16" type="pin clk_out1" />
+        <line x2="224" y1="48" y2="48" x1="256" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="220" y="48" type="pin clk_out2" />
+        <line x2="224" y1="80" y2="80" x1="256" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="220" y="80" type="pin clk_out3" />
+        <line x2="224" y1="112" y2="112" x1="256" />
+        <attrtext style="alignment:RIGHT;fontsize:24;fontname:Arial" attrname="PinName" x="220" y="112" type="pin locked" />
+        <text style="fontsize:40;fontname:Arial" x="36" y="-12">clksrc</text>
+    </graph>
+</symbol>

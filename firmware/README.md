@@ -6,3 +6,4 @@ So changes in this repository will be overwriten.
 
 The *.sch are schematic files that are generated (  and can be "read"   by ISE 14.7 
 
+exception is digpr2  this is now the design directory  see README.md in that directory 

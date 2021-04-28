@@ -48,7 +48,6 @@
         <signal name="SEL(1)" />
         <signal name="SEL(0)" />
         <signal name="TD1" />
-        <signal name="D(4)" />
         <signal name="D(0)" />
         <signal name="Pin1" />
         <signal name="D(1)" />
@@ -56,6 +55,8 @@
         <signal name="TD2" />
         <signal name="Pout3" />
         <signal name="Pout4" />
+        <signal name="GPIO14" />
+        <signal name="clk3" />
         <port polarity="Input" name="GPIO22" />
         <port polarity="Output" name="P(7:0)" />
         <port polarity="Output" name="LED(7:0)" />
@@ -69,6 +70,8 @@
         <port polarity="Input" name="Pin2" />
         <port polarity="Output" name="Pout3" />
         <port polarity="Output" name="Pout4" />
+        <port polarity="Input" name="GPIO14" />
+        <port polarity="Input" name="clk3" />
         <blockdef name="fd">
             <timestamp>2000-1-1T10:10:10</timestamp>
             <rect width="256" x="64" y="-320" height="256" />
@@ -310,19 +313,19 @@
         </block>
         <block symbolname="or2" name="XLXI_129">
             <blockpin signalname="RST" name="I0" />
-            <blockpin signalname="GPIO15" name="I1" />
+            <blockpin signalname="GPIO14" name="I1" />
             <blockpin signalname="CNTCLR" name="O" />
         </block>
         <block symbolname="m2_1" name="XLXI_136">
             <blockpin signalname="D(0)" name="D0" />
             <blockpin signalname="Pin1" name="D1" />
-            <blockpin signalname="D(4)" name="S0" />
+            <blockpin signalname="clk3" name="S0" />
             <blockpin signalname="TD1" name="O" />
         </block>
         <block symbolname="m2_1" name="XLXI_137">
             <blockpin signalname="D(1)" name="D0" />
             <blockpin signalname="Pin2" name="D1" />
-            <blockpin signalname="D(4)" name="S0" />
+            <blockpin signalname="clk3" name="S0" />
             <blockpin signalname="TD2" name="O" />
         </block>
         <block symbolname="inv" name="XLXI_141">
@@ -640,10 +643,10 @@
             <wire x2="1040" y1="960" y2="960" x1="960" />
             <wire x2="1216" y1="960" y2="960" x1="1040" />
         </branch>
-        <branch name="GPIO15">
+        <branch name="GPIO14">
             <wire x2="1216" y1="896" y2="896" x1="1184" />
         </branch>
-        <iomarker fontsize="28" x="1184" y="896" name="GPIO15" orien="R180" />
+        <iomarker fontsize="28" x="1184" y="896" name="GPIO14" orien="R180" />
         <branch name="SEL(1:0)">
             <wire x2="2624" y1="304" y2="304" x1="2416" />
             <wire x2="2624" y1="304" y2="384" x1="2624" />
@@ -683,11 +686,6 @@
             <wire x2="96" y1="352" y2="352" x1="64" />
             <wire x2="176" y1="352" y2="352" x1="96" />
         </branch>
-        <branch name="D(4)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="96" y="480" type="branch" />
-            <wire x2="96" y1="480" y2="480" x1="64" />
-            <wire x2="176" y1="480" y2="480" x1="96" />
-        </branch>
         <branch name="Pin1">
             <wire x2="176" y1="416" y2="416" x1="144" />
         </branch>
@@ -700,11 +698,6 @@
         </branch>
         <branch name="Pin2">
             <wire x2="144" y1="2128" y2="2128" x1="96" />
-        </branch>
-        <branch name="D(4)">
-            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="48" y="2192" type="branch" />
-            <wire x2="48" y1="2192" y2="2192" x1="32" />
-            <wire x2="144" y1="2192" y2="2192" x1="48" />
         </branch>
         <iomarker fontsize="28" x="96" y="2128" name="Pin2" orien="R180" />
         <branch name="TD2">
@@ -730,5 +723,13 @@
         <iomarker fontsize="28" x="864" y="240" name="Pout4" orien="R0" />
         <instance x="2800" y="1088" name="XLXI_143" orien="R0">
         </instance>
+        <branch name="clk3">
+            <wire x2="144" y1="2192" y2="2192" x1="112" />
+        </branch>
+        <iomarker fontsize="28" x="112" y="2192" name="clk3" orien="R180" />
+        <branch name="clk3">
+            <wire x2="176" y1="480" y2="480" x1="144" />
+        </branch>
+        <iomarker fontsize="28" x="144" y="480" name="clk3" orien="R180" />
     </sheet>
 </drawing>

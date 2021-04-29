@@ -6,7 +6,7 @@
         <trait edittrait="all:0" />
     </attr>
     <netlist>
-        <signal name="Q2" />
+        <signal name="Q3" />
         <signal name="Q1" />
         <signal name="XLXN_5" />
         <signal name="XLXN_7" />
@@ -14,7 +14,7 @@
         <signal name="XLXN_9" />
         <signal name="XLXN_10" />
         <signal name="Q0" />
-        <signal name="Q3" />
+        <signal name="Q2" />
         <signal name="XLXN_14" />
         <signal name="XLXN_15" />
         <signal name="XLXN_16" />
@@ -39,10 +39,10 @@
         <signal name="SEL" />
         <signal name="D2" />
         <signal name="D3" />
-        <port polarity="Output" name="Q2" />
+        <port polarity="Output" name="Q3" />
         <port polarity="Output" name="Q1" />
         <port polarity="Output" name="Q0" />
-        <port polarity="Output" name="Q3" />
+        <port polarity="Output" name="Q2" />
         <port polarity="Input" name="CE" />
         <port polarity="Input" name="clk" />
         <port polarity="Input" name="RST" />
@@ -188,26 +188,26 @@
             <line x2="64" y1="-128" y2="-128" x1="0" />
         </blockdef>
         <block symbolname="and3b3" name="XLXI_5">
-            <blockpin signalname="Q2" name="I0" />
-            <blockpin signalname="Q3" name="I1" />
+            <blockpin signalname="Q3" name="I0" />
+            <blockpin signalname="Q2" name="I1" />
             <blockpin signalname="Q1" name="I2" />
             <blockpin signalname="XLXN_5" name="O" />
         </block>
         <block symbolname="and3b1" name="XLXI_6">
             <blockpin signalname="Q1" name="I0" />
-            <blockpin signalname="Q3" name="I1" />
-            <blockpin signalname="Q2" name="I2" />
+            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q3" name="I2" />
             <blockpin signalname="XLXN_7" name="O" />
         </block>
         <block symbolname="and3b1" name="XLXI_7">
-            <blockpin signalname="Q3" name="I0" />
+            <blockpin signalname="Q2" name="I0" />
             <blockpin signalname="Q1" name="I1" />
-            <blockpin signalname="Q2" name="I2" />
+            <blockpin signalname="Q3" name="I2" />
             <blockpin signalname="XLXN_8" name="O" />
         </block>
         <block symbolname="and3b1" name="XLXI_8">
-            <blockpin signalname="Q2" name="I0" />
-            <blockpin signalname="Q3" name="I1" />
+            <blockpin signalname="Q3" name="I0" />
+            <blockpin signalname="Q2" name="I1" />
             <blockpin signalname="Q1" name="I2" />
             <blockpin signalname="XLXN_9" name="O" />
         </block>
@@ -219,15 +219,15 @@
             <blockpin signalname="XLXN_10" name="O" />
         </block>
         <block symbolname="and3b2" name="XLXI_13">
-            <blockpin signalname="Q3" name="I0" />
-            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q2" name="I0" />
+            <blockpin signalname="Q3" name="I1" />
             <blockpin signalname="Q0" name="I2" />
             <blockpin signalname="XLXN_14" name="O" />
         </block>
         <block symbolname="and3" name="XLXI_14">
             <blockpin signalname="Q0" name="I0" />
-            <blockpin signalname="Q3" name="I1" />
-            <blockpin signalname="Q2" name="I2" />
+            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q3" name="I2" />
             <blockpin signalname="XLXN_15" name="O" />
         </block>
         <block symbolname="and2b1" name="XLXI_15">
@@ -237,33 +237,33 @@
         </block>
         <block symbolname="and3b2" name="XLXI_16">
             <blockpin signalname="Q0" name="I0" />
-            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q3" name="I1" />
             <blockpin signalname="Q1" name="I2" />
             <blockpin signalname="XLXN_17" name="O" />
         </block>
         <block symbolname="and2" name="XLXI_17">
-            <blockpin signalname="Q3" name="I0" />
+            <blockpin signalname="Q2" name="I0" />
             <blockpin signalname="Q1" name="I1" />
             <blockpin signalname="XLXN_18" name="O" />
         </block>
         <block symbolname="and2b1" name="XLXI_18">
-            <blockpin signalname="Q3" name="I0" />
+            <blockpin signalname="Q2" name="I0" />
             <blockpin signalname="Q1" name="I1" />
             <blockpin signalname="XLXN_19" name="O" />
         </block>
         <block symbolname="and2" name="XLXI_19">
             <blockpin signalname="Q0" name="I0" />
-            <blockpin signalname="Q3" name="I1" />
+            <blockpin signalname="Q2" name="I1" />
             <blockpin signalname="XLXN_20" name="O" />
         </block>
         <block symbolname="and2" name="XLXI_20">
             <blockpin signalname="Q0" name="I0" />
-            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q3" name="I1" />
             <blockpin signalname="XLXN_21" name="O" />
         </block>
         <block symbolname="and3b2" name="XLXI_21">
-            <blockpin signalname="Q3" name="I0" />
-            <blockpin signalname="Q2" name="I1" />
+            <blockpin signalname="Q2" name="I0" />
+            <blockpin signalname="Q3" name="I1" />
             <blockpin signalname="Q1" name="I2" />
             <blockpin signalname="XLXN_22" name="O" />
         </block>
@@ -310,12 +310,12 @@
             <blockpin signalname="XLXN_69" name="D3" />
             <blockpin signalname="Q0" name="Q0" />
             <blockpin signalname="Q1" name="Q1" />
-            <blockpin signalname="Q3" name="Q2" />
-            <blockpin signalname="Q2" name="Q3" />
+            <blockpin signalname="Q2" name="Q2" />
+            <blockpin signalname="Q3" name="Q3" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
-        <branch name="Q2">
+        <branch name="Q3">
             <wire x2="1968" y1="1264" y2="1264" x1="1600" />
             <wire x2="1968" y1="1264" y2="1360" x1="1968" />
             <wire x2="2032" y1="1360" y2="1360" x1="1968" />
@@ -394,7 +394,7 @@
             <wire x2="2032" y1="2368" y2="2368" x1="1616" />
             <wire x2="1744" y1="1072" y2="1072" x1="1616" />
         </branch>
-        <branch name="Q3">
+        <branch name="Q2">
             <wire x2="1872" y1="1200" y2="1200" x1="1600" />
             <wire x2="2032" y1="1200" y2="1200" x1="1872" />
             <wire x2="1872" y1="1200" y2="1424" x1="1872" />
@@ -479,8 +479,8 @@
         <instance x="2400" y="2464" name="XLXI_22" orien="R0" />
         <iomarker fontsize="28" x="1744" y="1072" name="Q0" orien="R0" />
         <iomarker fontsize="28" x="1744" y="1136" name="Q1" orien="R0" />
-        <iomarker fontsize="28" x="2320" y="2624" name="Q2" orien="R0" />
-        <iomarker fontsize="28" x="2320" y="2672" name="Q3" orien="R0" />
+        <iomarker fontsize="28" x="2320" y="2624" name="Q3" orien="R0" />
+        <iomarker fontsize="28" x="2320" y="2672" name="Q2" orien="R0" />
         <iomarker fontsize="28" x="1184" y="1488" name="RST" orien="R180" />
         <iomarker fontsize="28" x="1152" y="1328" name="CE" orien="R180" />
         <iomarker fontsize="28" x="1184" y="1392" name="clk" orien="R180" />

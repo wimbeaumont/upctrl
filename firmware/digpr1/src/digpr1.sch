@@ -15,7 +15,7 @@
         <signal name="P3" />
         <signal name="D3" />
         <signal name="DCE" />
-        <signal name="RST" />
+        <signal name="Rst" />
         <signal name="CLK1" />
         <signal name="XLXN_58" />
         <signal name="DIN(3:0)" />
@@ -46,8 +46,6 @@
         <signal name="Yout(4)" />
         <signal name="Yout(7:4)" />
         <signal name="P2" />
-        <signal name="XLXN_303" />
-        <signal name="XLXN_306" />
         <signal name="XLXN_309" />
         <port polarity="Output" name="P0" />
         <port polarity="Input" name="D2" />
@@ -57,7 +55,7 @@
         <port polarity="Output" name="P3" />
         <port polarity="Input" name="D3" />
         <port polarity="Input" name="DCE" />
-        <port polarity="Input" name="RST" />
+        <port polarity="Input" name="Rst" />
         <port polarity="Input" name="CLK1" />
         <port polarity="Input" name="GPIO22" />
         <port polarity="Output" name="Yout(7:0)" />
@@ -245,14 +243,14 @@
         <block symbolname="fdce" name="XLXI_32">
             <blockpin signalname="CLK3" name="C" />
             <blockpin signalname="DCE" name="CE" />
-            <blockpin signalname="RST" name="CLR" />
+            <blockpin signalname="Rst" name="CLR" />
             <blockpin signalname="D3" name="D" />
             <blockpin signalname="P3" name="Q" />
         </block>
         <block symbolname="counter4" name="XLXI_31">
             <blockpin signalname="XLXN_242" name="Q1" />
             <blockpin signalname="XLXN_240" name="Q3" />
-            <blockpin signalname="RST" name="RST" />
+            <blockpin signalname="Rst" name="RST" />
             <blockpin signalname="CLK1" name="clk" />
             <blockpin signalname="DCE" name="CE" />
             <blockpin signalname="D0" name="D0" />
@@ -266,7 +264,7 @@
         <block symbolname="cb4cle" name="XLXI_42">
             <blockpin signalname="CLK1" name="C" />
             <blockpin signalname="DCE" name="CE" />
-            <blockpin signalname="RST" name="CLR" />
+            <blockpin signalname="Rst" name="CLR" />
             <blockpin signalname="D0" name="D0" />
             <blockpin signalname="D1" name="D1" />
             <blockpin signalname="D2" name="D2" />
@@ -282,7 +280,7 @@
         <block symbolname="fd4ce" name="XLXI_43">
             <blockpin signalname="CLK1" name="C" />
             <blockpin signalname="DCE" name="CE" />
-            <blockpin signalname="RST" name="CLR" />
+            <blockpin signalname="Rst" name="CLR" />
             <blockpin signalname="DIN(0)" name="D0" />
             <blockpin signalname="DIN(1)" name="D1" />
             <blockpin signalname="DIN(2)" name="D2" />
@@ -294,7 +292,7 @@
         </block>
         <block symbolname="fdc" name="XLXI_45">
             <blockpin signalname="CLK3" name="C" />
-            <blockpin signalname="RST" name="CLR" />
+            <blockpin signalname="Rst" name="CLR" />
             <blockpin signalname="XLXN_309" name="D" />
             <blockpin signalname="P2" name="Q" />
         </block>
@@ -320,11 +318,11 @@
             <wire x2="2720" y1="832" y2="832" x1="2688" />
         </branch>
         <iomarker fontsize="28" x="2720" y="832" name="P3" orien="R0" />
-        <rect width="1236" x="88" y="104" height="256" />
+        <rect width="1044" x="88" y="160" height="200" />
         <text style="fontsize:40;fontname:Arial" x="964" y="220">2A</text>
         <text style="fontsize:40;fontname:Arial" x="2828" y="964">3A</text>
         <text style="fontsize:40;fontname:Arial" x="2820" y="256">3B</text>
-        <rect width="1224" x="92" y="412" height="512" />
+        <rect width="1052" x="92" y="412" height="240" />
         <rect width="1096" x="1928" y="56" height="564" />
         <rect width="1104" x="1928" y="640" height="488" />
         <iomarker fontsize="28" x="832" y="240" name="P0" orien="R0" />
@@ -421,20 +419,12 @@
             <wire x2="2304" y1="896" y2="896" x1="2272" />
         </branch>
         <iomarker fontsize="28" x="2272" y="896" name="DCE" orien="R180" />
-        <branch name="RST">
-            <wire x2="2304" y1="1056" y2="1056" x1="2272" />
+        <branch name="Rst">
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="2160" y="1056" type="branch" />
+            <wire x2="2160" y1="1056" y2="1056" x1="2080" />
+            <wire x2="2304" y1="1056" y2="1056" x1="2160" />
         </branch>
-        <iomarker fontsize="28" x="2272" y="1056" name="RST" orien="R180" />
         <iomarker fontsize="28" x="2576" y="1984" name="GPIO22" orien="R180" />
-        <branch name="RST">
-            <wire x2="560" y1="2592" y2="2592" x1="176" />
-            <wire x2="1824" y1="2592" y2="2592" x1="560" />
-            <wire x2="2080" y1="2592" y2="2592" x1="1824" />
-            <wire x2="720" y1="2080" y2="2080" x1="560" />
-            <wire x2="560" y1="2080" y2="2592" x1="560" />
-            <wire x2="1920" y1="1792" y2="1792" x1="1824" />
-            <wire x2="1824" y1="1792" y2="2592" x1="1824" />
-        </branch>
         <branch name="CLK1">
             <wire x2="480" y1="2496" y2="2496" x1="192" />
             <wire x2="1728" y1="2496" y2="2496" x1="480" />
@@ -487,7 +477,6 @@
         <branch name="P5">
             <wire x2="2480" y1="2496" y2="2496" x1="2464" />
         </branch>
-        <iomarker fontsize="28" x="176" y="2592" name="RST" orien="R180" />
         <iomarker fontsize="28" x="192" y="2432" name="DCE" orien="R180" />
         <branch name="XLXN_299">
             <wire x2="2624" y1="2048" y2="2048" x1="2464" />
@@ -524,7 +513,6 @@
         <iomarker fontsize="28" x="2048" y="2176" name="D2" orien="R180" />
         <iomarker fontsize="28" x="2048" y="2240" name="D3" orien="R180" />
         <iomarker fontsize="28" x="2032" y="2368" name="DSEL" orien="R180" />
-        <text style="fontsize:40;fontname:Arial" x="1148" y="576">2B</text>
         <branch name="D2">
             <wire x2="720" y1="592" y2="592" x1="272" />
             <wire x2="736" y1="576" y2="576" x1="720" />
@@ -599,10 +587,11 @@
             <wire x2="2720" y1="320" y2="352" x1="2720" />
         </branch>
         <instance x="1984" y="384" name="XLXI_17" orien="R0" />
-        <branch name="RST">
-            <wire x2="2272" y1="576" y2="576" x1="2240" />
+        <branch name="Rst">
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="2208" y="576" type="branch" />
+            <wire x2="2208" y1="576" y2="576" x1="2144" />
+            <wire x2="2272" y1="576" y2="576" x1="2208" />
         </branch>
-        <iomarker fontsize="28" x="2240" y="576" name="RST" orien="R180" />
         <branch name="XLXN_309">
             <wire x2="2272" y1="352" y2="352" x1="2208" />
         </branch>
@@ -615,5 +604,16 @@
         <iomarker fontsize="28" x="2080" y="480" name="CLK3" orien="R180" />
         <iomarker fontsize="28" x="2288" y="960" name="CLK3" orien="R180" />
         <instance x="2272" y="608" name="XLXI_45" orien="R0" />
+        <text style="fontsize:40;fontname:Arial" x="1008" y="604">2B</text>
+        <branch name="Rst">
+            <wire x2="560" y1="2592" y2="2592" x1="384" />
+            <wire x2="1824" y1="2592" y2="2592" x1="560" />
+            <wire x2="2080" y1="2592" y2="2592" x1="1824" />
+            <wire x2="720" y1="2080" y2="2080" x1="560" />
+            <wire x2="560" y1="2080" y2="2592" x1="560" />
+            <wire x2="1920" y1="1792" y2="1792" x1="1824" />
+            <wire x2="1824" y1="1792" y2="2592" x1="1824" />
+        </branch>
+        <iomarker fontsize="28" x="384" y="2592" name="Rst" orien="R180" />
     </sheet>
 </drawing>

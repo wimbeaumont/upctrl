@@ -6,7 +6,7 @@
         <trait edittrait="all:0" />
     </attr>
     <netlist>
-        <signal name="Rst" />
+        <signal name="RstN" />
         <signal name="clk1" />
         <signal name="sw(2)" />
         <signal name="sw(0)" />
@@ -17,8 +17,6 @@
         <signal name="sw(5)" />
         <signal name="sw(3)" />
         <signal name="A_B(7:0)" />
-        <signal name="MUXSEL0" />
-        <signal name="MUXSEL1" />
         <signal name="LED(7:0)" />
         <signal name="LED_P(4)" />
         <signal name="LED_P(5)" />
@@ -74,12 +72,14 @@
         <signal name="XLXN_77" />
         <signal name="Lid(3:0)" />
         <signal name="XLXN_78" />
-        <port polarity="Input" name="Rst" />
+        <signal name="SEL(1:0)" />
+        <signal name="SEL(1)" />
+        <signal name="SEL(0)" />
+        <signal name="GPIO14" />
+        <port polarity="Input" name="RstN" />
         <port polarity="Input" name="clk1" />
         <port polarity="Input" name="sw(7:0)" />
         <port polarity="Input" name="clk3" />
-        <port polarity="Input" name="MUXSEL0" />
-        <port polarity="Input" name="MUXSEL1" />
         <port polarity="Output" name="LED(7:0)" />
         <port polarity="Output" name="P(7:0)" />
         <port polarity="Input" name="GPIO22" />
@@ -87,6 +87,8 @@
         <port polarity="Input" name="sysclk" />
         <port polarity="Input" name="clk0" />
         <port polarity="Output" name="Lid(3:0)" />
+        <port polarity="Input" name="SEL(1:0)" />
+        <port polarity="Input" name="GPIO14" />
         <blockdef name="digpr1">
             <timestamp>2019-12-11T14:33:55</timestamp>
             <rect width="64" x="320" y="84" height="24" />
@@ -192,7 +194,7 @@
             <line x2="384" y1="-352" y2="-352" x1="320" />
         </blockdef>
         <blockdef name="adderinput">
-            <timestamp>2019-12-12T11:9:20</timestamp>
+            <timestamp>2020-2-21T7:53:40</timestamp>
             <rect width="256" x="64" y="-192" height="192" />
             <line x2="0" y1="-160" y2="-160" x1="64" />
             <line x2="0" y1="-96" y2="-96" x1="64" />
@@ -202,6 +204,8 @@
             <line x2="384" y1="-160" y2="-160" x1="320" />
             <rect width="64" x="320" y="-44" height="24" />
             <line x2="384" y1="-32" y2="-32" x1="320" />
+            <line x2="68" y1="-128" y2="-128" x1="4" />
+            <line x2="64" y1="-128" y2="-128" x1="68" />
         </blockdef>
         <blockdef name="buf">
             <timestamp>2000-1-1T10:10:10</timestamp>
@@ -302,8 +306,8 @@
             <blockpin signalname="A_B(2)" name="P2" />
         </block>
         <block symbolname="Mux_8_4" name="XLXI_34">
-            <blockpin signalname="MUXSEL0" name="S0" />
-            <blockpin signalname="MUXSEL1" name="S1" />
+            <blockpin signalname="SEL(0)" name="S0" />
+            <blockpin signalname="SEL(1)" name="S1" />
             <blockpin signalname="A_B(7:0)" name="A(7:0)" />
             <blockpin signalname="XLXN_43(7:0)" name="B(7:0)" />
             <blockpin signalname="XLXN_63(7:0)" name="C(7:0)" />
@@ -316,6 +320,7 @@
             <blockpin signalname="D(7:0)" name="D(7:0)" />
             <blockpin signalname="XLXN_63(7:0)" name="Y(7:0)" />
             <blockpin signalname="XLXN_64(7:0)" name="Cout(7:0)" />
+            <blockpin signalname="GPIO14" name="SUBTR" />
         </block>
         <block symbolname="buf" name="XLXI_39">
             <blockpin signalname="D(6)" name="I" />
@@ -327,7 +332,7 @@
         </block>
         <block symbolname="dbounce" name="XLXI_42">
             <blockpin signalname="sysclk" name="clk" />
-            <blockpin signalname="Rst" name="rst" />
+            <blockpin signalname="RstN" name="rst" />
             <blockpin signalname="clk0" name="A" />
             <blockpin signalname="XLXN_77" name="Y" />
         </block>
@@ -336,7 +341,7 @@
             <blockpin signalname="A_B(7)" name="O" />
         </block>
         <block symbolname="inv" name="XLXI_45">
-            <blockpin signalname="Rst" name="I" />
+            <blockpin signalname="RstN" name="I" />
             <blockpin signalname="XLXN_78" name="O" />
         </block>
     </netlist>
@@ -396,14 +401,6 @@
         </instance>
         <iomarker fontsize="28" x="592" y="864" name="clk1" orien="R180" />
         <iomarker fontsize="28" x="576" y="1200" name="clk3" orien="R180" />
-        <branch name="MUXSEL0">
-            <wire x2="1904" y1="832" y2="832" x1="1872" />
-        </branch>
-        <iomarker fontsize="28" x="1872" y="832" name="MUXSEL0" orien="R180" />
-        <branch name="MUXSEL1">
-            <wire x2="1904" y1="896" y2="896" x1="1872" />
-        </branch>
-        <iomarker fontsize="28" x="1872" y="896" name="MUXSEL1" orien="R180" />
         <bustap x2="656" y1="1808" y2="1808" x1="560" />
         <branch name="sw(6)">
             <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="704" y="1808" type="branch" />
@@ -722,10 +719,10 @@
         </branch>
         <iomarker fontsize="28" x="2256" y="2320" name="clk3" orien="R180" />
         <branch name="sysclk">
-            <wire x2="1424" y1="1280" y2="1280" x1="1392" />
+            <wire x2="1408" y1="1280" y2="1280" x1="1264" />
+            <wire x2="1424" y1="1280" y2="1280" x1="1408" />
         </branch>
-        <iomarker fontsize="28" x="1392" y="1280" name="sysclk" orien="R180" />
-        <branch name="Rst">
+        <branch name="RstN">
             <wire x2="160" y1="2288" y2="2288" x1="96" />
         </branch>
         <branch name="sysclk">
@@ -809,15 +806,39 @@
             <attrtext style="alignment:SOFT-LEFT;fontsize:28;fontname:Arial" attrname="Name" x="1320" y="944" type="branch" />
             <wire x2="1328" y1="944" y2="944" x1="1312" />
         </branch>
-        <iomarker fontsize="28" x="96" y="2288" name="Rst" orien="R180" />
+        <iomarker fontsize="28" x="96" y="2288" name="RstN" orien="R180" />
         <branch name="XLXN_78">
             <wire x2="768" y1="800" y2="800" x1="752" />
             <wire x2="784" y1="800" y2="800" x1="768" />
         </branch>
         <instance x="528" y="832" name="XLXI_45" orien="R0" />
-        <branch name="Rst">
-            <wire x2="528" y1="800" y2="800" x1="496" />
+        <branch name="RstN">
+            <wire x2="512" y1="800" y2="800" x1="496" />
+            <wire x2="528" y1="800" y2="800" x1="512" />
         </branch>
-        <iomarker fontsize="28" x="496" y="800" name="Rst" orien="R180" />
+        <iomarker fontsize="28" x="496" y="800" name="RstN" orien="R180" />
+        <branch name="SEL(1:0)">
+            <wire x2="1744" y1="608" y2="832" x1="1744" />
+            <wire x2="1744" y1="832" y2="896" x1="1744" />
+            <wire x2="1744" y1="896" y2="928" x1="1744" />
+        </branch>
+        <iomarker fontsize="28" x="1744" y="608" name="SEL(1:0)" orien="R270" />
+        <bustap x2="1840" y1="896" y2="896" x1="1744" />
+        <branch name="SEL(1)">
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="1872" y="896" type="branch" />
+            <wire x2="1872" y1="896" y2="896" x1="1840" />
+            <wire x2="1904" y1="896" y2="896" x1="1872" />
+        </branch>
+        <bustap x2="1840" y1="832" y2="832" x1="1744" />
+        <branch name="SEL(0)">
+            <attrtext style="alignment:SOFT-BCENTER;fontsize:28;fontname:Arial" attrname="Name" x="1872" y="832" type="branch" />
+            <wire x2="1872" y1="832" y2="832" x1="1840" />
+            <wire x2="1904" y1="832" y2="832" x1="1872" />
+        </branch>
+        <iomarker fontsize="28" x="1264" y="1280" name="sysclk" orien="R180" />
+        <branch name="GPIO14">
+            <wire x2="1424" y1="1248" y2="1248" x1="1392" />
+        </branch>
+        <iomarker fontsize="28" x="1392" y="1248" name="GPIO14" orien="R180" />
     </sheet>
 </drawing>

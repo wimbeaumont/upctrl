@@ -79,9 +79,14 @@ NET "PextN[0]" LOC = V4;
 NET "PextN[0]" IOSTANDARD = "LVDS_33";
 NET "PextN[0]" DIFF_TERM = "FALSE";
  
- NET "POUT<0>"  LOC = "V9"; #      Sch name = JA7 
+ 
+ 
+ NET "POUT<0>"  LOC = "T3"; #      Sch name = JA1
  NET "POUT<1>"  LOC = "R3"; #      Sch name = JA2
- NET "POUT<2>"  LOC = "T3"; #      Sch name = JA1
+ NET "POUT<2>"  LOC = "V9"; #      Sch name = JA7
+ #NET "POUT<3>"  LOC = "T9"; #      Sch name = JA8
+  
+  
 # NET "POUT<3>"  LOC = "T9"; #      Sch name = JA8
  
  #NET "JB<0>"  LOC = "T3"; # Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
@@ -152,6 +157,8 @@ NET "Lid<3>" LOC = "N6"; #VmodMIPsigname:JD-D1_P
 
 NET "PoutAdd[0]" LOC = "V8;"; #VmodMIPsigname:JE1
 NET "PoutAdd[1]" LOC = "U8;"; #VmodMIPsigname:JE2
+#NET "PoutAdd[2]" LOC = "N8;"; #VmodMIPsigname:JE7
+#NET "PoutAdd[3]" LOC = "M8;"; #VmodMIPsigname:JE8
 
 
 #end spreadsheet

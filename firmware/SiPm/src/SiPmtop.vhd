@@ -152,8 +152,8 @@ COIN <= (CoinIn1 and CoinIn2) when Registerdata( reg_input_sel)(2) ='1' else (Cn
 Pout(0) <= Cnt1In;
 Pout(1) <= COIN;
 Pout(2) <= Cnt2In;
-PoutAdd(0) <= enablecnt;
-PoutAdd(1) <= clk3 and GPIO15;
+PoutAdd(0) <= CoinIn1;
+PoutAdd(1) <= CoinIn2;
 
 enablecnt <=  twenable  when Registerdata( reg_enble_cnt)(0) ='1'  else D(2) ; 
 	 

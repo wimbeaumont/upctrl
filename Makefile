@@ -6,16 +6,26 @@
 #        @echo -e 
 #        @echo -e 
 
+# assuming this github directories 
+#PdevProj
+#PdevUtils
+#PeripheralDevices
+#peripheral_dev_tst
+# upctrl
+
+
+
+
 TARGETS = test
 TARGET_FLAG=__LINUX__
 
 SRC      = ./src/
 OBJ      = ./obj/
-PDevPath = /home/pi/github/Pdev/PeripheralDevices/
+PDevPath = ../PeripheralDevices/
 INCLSIPM      = -I ./incl/ \
 			-I $(PDevPath)/I2Cinterfaces -I $(PDevPath)/DevInterfaces -I $(PDevPath)/LTC2633
 BIN		= ./bin/
-LIBPATH = /home/pi/github/Pdev/peripheral_dev_tst/cmake
+LIBPATH =  ../PdevProj/build 
 CC = gcc
 
 INCLPATH =  -I ./incl
@@ -34,9 +44,10 @@ digpr_pinchk :
 SiPmCtrl :	 
 	 g++ $(INCLSIPM) -D${TARGET_FLAG}  $(SRC)$@.cpp   -L $(LIBPATH) -ltstlib -lpigpio   -lpthread    -o $(BIN)/$@
 	 
-muonctrl1 :	 
-	 g++ -fpermissive $(INCLSIPM) -D${TARGET_FLAG}  $(SRC)$@.cpp   -L $(LIBPATH) -ltstlib -lpigpio   -lpthread    -o $(BIN)/$@
 	 
+muonctrl2022 :	 
+	 g++ -fpermissive $(INCLSIPM) -D${TARGET_FLAG}  $(SRC)$@.cpp   -L $(LIBPATH) -ltstlib -lpigpio   -lpthread    -o $(BIN)/$@
+
 	 
 % :
 	 $(CC) $(INCLPATH) $(SRC)$@.c   -lpigpio -lpthread   -o $(BIN)/$@

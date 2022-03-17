@@ -15,7 +15,7 @@ program to demonstrate to use comand line arguments in a c program in a very sim
 
 
 int main(int argc, char *argv[]) {
-	const int nr_arg_expected;
+	const int nr_arg_expected =2;
 	int intarg[nr_arg_expected];
 	// first check if there are enough arguments, we expect 2 
 	// the program call itself is always the first argument so 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 			intarg[nr_arg] = atoi(argv[nr_arg+1]);
 			// check here if the input is reasonable if not exit 
 		}
-	}else { printf(" program %s need at least %d arguments  %d\n\r", argv[0], nr_arg_expected );
+	}else { printf(" program %s need at least %d arguments  \n\r", argv[0], nr_arg_expected );
 			return -1;
 	}
 	printf("start program %s with arguments :\n\r ", argv[0]);

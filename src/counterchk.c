@@ -17,6 +17,7 @@ program to readout the counters
 
 int main(int argc, char *argv[])
 {
+   int InpSel=clk3;
 	int counts[6];
    int ls[8];// read status 
    printf("start program %s\n\r", argv[0]);
@@ -31,11 +32,12 @@ int main(int argc, char *argv[])
 	gpioSetMode(D1, PI_OUTPUT); 
 	gpioSetMode(D2, PI_OUTPUT);
 	gpioSetMode(D4, PI_OUTPUT);
-	gpioWrite (D4,1	 );
+	gpioSetMode(InpSel, PI_OUTPUT);
+	gpioWrite (InpSel,1 );
 	
-	gpioSetMode(GPIO15,PI_OUTPUT);
-	gpioWrite (GPIO15, 1) ;
-	gpioWrite (GPIO15, 0) ;
+	gpioSetMode(GPIO14,PI_OUTPUT);
+	gpioWrite (GPIO14, 1) ;
+	gpioWrite (GPIO14, 0) ;
 			
 	// start (enable counters) 
 	gpioWrite (D2, 1) ;		

@@ -142,17 +142,16 @@ int print_led_status (int print) {
 	// no check if it is initialized for the moment 
 	unsigned ls[8] ;
 	get_led_status_bin( ls, 8 ); 
-	if( print > 0) {  print_bin_arry_status (ls, sizeof(ls)/sizeof(ls[0]));}
+	if( print > 0) {  print_bin_arry_status ((int*)ls, sizeof(ls)/sizeof(ls[0]));}
 	if( print > 1) { printf ( "\n\r" );}
-	return ar2decvalue(ls, sizeof(ls)/sizeof(ls[0]));
+	return ar2decvalue((int*)ls, sizeof(ls)/sizeof(ls[0]));
 }
 
 
 // standard input for FPGA 
 int  Dpins[] = {  13, 26,19,6,11,10,9,5 };
+//int  Dpins[] = { D0, D1,D2,D3,D4,D5,D6,D7  };  // compiler error
 
-  //D0=13;D1=26; D2=19;D3=6;D4=11; D5=10;D6=9;D7=5;
- 
 iopin Ds[8]; 
 // function to initiate  a array of outputs  ( inputs for the FPGA) 
 int setup_output_array( int* pinarry , int size ) {
@@ -188,7 +187,7 @@ void set_outputs( unsigned pins[], const int nrpins , int value ){
 }
 
 void set_D_outputs( const int nrpins, int value) {
-		int pinnr[nrpins];
+		unsigned pinnr[nrpins];
 		for ( int pcnt=0;pcnt < nrpins; pcnt++ ) {
 				pinnr[pcnt]=Ds[pcnt].pin;
 		}
@@ -283,7 +282,7 @@ int set_muxout2( int a, int nrinp ) {
 
 
 int set_muxout( char a  ) {
-		int err,inpnr=0;
+		int err=0,inpnr=0;
 		switch ( a ) { 
 			case 'A'  : { inpnr=0; }
 			break;

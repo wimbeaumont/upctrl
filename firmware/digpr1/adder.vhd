@@ -34,7 +34,8 @@ entity adder is
     Port ( A : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            B : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            Y : out  STD_LOGIC_VECTOR (SIZE -1 downto 0);
-           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0)
+           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0);
+			  Cin : in STD_LOGIC 
 			);
 end  adder;
 
@@ -53,7 +54,7 @@ end component;
 signal  Cint : STD_LOGIC_VECTOR (SIZE  downto 0); -- need read write  
 begin
 
-Cint(0) <= '0'; 
+Cint(0) <= Cin; 
 
 ADDER : for I in 0 to SIZE-1 generate 
   L: 	fulladder  port map ( A => A(I) , B=>B(I) , C => Cint(I) ,Cout=>Cint(I+1), Y => Y(I)) ;

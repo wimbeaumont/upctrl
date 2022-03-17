@@ -50,7 +50,8 @@ component  adder
     Port ( A : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            B : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            Y : out  STD_LOGIC_VECTOR (SIZE -1 downto 0);
-           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0)
+           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0);
+			  Cin : in STD_LOGIC
 			);
 end  component;
 
@@ -67,7 +68,7 @@ end process ;--InSel
 
 add1: adder 
 		generic map ( SIZE => SIZE )
-		port map ( A => A, B => B, Y => Y , Cout => Cout);
+		port map ( A => A, B => B, Y => Y , Cout => Cout, Cin=> SUBTR);
 		
 
 end Behavioral;

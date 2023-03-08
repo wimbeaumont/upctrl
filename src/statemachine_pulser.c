@@ -43,12 +43,16 @@ int main(int argc, char *argv[]){
     set_muxout2( 0,4); // Pulse time 
 	set_outputs(Dpins, 8 , 4) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
+	set_muxout2( 3,4); // Low time for improved pulser 
+	set_outputs(Dpins, 8 , 4) ;
+	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 1,4); // wait time 
 	set_outputs(Dpins, 8 , 100) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 2,4); // Nr pulse 
 	set_outputs(Dpins, 8 , 5) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register
+	
 
 	gpioWrite ( start,1) ;
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));

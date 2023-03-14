@@ -1,0 +1,26 @@
+# ignore all 
+ and all sub dir 
+* 
+/*
+
+
+# but not these files 
+!.gitignore
+
+!README.md
+!digpr4.xise
+
+
+#and  also keep these subdir's and the files in there 
+!/ipcore_dir
+!/ipcore_dir/*.xco
+!/ipcore_dir/*.xise
+!/src
+!/src/*
+
+
+#but still these once 
+/src/*.schcmd
+/src/*.schbak
+/src/*.schlog
+

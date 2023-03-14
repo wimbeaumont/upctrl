@@ -67,14 +67,14 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
  #NET "btn<5>" LOC = "F5";  # Bank = 3, Pin name = IO_L55N_M3A14, 	   Sch name = BTNC
  
 # onBoard SWITCHES
- #NET "sw<0>" LOC = "A10"; # Bank = 0, Pin name = IO_L37N_GCLK12,      	Sch name = SW0
- #NET "sw<1>" LOC = "D14"; # Bank = 0, Pin name = IO_L65P_SCP3,      	Sch name = SW1
- #NET "sw<2>" LOC = "C14"; # Bank = 0, Pin name = IO_L65N_SCP2,      	Sch name = SW2
- #NET "sw<3>" LOC = "P15"; # Bank = 1, Pin name = IO_L74P_AWAKE_1,       Sch name = SW3
- #NET "sw<4>" LOC = "P12"; # Bank = 2, Pin name = IO_L13N_D10,      		Sch name = SW4
- #NET "sw<5>" LOC = "R5";  # Bank = 2, Pin name = IO_L48P_D7,      		Sch name = SW5
- #NET "sw<6>" LOC = "T5";  # Bank = 2, Pin name = IO_L48N_RDWR_B_VREF_2, Sch name = SW6
- #NET "sw<7>" LOC = "E4";  # Bank = 3, Pin name = IO_L54P_M3RESET,       Sch name = SW7
+ NET "sw<0>" LOC = "A10"; # Bank = 0, Pin name = IO_L37N_GCLK12,      	Sch name = SW0
+ NET "sw<1>" LOC = "D14"; # Bank = 0, Pin name = IO_L65P_SCP3,      	Sch name = SW1
+ NET "sw<2>" LOC = "C14"; # Bank = 0, Pin name = IO_L65N_SCP2,      	Sch name = SW2
+ NET "sw<3>" LOC = "P15"; # Bank = 1, Pin name = IO_L74P_AWAKE_1,       Sch name = SW3
+ NET "sw<4>" LOC = "P12"; # Bank = 2, Pin name = IO_L13N_D10,      		Sch name = SW4
+ NET "sw<5>" LOC = "R5";  # Bank = 2, Pin name = IO_L48P_D7,      		Sch name = SW5
+ NET "sw<6>" LOC = "T5";  # Bank = 2, Pin name = IO_L48N_RDWR_B_VREF_2, Sch name = SW6
+ NET "sw<7>" LOC = "E4";  # Bank = 3, Pin name = IO_L54P_M3RESET,       Sch name = SW7
 
 # TEMAC Ether#NET MAC
  #NET "phyrst"    LOC = "G13"; # Bank = 1, Pin name = IO_L32N_A16_M1A9,       	 Sch name = E-RESET
@@ -189,6 +189,7 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
  #NET "HDMIIN1SCL"  LOC = "C13"; # Bank = 0, Pin name = IO_L50P,        Sch name = PMOD-SCL
  #NET "HDMIIN1SDA"  LOC = "A13"; # Bank = 0, Pin name = IO_L50N,        Sch name = PMOD-SDA
 
+
 # onboard HDMI IN2
  #NET "HDMIIN2CLKP" LOC = "H17"; # Bank = 1, Pin name = IO_L43P_GCLK5_M1DQ4, Sch name = TMDS-RX-CLK_P
  #NET "HDMIIN2CLKN" LOC = "H18"; # Bank = 1, Pin name = IO_L43N_GCLK4_M1DQ5, Sch name = TMDS-RX-CLK_N
@@ -215,16 +216,22 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
  #NET "AUDRST"   LOC = "T17"; # Bank = 1, Pin name = IO_L51P_M1DQ12,      Sch name = AUD-RESET
  
 # PMOD Connector
- NET "Pin1"  LOC = "T3"; # Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
- NET "Pin2"  LOC = "V9"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
-# for checking 
-NET "Pout3"  LOC = "R3"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
-NET "Pout4"  LOC = "T9"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-CLK_P
-# on the HDMI to avoid conflicts . 
-# NET "Pout3"  LOC = "C13"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
-# NET "Pout4"  LOC = "A13"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-CLK_P
+
+
+ NET "p1N"   LOC = "V4"  | IOSTANDARD=LVDS_25;  # Pin name   Sch name = JA-D1_N
+ NET "p1P"   LOC = "T4"  | IOSTANDARD=LVDS_25;  # Pin name   Sch name = JA-D1_P  
+
+ NET "p0N"  LOC = "P6" | IOSTANDARD=LVDS_25; # Bank = 2,  Pin name = IO_L64N_D9,     Sch name = JA-D2_N
+ NET "p0P"  LOC = "N5" | IOSTANDARD=LVDS_25; # Bank = 2,  Pin name = IO_L64P_D8,     Sch name = JA-D2_P
  
 
+ NET "P<3>"  LOC = "T3"; # Bank = 2,  Pin name = IO_L32N_GCLK28, Sch name = JA-CLK_N
+ NET "P<4>"  LOC = "R3"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-CLK_P
+ NET "P<5>"  LOC = "V9"; # Bank = 2,  Pin name = IO_L63N,        Sch name = JA-D1_N
+ NET "P<6>"  LOC = "T9"; # 
+ 
+ 
+ 
  #NET "JB<0>"  LOC = "T3"; # Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
  #NET "JB<1>"  LOC = "R3"; # Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
  #NET "JB<2>"  LOC = "P6"; # Bank = 2,  Pin name = IO_L64N_D9,     Sch name = JA-D2_N
@@ -241,58 +248,66 @@ NET "Pout4"  LOC = "T9"; # Bank = 2,  Pin name = IO_L32P_GCLK29, Sch name = JA-C
 #NET "CLK1" CLOCK_DEDICATED_ROUTE = FALSE;
 #NET "CLK3" CLOCK_DEDICATED_ROUTE = FALSE;
 
-# these are copied from the  spread sheet 
-
-NET "D<1>" LOC = "T11"; #VmodMIPsigname:JA-D0_N
-NET "D<0>" LOC = "R11"; #VmodMIPsigname:JA-D0_P
-NET "D<7>" LOC = "P11"; #VmodMIPsigname:JA-D2_N
-NET "D<6>" LOC = "N10"; #VmodMIPsigname:JA-D2_P
-
-
-NET "D<2>" LOC = "T10"; #VmodMIPsigname:JA-CLK_N
-NET "D<3>" LOC = "R10"; #VmodMIPsigname:JA-CLK_P
-NET "D<4>" LOC = "V12"; #VmodMIPsigname:JA-D1_N
-NET "D<5>" LOC = "T12"; #VmodMIPsigname:JA-D1_P
-
-
-
-NET "GPIO22" LOC = "N9"; #VmodMIPsigname:JB-D0_N
-#NET "clk1" LOC = "M10"; #VmodMIPsigname:JB-D0_P
-NET "SEL<0>" LOC = "T8"; #VmodMIPsigname:JB-D2_N
-NET "SEL<1>" LOC = "R8"; #VmodMIPsigname:JB-D2_P
-
-
+## these are copied from the  spread sheet 
+#
+#NET "D<1>" LOC = "T11"; #VmodMIPsigname:JA-D0_N
+#NET "D<0>" LOC = "R11"; #VmodMIPsigname:JA-D0_P
+#NET "D<7>" LOC = "P11"; #VmodMIPsigname:JA-D2_N
+#NET "D<6>" LOC = "N10"; #VmodMIPsigname:JA-D2_P
+#
+#
+#NET "D<2>" LOC = "T10"; #VmodMIPsigname:JA-CLK_N
+#NET "D<3>" LOC = "R10"; #VmodMIPsigname:JA-CLK_P
+#NET "D<4>" LOC = "V12"; #VmodMIPsigname:JA-D1_N
+#NET "D<5>" LOC = "T12"; #VmodMIPsigname:JA-D1_P
+#
+#
+##
+#NET "GPIO22" LOC = "N9"; #VmodMIPsigname:JB-D0_N
+##NET "clk1" LOC = "M10"; #VmodMIPsigname:JB-D0_P
+#NET "MUXSEL0" LOC = "T8"; #VmodMIPsigname:JB-D2_N
+#NET "MUXSEL1" LOC = "R8"; #VmodMIPsigname:JB-D2_P
 
 
 
 
 
-NET "P<0>" LOC = "V15"; #VmodMIPsigname:JC-D0_N
-NET "P<1>" LOC = "U15"; #VmodMIPsigname:JC-D0_P
-NET "P<2>" LOC = "N11"; #VmodMIPsigname:JC-D2_N
-NET "P<3>" LOC = "M11"; #VmodMIPsigname:JC-D2_P
-
-
-NET "P<4>" LOC = "V16"; #VmodMIPsigname:JC-CLK_N
-NET "P<5>" LOC = "U16"; #VmodMIPsigname:JC-CLK_P
-NET "P<6>" LOC = "V13"; #VmodMIPsigname:JC-D1_N
-NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
-
-
-
-NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
-NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
-NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
-#NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
-
-NET "Lid<0>" LOC = "V6"; #VmodMIPsigname:JD-CLK_N
-NET "Lid<1>" LOC = "T6"; #VmodMIPsigname:JD-CLK_P
-NET "Lid<2>" LOC = "P7"; #VmodMIPsigname:JD-D1_N
-NET "Lid<3>" LOC = "N6"; #VmodMIPsigname:JD-D1_P
-
+#
+#
+#
+#
+#NET "P<0>" LOC = "V15"; #VmodMIPsigname:JC-D0_N
+#NET "P<1>" LOC = "U15"; #VmodMIPsigname:JC-D0_P
+#NET "P<2>" LOC = "N11"; #VmodMIPsigname:JC-D2_N
+#NET "P<3>" LOC = "M11"; #VmodMIPsigname:JC-D2_P
+#
+#
+#NET "P<4>" LOC = "V16"; #VmodMIPsigname:JC-CLK_N
+#NET "P<5>" LOC = "U16"; #VmodMIPsigname:JC-CLK_P
+#NET "P<6>" LOC = "V13"; #VmodMIPsigname:JC-D1_N
+#NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
+#
+#
+#
+##NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
+#NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
+#NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
+##NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
+#
+#NET "Lid<0>" LOC = "V6"; #VmodMIPsigname:JD-CLK_N
+#NET "Lid<1>" LOC = "T6"; #VmodMIPsigname:JD-CLK_P
+#NET "Lid<2>" LOC = "P7"; #VmodMIPsigname:JD-D1_N
+#NET "Lid<3>" LOC = "N6"; #VmodMIPsigname:JD-D1_P
+#
 
 
 #end spreadsheet
+
+
+
+
+
+
 
 # USB UART Connector
  #NET "UartRx" LOC = "A16"; # Bank = 0, Pin name = IO_L66N_SCP0, Sch name = USBB-RXD

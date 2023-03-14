@@ -624,7 +624,7 @@
       </Ready>
    </inputs>
    <outputs>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -679,7 +679,7 @@
          <page>
          -1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -962,7 +962,7 @@
          -1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -1017,7 +1017,7 @@
          <page>
          -1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -1518,7 +1518,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -1573,7 +1573,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -1881,7 +1881,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -1936,7 +1936,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -2244,7 +2244,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -2299,7 +2299,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -2607,7 +2607,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -2662,7 +2662,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -3915,7 +3915,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -3970,7 +3970,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED
@@ -4278,7 +4278,7 @@ false
          1
          </page>
       </name>
-      <LcntrPon>
+      <LcntPon>
             <status>
             GLOBAL_FIXED
             </status>
@@ -4333,7 +4333,7 @@ false
          <page>
          1
          </page>
-      </LcntrPon>
+      </LcntPon>
       <Pon>
             <status>
             GLOBAL_FIXED

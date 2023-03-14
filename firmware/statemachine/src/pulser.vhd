@@ -1,4 +1,4 @@
--- Created by fizzim.pl version 5.20 on 2019:08:30 at 16:01:58 (www.fizzim.com)
+-- Created by fizzim.pl version 5.20 on 2023:03:10 at 13:54:22 (www.fizzim.com)
 
 library ieee;
 use IEEE.STD_LOGIC_1164.all;
@@ -7,8 +7,8 @@ use IEEE.STD_LOGIC_UNSIGNED.all;
 entity pulse_cntrl is
 port (
   LcntNr : out STD_LOGIC;
+  LcntPon : out STD_LOGIC;
   LcntWait : out STD_LOGIC;
-  LcntrPon : out STD_LOGIC;
   Pon : out STD_LOGIC;
   wait_s : out STD_LOGIC;
   Pcnt : in STD_LOGIC;
@@ -34,18 +34,18 @@ constant wait_t   : state_type:="101";
 
 signal state,nextstate: state_type;
 signal LcntNr_internal: STD_LOGIC;
+signal LcntPon_internal: STD_LOGIC;
 signal LcntWait_internal: STD_LOGIC;
-signal LcntrPon_internal: STD_LOGIC;
 signal Pon_internal: STD_LOGIC;
 signal wait_s_internal: STD_LOGIC;
 
 -- comb always block
 begin
-  COMB: process(state,Pcnt,Ptime,Ready,start,LcntNr_internal,LcntWait_internal,LcntrPon_internal,Pon_internal,wait_s_internal) begin
+  COMB: process(state,Pcnt,Ptime,Ready,start,LcntNr_internal,LcntPon_internal,LcntWait_internal,Pon_internal,wait_s_internal) begin
     nextstate <= state; -- default to hold value because implied_loopback is set
     LcntNr_internal <= '0'; -- default
+    LcntPon_internal <= '0'; -- default
     LcntWait_internal <= '0'; -- default
-    LcntrPon_internal <= '0'; -- default
     Pon_internal <= '0'; -- default
     wait_s_internal <= '0'; -- default
     case state is
@@ -62,11 +62,11 @@ begin
 
       when loadpulse_time_cnt =>
         LcntNr_internal <= '1';
-        LcntrPon_internal <= '1';
+        LcntPon_internal <= '1';
         nextstate <= pulse_on;
 
       when pulse_off          =>
-        LcntrPon_internal <= '1';
+        LcntPon_internal <= '1';
         if (Pcnt='1') then
           nextstate <= pulse_on;
         else
@@ -100,17 +100,19 @@ begin
 
   -- Port renames for vhdl
   LcntNr <= LcntNr_internal;
+  LcntPon <= LcntPon_internal;
   LcntWait <= LcntWait_internal;
-  LcntrPon <= LcntrPon_internal;
   Pon <= Pon_internal;
   wait_s <= wait_s_internal;
 
   -- sequential always block
   FF: process(clk,rst,nextstate) begin
-	 if (rst='1') then
-        state <= iddle;	
-    elsif (rising_edge(clk)) then
+    if (rising_edge(clk)) then
+      if (rst='1') then
+        state <= iddle;
+      else
         state <= nextstate;
+      end if;
     end if;
   end process;
 end fizzim;

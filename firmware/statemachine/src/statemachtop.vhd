@@ -1,21 +1,22 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 	Univeristeit Antwerpen
+-- Engineer:   Wim Beaumont 
 -- 
 -- Create Date:    15:15:30 08/28/2019 
--- Design Name: 
+-- Design Name: 	 
 -- Module Name:    statemachtop - Behavioral 
--- Project Name: 
--- Target Devices: 
+-- Project Name:   statemachine / programeerbare pulser  
+-- Target Devices:  Atlys board 
 -- Tool versions: 
 -- Description: 
---
+-- Pulser with programable puse width and pulse train length
+-- Output goes to the JMOD extention boad  -> RP adaption board (check topdoc.png /svg) 
 -- Dependencies: 
 --
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 
---
+--20230308  changed  LedId to the common version
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -48,6 +49,8 @@ end statemachtop;
 
 
 architecture Behavioral of statemachtop is
+-- 
+constant  LIdset  :STD_LOGIC_VECTOR (2 downto 0) := "111";
 -- name changes of input pins 
 alias  start : std_logic is GPIO14;
 alias  ready : std_logic is GPIO22;
@@ -68,7 +71,7 @@ statemach1: entity work.pulse_cntrl
 port map (
   LcntNr => LcntNr,	
   LcntWait => LcntWait,
-  LcntrPon => LcntPon,
+  LcntPon => LcntPon,
   Pon => Pon_i ,
   wait_s => wait_s,
   Pcnt => pcnt,
@@ -153,11 +156,12 @@ clksrc1 : entity  work.clksrc
     LOCKED => open);
 
 
-
  
 ledid1 : entity work.ledid 
-		port map ( clk => clk4M,
+		port map ( Id => LidSet, 
+					 clk => clk4M,
 					 Lid =>Lid);
+
 
 LED(1) <= pcnt;
 LED(2) <=ptime;

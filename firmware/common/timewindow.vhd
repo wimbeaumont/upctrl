@@ -14,6 +14,7 @@
 --
 -- Revision: 
 -- Revision 0.01 - File Created
+-- Revision 20230324 start as pulse 
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -26,8 +27,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library UNISIM;
+use UNISIM.VComponents.all;
 
 entity timewindow is
     Port ( clk : in  STD_LOGIC;
@@ -42,12 +43,27 @@ architecture Behavioral of timewindow is
 constant CNT_LENGTH : integer := 28;
 signal Dset : STD_LOGIC_VECTOR (CNT_LENGTH-1 downto 0);
 signal WinActiveTime :STD_LOGIC;
+signal startpulse , start_d1 :STD_LOGIC;
+
+component FD
+  generic( INIT : bit :=  '0');
+  port ( C : in    std_logic; 
+             D : in    std_logic; 
+             Q : out   std_logic);
+end component;
+attribute BOX_TYPE of FD : component is "BLACK_BOX";
+
 
 begin
-
 Dset( CNT_LENGTH-17 downto 0) <= (others => '1' );
 Dset (CNT_LENGTH-9  downto CNT_LENGTH-16)  <=  TwLow;
 Dset (CNT_LENGTH-1 downto CNT_LENGTH-8)  <=  TwHigh;
+
+-- start as pulse 
+ff1_1 : FD
+      port map (C=>CLK, D=>start, Q=>start_d1);
+   
+startpulse <= start AND start_d1;
 
 windowcnt1 : entity work.gen_down_cnt 
 			generic map ( 
@@ -60,7 +76,7 @@ windowcnt1 : entity work.gen_down_cnt
 				d => Dset,
 				zero_bar => WinActiveTime,
 				q=> open,
-				load => start,
+				load => startpulse,
 				clk  => clk,
 				one_bar => open
 			);

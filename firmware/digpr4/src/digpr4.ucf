@@ -25,7 +25,7 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
 # NET "clk0" LOC = "N4";  # Bank = 3, Pin name = IO_L1P, 	   		   Sch name = BTNU
 # NET "clk0" CLOCK_DEDICATED_ROUTE = FALSE;
  #NET "btn<2>" LOC = "P4";  # Bank = 3, Pin name = IO_L2P, 	   		   Sch name = BTNL
- #NET "clk1" LOC = "P4";  # Bank = 3, Pin name = IO_L2P, 	   		   Sch name = BTNL
+ NET "clk1" LOC = "P4";  # Bank = 3, Pin name = IO_L2P, 	   		   Sch name = BTNL
  #NET "clk1" CLOCK_DEDICATED_ROUTE = FALSE;
  #NET "btn<3>" LOC = "P3";  # Bank = 3, Pin name = IO_L2N, 	   		   Sch name = BTND
  #NET "clk3" LOC = "P3";  # Bank = 3, Pin name = IO_L2P, 	   		   Sch name = BTNL
@@ -60,29 +60,32 @@ NET "sysclk"   LOC = "L15"; # Bank = 1, Pin name = IO_L42P_GCLK7_M1UDM, Type = G
 # 6 ,12 : GND 
 # see also fie iotableV3_PCB.ods , tab PMOD_Atlys
 
+# JAx   is pin x on the PMOD connector JB on the ATLYS board 
+# between JA-Dx_x  and JAy there is a resistor 
 
-# Bank = 2,  Pin name = IO_L62N_D6,     Sch name = JA-D0_N
-NET "PextP[1]" LOC = N5;
-NET "PextP[1]" IOSTANDARD = "LVDS_33";
-NET "PextP[1]" DIFF_TERM = "FALSE";
-# Bank = 2,  Pin name = IO_L62P_D5,     Sch name = JA-D0_P
-NET "PextN[1]" LOC = P6;
-NET "PextN[1]" IOSTANDARD = "LVDS_33";
-NET "PextN[1]" DIFF_TERM = "FALSE";
 
-# Bank = 2,  Pin name = IO_L64N_D9,     Sch name = JA-D2_N
-NET "PextP[0]" LOC = T4;
-NET "PextP[0]" IOSTANDARD = "LVDS_33";
-NET "PextP[0]" DIFF_TERM = "FALSE";
-# Bank = 2,  Pin name = IO_L64P_D8,     Sch name = JA-D2_P
-NET "PextN[0]" LOC = V4;
-NET "PextN[0]" IOSTANDARD = "LVDS_33";
-NET "PextN[0]" DIFF_TERM = "FALSE";
+NET "PextP[0]" LOC = N5; # JA_D2_P  ==JA4
+NET "PextP[0]" IOSTANDARD = "LVDS_25";
+NET "PextP[0]" DIFF_TERM = "TRUE";
+
+NET "PextN[0]" LOC = P6; # JA_D2_N  == JA3 
+NET "PextN[0]" IOSTANDARD = "LVDS_25";
+NET "PextN[0]" DIFF_TERM = "TRUE";
+
+
+NET "PextP[1]" LOC = T4; #JA_D1_P == JA10
+NET "PextP[1]" IOSTANDARD = "LVDS_25";
+NET "PextP[1]" DIFF_TERM = "TRUE";
+
+
+NET "PextN[1]" LOC = V4; #JA_D1_N = JA9 
+NET "PextN[1]" IOSTANDARD = "LVDS_25";
+NET "PextN[1]" DIFF_TERM = "TRUE";
  
 NET "POUT<0>"  LOC = "V9"; #      Sch name = JA7 
 NET "POUT<1>"  LOC = "R3"; #      Sch name = JA2
-NET "POUT<2>"  LOC = "T3"; #      Sch name = JA1
-# NET "POUT<3>"  LOC = "T9"; #      Sch name = JA8
+NET "POUT<3>"  LOC = "T3"; #      Sch name = JA1
+NET "POUT<2>"  LOC = "T9"; #      Sch name = JA8
  
 
 
@@ -148,7 +151,7 @@ NET "P<7>" LOC = "U13"; #VmodMIPsigname:JC-D1_P
 
 
 NET "clk3" LOC = "T7"; #VmodMIPsigname:JD-D0_N
-NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
+#NET "GPIO18" LOC = "R7"; #VmodMIPsigname:JD-D0_P
 NET "GPIO15" LOC = "V5"; #VmodMIPsigname:JD-D2_N
 NET "GPIO14" LOC = "U5"; #VmodMIPsigname:JD-D2_P
 
@@ -157,6 +160,14 @@ NET "Lid<1>" LOC = "T6"; #VmodMIPsigname:JD-CLK_P
 NET "Lid<2>" LOC = "P7"; #VmodMIPsigname:JD-D1_N
 NET "Lid<3>" LOC = "N6"; #VmodMIPsigname:JD-D1_P
 
+NET "PoutAdd[0]" LOC = "V8;"; #VmodMIPsigname:JE1
+NET "PoutAdd[1]" LOC = "U8;"; #VmodMIPsigname:JE2
+NET "PoutAdd[2]" LOC = "N8;"; #VmodMIPsigname:JE7
+NET "PoutAdd[3]" LOC = "M8;"; #VmodMIPsigname:JE8
+NET "PoutAdd[4]" LOC = "P8;"; #VmodMIPsigname:JE3
+NET "PoutAdd[5]" LOC = "V7;"; #VmodMIPsigname:JE9
+#NET "PoutAdd[6]" LOC = "N7;"; #VmodMIPsigname:JE4
+#NET "PoutAdd[7]" LOC = "U7;"; #VmodMIPsigname:JE10
 
 
 #end spreadsheet

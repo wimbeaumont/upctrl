@@ -17,31 +17,27 @@
   <files>
     <file xil_pn:name="src/counter.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
-    </file>
-    <file xil_pn:name="src/pulsegen.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="27"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
-    </file>
-    <file xil_pn:name="src/mux4_8_1.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="28"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
-    </file>
-    <file xil_pn:name="src/ledid.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="29"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
-    </file>
-    <file xil_pn:name="src/outputbuf.vhd" xil_pn:type="FILE_VHDL">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="30"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+    </file>
+    <file xil_pn:name="../common/pulsegen.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="27"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
+    </file>
+    <file xil_pn:name="../common/ledid.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="29"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
+    </file>
+    <file xil_pn:name="../common/outputbuf.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="30"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
     </file>
     <file xil_pn:name="ipcore_dir/clksrc.xco" xil_pn:type="FILE_COREGEN">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="33"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
     </file>
     <file xil_pn:name="src/digpr4top.vhd" xil_pn:type="FILE_VHDL">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="29"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
     </file>
     <file xil_pn:name="src/digpr4.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
@@ -54,7 +50,23 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="85"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
     </file>
-    <file xil_pn:name="ipcore_dir/clksrc.xise" xil_pn:type="FILE_ISE">
+    <file xil_pn:name="../common/pulse_count.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="68"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+    </file>
+    <file xil_pn:name="../common/mux4_Win_Bout.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="71"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
+    </file>
+    <file xil_pn:name="../../../../gitlab/uacomp/reg_4.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="70"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+    </file>
+    <file xil_pn:name="../common/timewindow.vhd" xil_pn:type="FILE_VHDL">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="71"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/clksrc.xise" xil_pn:type="FILE_COREGENISE">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
   </files>
@@ -249,6 +261,7 @@
     <property xil_pn:name="Output Extended Identifiers" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Output File Name" xil_pn:value="digpr4top" xil_pn:valueState="default"/>
     <property xil_pn:name="Overwrite Compiled Libraries" xil_pn:value="false" xil_pn:valueState="default"/>
+    <property xil_pn:name="Overwrite Existing Symbol" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Pack I/O Registers into IOBs" xil_pn:value="Auto" xil_pn:valueState="default"/>
     <property xil_pn:name="Pack I/O Registers/Latches into IOBs" xil_pn:value="Off" xil_pn:valueState="default"/>
     <property xil_pn:name="Package" xil_pn:value="csg324" xil_pn:valueState="non-default"/>

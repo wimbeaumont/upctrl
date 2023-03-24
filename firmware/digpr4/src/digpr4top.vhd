@@ -14,8 +14,22 @@
 --
 -- Revision: 
 -- Revision 0.1 - File Created
+-- Revision 1.0 - with differential inputs  mrt 2022
+-- Revision 1.1 - introduced pulse counter
 -- Additional Comments: 
---
+-- registers :( 8 bits) 
+-- 00 : timewindowLow 
+-- 01 : timewindowHigh
+-- 10 : Settings
+-- 11 : internal  pulser divider 
+-- settings ( register Q2 output ) 
+-- S0 == cnt2 (the and)  input  if  S0=0 cnt1 and cnt 2 , else Pand ( Pulse And)
+-- S1,S2  :  cnt 1, 3 input x0 : RP input , 11 Pext  , 01 :internal pulser
+-- S3 =1  : timewindow always 1 
+-- S4 =1  invert Pext0 
+-- S5 =1  invert Pext1  
+-- diff connections : 
+
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -31,65 +45,69 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity digpr4top is
-
-PORT(     SEL:	IN	STD_LOGIC_VECTOR(1 DOWNTO 0); 
-        
-          GPIO22	:	IN	STD_LOGIC;  -- bit 3 for the output select 
-          P	:	OUT	STD_LOGIC_VECTOR (7 DOWNTO 0); 
-          LED	:	OUT	STD_LOGIC_VECTOR (7 DOWNTO 0); 
-          Lid	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0); 
-          RstN	:	IN	STD_LOGIC; 
-          D	:	IN	STD_LOGIC_VECTOR (7 DOWNTO 0); 
-			 -- inputs from on board PMOD connector
- 			 PextP	:	IN	STD_LOGIC_VECTOR (1 DOWNTO 0); 
-			 PextN   :	IN	STD_LOGIC_VECTOR (1 DOWNTO 0); 			 
-          GPIO15	:	IN	STD_LOGIC;  -- data valid for the D input of the pulse generator
-			 GPIO18	:	IN	STD_LOGIC;   -- counter reset 
-			 --next two names are used for compatibility but select the input source for the counters
-			 clk3  	:	IN	STD_LOGIC;
-			 GPIO14  	:	IN	STD_LOGIC;
-          SYSCLK	:	IN	STD_LOGIC;
+GENERIC ( COUNTSIZE : integer := 16);
+PORT(    
+	-- output MUX 
+	SEL:	IN	STD_LOGIC_VECTOR(1 DOWNTO 0); -- select signals for  the output mux 
+   GPIO22	:	IN	STD_LOGIC; --byte_sel(0) for the out mux 
+	clk1    :  IN	STD_LOGIC; -- byte_sel(1) for out mux 
+	
+	P	:	OUT	STD_LOGIC_VECTOR (7 DOWNTO 0);  -- output port to the RP
+   LED	:	OUT	STD_LOGIC_VECTOR (7 DOWNTO 0); -- output port to the LED
+	---------------
+	
+	D	:	IN	STD_LOGIC_VECTOR (7 DOWNTO 0);  -- data input 
+	-- pulse inputs from on board PMOD connector
+	PextP	:	IN	STD_LOGIC_VECTOR (1 DOWNTO 0); 
+	PextN   :	IN	STD_LOGIC_VECTOR (1 DOWNTO 0); 
+	--------------		 
+   GPIO15	:	IN	STD_LOGIC;   -- counter reset 
+	--next two names are used for compatibility but select the input source for the counters
+	clk3  	:	IN	STD_LOGIC; --  start the time window
+	GPIO14  	:	IN	STD_LOGIC; --  data valild for writing to the register
+	
+	RstN	:	IN	STD_LOGIC; 			
+	SYSCLK	:	IN	STD_LOGIC;
+			 
 			 -- outputs to check the inputs for the pulsers 
-          Pout   :  OUT STD_LOGIC_Vector(3 downto 0)
-			 );
+   Pout   :  OUT STD_LOGIC_Vector(3 downto 0);
+	Lid	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0);  -- ID LEDS 
+	-- debug sigals 
+	PoutAdd  : OUT STD_LOGIC_Vector(5 downto 0)
+	 );
 
 end digpr4top;
 
+
+
 architecture Behavioral of digpr4top is
 
- 
-   component FD
-      generic( INIT : bit :=  '0');
-      port ( C : in    std_logic; 
-             D : in    std_logic; 
-             Q : out   std_logic);
-   end component;
-   attribute BOX_TYPE of FD : component is "BLACK_BOX";
-
-	signal clk4M    : std_logic;
+	signal CLK4    : std_logic;
    signal CLK100   : std_logic;
    signal CNTCLR   : std_logic;
-   signal D0       : std_logic_vector (15 downto 0);
-   signal D1       : std_logic_vector (15 downto 0);
-   signal D2       : std_logic_vector (15 downto 0);
-   signal D6       : std_logic_vector (7 downto 0);
-	signal D0LB      : std_logic_vector (7 downto 0);
-	signal D0HB      : std_logic_vector (7 downto 0);
-   signal D1LB       : std_logic_vector (7 downto 0);
-	signal D1HB       : std_logic_vector (7 downto 0);
-   signal D2LB       : std_logic_vector (7 downto 0);
-	signal D2HB       : std_logic_vector (7 downto 0);
+	signal COIN		 : std_logic;
+   signal D0       : std_logic_vector (COUNTSIZE-1 downto 0);-- cnt1
+   signal D1       : std_logic_vector (COUNTSIZE-1 downto 0);-- cnt2
+   signal D2       : std_logic_vector (COUNTSIZE-1 downto 0);-- coin cnt
+   signal D6       : std_logic_vector (COUNTSIZE-1 downto 0);-- status bits 
    signal RST      : std_logic;
-	signal CNT1_CE , Qff1_2,Qff1_1: std_logic;
-	signal CNT2_CE , Qff2_2,Qff2_1 , COIN: std_logic;
-   signal CNT3_CE , Qff3_2,Qff3_1: std_logic;
-	signal Pext	:	STD_LOGIC_VECTOR (1 DOWNTO 0); 
-
+	signal Pext	:	STD_LOGIC_VECTOR (1 DOWNTO 0);  -- eventual inverted 
+	signal Pext_D	:	STD_LOGIC_VECTOR (1 DOWNTO 0); -- direct from diff input 
+	signal byte_sel : STD_LOGIC_VECTOR(1 downto 0);
+	signal TimeWinHigh ,TimeWinLow ,Settings,PulsgenIn  :  STD_LOGIC_VECTOR (7 downto 0);
+	signal CntWinEn, Pulse1, Pulse2, Pand ,TWinAct: STD_LOGIC;
 -- input select 
 	signal Cnt1In, Cnt2In :  std_logic;
 	signal InpSel     : std_logic_vector (1 downto 0);
-
+	alias start  	:	STD_LOGIC is clk3  ;
+	alias datavalid 	:	STD_LOGIC is GPIO14  ;
+	alias CNTCLK : STD_LOGIC is CLK100  ;
 begin
+
+D6(15 downto 11) <= "00001";
+
+byte_sel(0) <= GPIO22;
+byte_sel(1) <=clk1 ;
 
 -- the input signals 
 -- diff to single 
@@ -101,9 +119,10 @@ P0_IBUFDS : IBUFDS
   port map(
     I  => PextP(0),
     IB => PextN(0),
-    O  => Pext(0)
+    O  => Pext_D(0)
 	 );
 
+Pext(0) <=  Pext_D(0) when settings(4) = '0' else  not Pext_D(0);
 
 
 P1_IBUFDS : IBUFDS
@@ -113,15 +132,15 @@ P1_IBUFDS : IBUFDS
   port map(
     I  => PextP(1),
     IB => PextN(1),
-    O  => Pext(1)
+    O  => Pext_D(1)
 	 );
 
-
+Pext(1) <=  Pext_D(1) when settings(5) = '0' else  not Pext_D(1);
 
 
 RST <= not RstN	;
 
-CNTCLR <= RST OR GPIO18;
+CNTCLR <= RST OR GPIO15;
 
 clksrc1 : entity  work.clksrc
   port map
@@ -130,116 +149,138 @@ clksrc1 : entity  work.clksrc
     -- Clock out ports
     CLK_OUT1 => CLK100,
     CLK_OUT2 => open,
-    CLK_OUT3 => clk4M,
+    CLK_OUT3 => CLK4,
     -- Status and control signals
     RESET  => RST,
     LOCKED => open);
 
-InpSel(0) <= clk3;
-InpSel(1) <= GPIO14;
+
+
+
+InpSel(0) <= settings(1);
+InpSel(1) <= settings(2);
+-- Pext=extern diff pulse ,  D6 intern pulser , Dx is RP generated pulse
 Cnt1In <= Pext(0)  when InpSel="11" else  D6(0) when InpSel="01"  else D(0);
 Cnt2In <= Pext(1)  when InpSel="11" else  D6(1) when InpSel="01"  else D(1);
+
+
 
 Pout(0) <= Cnt1In ;
 Pout(1) <= Cnt2In ;	 
 Pout(2) <= COIN;
+pout(3) <= Pext(0); 
+PoutAdd(0) <= CntWinEn;
+PoutAdd(1) <= d6(5); --cnt 1 enable 
+PoutAdd(2) <= d6(6); --cnt 2 enable 
+PoutAdd(3) <= d6(7); --coinc enable 
+PoutAdd(4) <= Pulse1;
+PoutAdd(5) <= D0(0);
 
-ff1_1 : FD
-      port map (C=>CLK100,
-                D=>Cnt1In,
-                Q=>Qff1_1);
-   
-ff1_2 : FD
-      port map (C=>CLK100,
-                D=>Qff1_1,
-                Q=>Qff1_2);
-					 
-CNT1_CE <= (not  Qff1_2 )  and  (Qff1_1 and  D(2));
-d6(5) <= CNT1_CE;
-count1  : entity work.counter
-      port map (C=>CLK100,
-                CE=>CNT1_CE,
-                CLR=>CNTCLR,
-                Q=>D0
-              );
+CntWinEn <= TWinAct or settings(3);
 
-COIN <= Cnt1In and Cnt2In;
+pcount1  : entity work.pulse_count
+	generic map ( CWIDTH =>  COUNTSIZE)
+   port map( 	D => Cnt1In,
+					EnA => D(2) ,
+					EnB => CntWinEn,
+					CLR => CNTCLR,
+					CLK => CNTCLK,
+					CNTE_out => d6(5), 
+					Pout=> Pulse1,
+					OVLDET => d6(8),
+					Q => D0
+					);
 
-ff2_1 : FD
-      port map (C=>CLK100,
-                D=> COIN,
-                Q=>Qff2_1);
-   
-ff2_2 : FD
-      port map (C=>CLK100,
-                D=>Qff2_1,
-                Q=>Qff2_2);
-CNT2_CE <= ( NOT Qff2_2)  AND  Qff2_1 AND  D(2);
-d6(6) <=CNT2_CE ;
+Pand <= Pulse1 and Pulse2;
+COIN <= (Cnt1In and Cnt2In)  when Settings(0) ='0' else Pand;
 
-count2  : entity work.counter
-      port map (C=>CLK100,
-                CE=>CNT2_CE,
-                CLR=>CNTCLR,               
-                Q=>D1      );
 
-ff3_1 : FD
-      port map (C=>CLK100,
-                D=>Cnt2In,
-                Q=>Qff3_1);
-  
-ff3_2 : FD
-      port map (C=>CLK100,
-                D=>Qff3_1,
-                Q=>Qff3_2);
-CNT3_CE <= ( NOT Qff3_2)  AND  Qff3_1 AND  D(2);
-d6(7) <= CNT3_CE;
-count3  : entity work.counter
-      port map (C=>CLK100,
-                CE=>CNT3_CE,
-                CLR=>CNTCLR,            
-                Q=>D2);
+pcount2  : entity work.pulse_count 
+	generic map ( CWIDTH =>  COUNTSIZE)
+   port map( 	D => COIN,
+					EnA => D(2) ,
+					EnB => CntWinEn,
+					CLR => CNTCLR,
+					CLK => CNTCLK,
+					Pout => open,
+					CNTE_out => d6(9), 
+					OVLDET => open,
+					Q => D1
+					);
 
+pcount3  : entity work.pulse_count 
+	generic map ( CWIDTH =>  COUNTSIZE)
+   port map( 	D => Cnt2In,
+					EnA => D(2) ,
+					EnB => CntWinEn,
+					CLR => CNTCLR,
+					CLK => CNTCLK,
+					CNTE_out => d6(7), 
+					OVLDET => d6(10),
+					Pout=> Pulse2,
+					Q => D2
+					);
 
 
 
  pulsgen1  : entity work.pulsegen
-      port map (clk=>clk4M,
-                D=>D,
+      port map (clk=>CLK4,
+                D=>PulsgenIn,
                 RST=>RST,
-                WE=>GPIO15,
+                WE=>'1', -- PulsegenIn is "stable input "
                 PAND=>D6(2),
                 P1=>D6(0),
                 P2=>D6(1),
                 zbar1=>D6(3),
                 zbar2=>D6(4));
-					 
-D0LB <= 	 D0(7 downto 0);
-D0HB <= 	 D0(15 downto 8);
-D1LB <= 	 D1(7 downto 0);
-D1HB <= 	 D1(15 downto 8);
-D2LB <= 	 D2(7 downto 0);
-D2HB <= 	 D2(15 downto 8);
 
 
-outmux :  entity work.mux4_8_1 
-     port map (D0 =>D0LB,
-                D1=>D0HB,
-                D2=>D1LB,
-                D3=>D1HB,
-                D4=>D2LB,
-                D5=>D2HB,
-                D6=>D6,
-                sel0=>SEL(0),
-                sel1=>SEL(1),
-                sel2=>GPIO22,
-                LED=>LED,
-                P =>P
-					 );
-   
+
+outmux: entity work.mux4_Win_Bout 
+	 Generic map ( DSIZE => COUNTSIZE  )   
+    Port map ( D0 => D0,
+           D1 => D1,
+           D2 => D2,
+           D3 => D6,
+           P => P,
+			  LED => LED,
+           sel => SEL ,
+			  byte_sel => byte_sel 
+			 );
+
+
+settingsreg : entity work.Reg_4 
+	generic map ( D_WIDTH => D'LENGTH, RSTLVL  =>'1'  )
+    Port map ( 	
+				Q0    => TimeWinLow,
+				Q1    => TimeWinHigh,
+				Q2    => Settings,
+				Q3    => PulsgenIn,
+				D     => D,
+				S0    => SEL, -- shared with the ouput mux !!! 
+				load  => datavalid,
+				clk   => CLK4,
+				rst   => RST
+			);
+
+
+
+
+timewindow1 : entity work.timewindow
+   Port map  ( clk  => CLK4,
+					rst =>  RST,
+					TwHigh =>  TimeWinHigh ,
+					TwLow => TimeWinLow ,
+					start => start,
+					WinActive => TWinAct
+				);	
+
+
+
 ledid1 : entity work.ledid 
-		port map ( clk => clk4M,
-					 Lid =>Lid);
+		port map (	Id =>  "100",  
+						clk => CNTCLK,
+						Lid =>Lid);
  
 
 

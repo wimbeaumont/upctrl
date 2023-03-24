@@ -17,6 +17,7 @@
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 
+-- 20230323  added OVLDET becomes 1 when Q = all one 
 --
 ----------------------------------------------------------------------------------
 library IEEE;
@@ -30,6 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- any Xilinx primitives in this code.
 library UNISIM;
 use UNISIM.VComponents.all;
+use ieee.numeric_std.all;
 
 entity pulse_count is
 	generic ( CWIDTH : integer :=16 );
@@ -40,6 +42,7 @@ entity pulse_count is
            CLK : in  STD_LOGIC; --sync clk iput
 			  CNTE_out : out STD_LOGIC; -- count enable status
 			  Pout: out STD_LOGIC; --  pulse detect output 1 clock high
+			  OVLDET: out  std_logic;
            Q : out  STD_LOGIC_VECTOR (CWIDTH-1 downto 0));
 end pulse_count;
 
@@ -53,11 +56,30 @@ architecture Behavioral of pulse_count is
    end component;
    attribute BOX_TYPE of FD : component is "BLACK_BOX";
 
-
-	signal CNT1_CE , Qff1_2,Qff1_1,Qff1_3: std_logic;
-
+----- component FDC -----
+component FDC
+  generic (     INIT : bit := '0'  );
+  port (
+     Q : out std_logic;
+     C : in std_logic;
+     CLR : in std_logic;
+     D : in std_logic
+  );
+end component;
+attribute BOX_TYPE of  FDC : component is "BLACK_BOX";
+signal qcnt  :  STD_LOGIC_VECTOR (CWIDTH-1 downto 0);
+signal qcntu : unsigned (CWIDTH-1 downto 0);
+signal CNT1_CE , Qff1_2,Qff1_1,Qff1_3 , OVLDET_chk: std_logic;
+constant all_one : unsigned (CWIDTH-1 downto 0 ) := (others => '1');
 begin
 
+ff_ovl : FDC 
+port map (C=>CLK,
+          D=>OVLDET_chk,
+          Q=>OVLDET,
+			 CLR => CLR
+			);
+			
 
 ff1_1 : FD
       port map (C=>CLK,
@@ -86,10 +108,12 @@ count1  : entity work.counter
       port map (C=>CLK,
                 CE=>CNT1_CE,
                 CLR=>CLR,
-                Q=>Q
+                Q=>qcnt
               );
 
-
+Q<= qcnt; 
+qcntu <= unsigned(qcnt);
+OVLDET_chk  <= '1' when ( qcntu= all_one)  else '0';
 
 end Behavioral;
 

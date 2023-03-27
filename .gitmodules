@@ -1,0 +1,3 @@
+[submodule "PeripheralDevices"]
+	path = PeripheralDevices
+	url = git@github.com:wimbeaumont/PeripheralDevices.git

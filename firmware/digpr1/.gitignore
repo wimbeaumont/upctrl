@@ -21,4 +21,5 @@
 #but still these once 
 /src/*.schcmd
 /src/*.schbak
+/src/*.schlog
 

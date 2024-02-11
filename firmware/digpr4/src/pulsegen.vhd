@@ -14,6 +14,7 @@
 --
 -- Revision: 
 -- Revision 0.01 - File Created
+-- Revision 2.00 - 18/03/2022  differnetial external inputs for counters
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------

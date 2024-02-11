@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    16:05:19 09/25/2018 
+-- Create Date:    11:38:51 12/13/2019 
 -- Design Name: 
--- Module Name:    Mux_8_4 - Behavioral 
+-- Module Name:    ledid - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,25 +29,27 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Mux_8_2 is
-    Port ( A : in  STD_LOGIC_VECTOR (7 downto 0);
-           B : in  STD_LOGIC_VECTOR (7 downto 0);       
-           Y : out  STD_LOGIC_VECTOR (7 downto 0);        
-           S0 : in  STD_LOGIC);
-end Mux_8_2;
+entity ledid is
+    Port ( clk : in  STD_LOGIC;
+           Lid : out  STD_LOGIC_VECTOR(3 downto 0) 
+          );
+end ledid;
 
-architecture Behavioral of Mux_8_2 is
-signal Sel : STD_LOGIC_VECTOR (0 downto 0);
+architecture Behavioral of ledid is
+ signal Id :STD_LOGIC_VECTOR(2 downto 0) ;
+ signal q: STD_LOGIC;
+begin
 
-begin 
-Sel(0) <= S0 ;
-
-
-LUT  : with  Sel select 
-	Y <=	A when "0",
-			B when "1",
-				
-			"00000000" when others;
+  togleff: process  ( clk) 
+  begin
+	if( rising_edge(clk)) then 
+		q <= not q;
+	end if;
+  end process togleff;
+	
+  Id <=  "001";
+  Lid(3)  <= q;
+  Lid(2 downto 0 ) <= not Id; -- 0 == LED on 
 
 end Behavioral;
 

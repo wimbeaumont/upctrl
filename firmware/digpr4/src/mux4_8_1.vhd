@@ -31,22 +31,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 library work ;
 use work.all ;
 
--- this is a 4 input mux  with data size input == DSIZE (max 32) 
---  sel selects the input used 
---  byte_sel selects the byte of the input connected to the output
-
-
 entity mux4_8_1 is
-	 Generic ( DSIZE : integer :=8) ;
-    Port ( D0 : in  STD_LOGIC_VECTOR (DSIZE-1 downto 0);
-           D1 : in  STD_LOGIC_VECTOR (DSIZE-1 downto 0);
-           D2 : in  STD_LOGIC_VECTOR (DSIZE-1 downto 0);
-           D3 : in  STD_LOGIC_VECTOR (DSIZE-1 downto 0);
+    Port ( D0 : in  STD_LOGIC_VECTOR (7 downto 0);
+           D1 : in  STD_LOGIC_VECTOR (7 downto 0);
+           D2 : in  STD_LOGIC_VECTOR (7 downto 0);
+           D3 : in  STD_LOGIC_VECTOR (7 downto 0);
+           D4 : in  STD_LOGIC_VECTOR (7 downto 0);
+           D5 : in  STD_LOGIC_VECTOR (7 downto 0);
+			  D6 : in  STD_LOGIC_VECTOR (7 downto 0);
            P : out  STD_LOGIC_VECTOR (7 downto 0);
 			  LED : out  STD_LOGIC_VECTOR (7 downto 0);
-           sel : in  STD_LOGIC_VECTOR ( 1 downto 0);
-			  byte_sel : in STD_LOGIC_VECTOR ( 1 downto 0)
-			 );
+           sel0 : in  STD_LOGIC;
+           sel1 : in  STD_LOGIC;
+           sel2 : in  STD_LOGIC);
 end mux4_8_1;
 
 
@@ -61,29 +58,24 @@ component outputbuf is
 end component outputbuf;
 
 
-
-signal DSel : STD_LOGIC_VECTOR (DSIZE-1 downto 0);
-signal DSMax : STD_LOGIC_VECTOR (32  downto 0); -- 32 so always > DSIZE-1 
-signal Dout  : STD_LOGIC_VECTOR (7 downto 0);
+subtype ADR is STD_LOGIC_VECTOR (2 downto 0);
+signal address : ADR ;
+signal Dout : STD_LOGIC_VECTOR (7 downto 0);
 begin
 
+address(0) <= sel0;
+address(1) <= sel1;
+address(2) <= sel2;
 
-
-
-MuxSel : with  sel select 
-	DSel <=	D0 when "00",
-				D1 when "01",
-				D2 when "10",
-				D3 when others;
-
-DSMax ( DSIZE-1 downto 0) <=  DSel;
-DSMax ( 32 downto DSIZE) <=(others => '0') ;
-
-Muxbyte : with byte_sel select 
-	Dout <=  DSMax(7 downto 0) when "00",				
-				DSMax(15 downto 8) when "01",				
-				DSMax(23 downto 16) when "10",				
-				DSMax(31 downto 24) when others;
+Mux : with  address select 
+	Dout <=	D0 when "000",
+				D1 when "001",
+				D2 when "010",
+				D3 when "011",
+				D4 when "100",
+				D5 when "101",
+				D6 when others;
+			
 
 OutBuf1 :outputbuf port map (
 						Dout, P, LED); 

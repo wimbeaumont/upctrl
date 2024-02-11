@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    11:35:43 12/12/2019 
+-- Create Date:    10:43:49 12/12/2019 
 -- Design Name: 
--- Module Name:    adderinput - Behavioral 
+-- Module Name:    adder - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,46 +29,38 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity adderinput is
-    Generic ( SIZE : natural := 8 ) ;
-    Port ( D : in  STD_LOGIC_VECTOR (SIZE-1 downto 0);
-           sel : in  STD_LOGIC;
-           clk : in  STD_LOGIC;
-			  SUBTR : in STD_LOGIC;
-           Y : out  STD_LOGIC_VECTOR (SIZE-1 downto 0);
-           Cout : out  STD_LOGIC_VECTOR (SIZE-1 downto 0));
-end adderinput;
-
-architecture Behavioral of adderinput is
-
-
-signal  A, B : STD_LOGIC_VECTOR (SIZE-1 downto 0);
-
-
-component  adder 
+entity adder is
 	 Generic ( SIZE : natural := 8 ) ;
     Port ( A : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            B : in  STD_LOGIC_VECTOR (SIZE -1 downto 0);
            Y : out  STD_LOGIC_VECTOR (SIZE -1 downto 0);
-           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0)
+           Cout : out   STD_LOGIC_VECTOR (SIZE -1 downto 0);
+			  Cin : in STD_LOGIC 
 			);
-end  component;
+end  adder;
 
+architecture Behavioral of adder is
+
+
+component fulladder is
+    Port ( A : in  STD_LOGIC;
+           B : in  STD_LOGIC;
+           C : in  STD_LOGIC;
+           Y : out  STD_LOGIC;
+           Cout : out  STD_LOGIC);
+end component;
+
+
+signal  Cint : STD_LOGIC_VECTOR (SIZE  downto 0); -- need read write  
 begin
 
-process ( clk) is
-	begin 
-		if( rising_edge(clk) ) then 
-			if ( sel = '0' ) then A <=D ;
-			else B <= D ;
-			end if ;
-		end if;
-end process ;--InSel
+Cint(0) <= Cin; 
 
-add1: adder 
-		generic map ( SIZE => SIZE )
-		port map ( A => A, B => B, Y => Y , Cout => Cout);
-		
+ADDER : for I in 0 to SIZE-1 generate 
+  L: 	fulladder  port map ( A => A(I) , B=>B(I) , C => Cint(I) ,Cout=>Cint(I+1), Y => Y(I)) ;
+end generate ADDER; 
+
+Cout <= Cint ( SIZE downto 1); 
 
 end Behavioral;
 

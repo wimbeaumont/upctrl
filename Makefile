@@ -30,6 +30,11 @@ CC = gcc
 
 INCLPATH =  -I ./incl
 
+.PHONY: all
+all: adder_b adder blink_led6 check_and check_comlogic counterchk counter_explore counting_interrupt counting_polling dffchk digpr_pinchk freq_count_1 get2comp rbpi_and2a rbpi_blink rbpi_blink_simple rbpi_toglleall read_sw7 simple_arg statemachine_pulser sw7toled6 test test_muxout 
+
+
+
 test :  
 	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@
 	 

@@ -29,7 +29,7 @@
 #include <unistd.h>
 #include <wiringPi.h>  // for the interrupt routines 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 // globalCounter:
 //	Global variable to count interrupts
 //	Should be declared volatile to make sure the compiler doesn't cache it.

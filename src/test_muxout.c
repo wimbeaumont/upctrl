@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "pr_utils.h"
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h"  
 
 /*
 		gcc -o test_muxout test_muxout.c -lpigpio -lpthread

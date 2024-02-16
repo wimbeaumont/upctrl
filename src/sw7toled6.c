@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 
 /*
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
 	int lc=0;
 	while(1)  {
-		"do something" 
+		//"do something" 
 	}
 
 

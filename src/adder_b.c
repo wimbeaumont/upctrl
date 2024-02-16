@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o adder adder.c  -lpigpio -lpthread
@@ -77,9 +77,9 @@ int main(int argc, char *argv[]){
 	// itterate  over all combinations 
     for (int  inpcomb=0 ; inpcomb < nr_inpcomb ; inpcomb++) {
 		int A= inpcomb & 0xFF, B=0x38;
-		gpioWrite( SEL, 0);
+		gpioWrite( SEL0, 0);
 		set_outputs( inputs, nr_inputs , A) ;
-		gpioWrite( SEL, 1);
+		gpioWrite( SEL0, 1);
 		set_outputs( inputs, nr_inputs , B) ;
 		// convert to bin array for the simulation 
 		decvalue2binar(A ,simulations_inputsA  ,nr_inputs );

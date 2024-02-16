@@ -30,7 +30,7 @@ def inv_bin_array(ar):
 def print_bin_arry_status(ar):
     size = len(ar)
     for cnt in range(size - 1, -1, -1):
-        print("-1" if ar[cnt] else "-0", end="")
+        print("-1" if ar[cnt] else "-0")
     print("-")
 
 def print_dec_as_bin_array_status(value, nr_bits):

@@ -30,20 +30,22 @@ CC = gcc
 
 INCLPATH =  -I ./incl
 
+
 .PHONY: all
-all: adder_b adder blink_led6 check_and check_comlogic counterchk counter_explore counting_interrupt counting_polling dffchk digpr_pinchk freq_count_1 get2comp rbpi_and2a rbpi_blink rbpi_blink_simple rbpi_toglleall read_sw7 simple_arg statemachine_pulser sw7toled6 test test_muxout 
+all: adder_b adder blink_led6 check_and check_comlogic counterchk counter_explore  counting_polling dffchk  freq_count_1 get2comp rbpi_and2a rbpi_blink rbpi_blink_simple rbpi_toglleall read_sw7 simple_arg statemachine_pulser sw7toled6 test test_muxout 
 
-
+#counting_interrupt  not in all !!
+#digpr_pinchk
 
 test :  
 	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@
 	 
 #needs the wiring PI lib for interrup routine 
 counting_interrupt :
-	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@ -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
+	 $(CC) $(INCLPATH) -I $(HOME)/wiringPi/wiringPi $(SRC)$@.c -L $(HOME)/wiringPi/wiringPi -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
 	 
 digpr_pinchk :
-	 $(CC) $(INCLPATH) $(SRC)$@.c -o $(BIN)/$@   -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
+	 $(CC) $(INCLPATH) -I $(HOME)/wiringPi/wiringPi $(SRC)$@.c -o $(BIN)/$@   -lpigpio -lwiringPi  -lpthread    -o $(BIN)/$@
 
 
 SiPmCtrl :	 

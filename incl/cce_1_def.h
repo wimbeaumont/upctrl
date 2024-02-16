@@ -59,43 +59,9 @@ const int GPIO18=18;
 //extra pin def
 const int GPIO22=22;
 
+const unsigned ledpinnr[8] ={ 21 ,16,7 ,25,20,12,8,24 };
 
-typedef struct iopin_struct  {
-	unsigned  pin ;
-	unsigned mode ;
-	unsigned initialized;
-
-} iopin ;
-
-
-int init_pin( iopin *thispin ) {
-	int err = gpioSetMode( thispin->pin, thispin->mode );
-	if ( err ) {	
-		thispin->initialized=0; 
-		printf("can not set pin %d in mode %d err: %d \n\r",thispin->pin,thispin->mode ,err ); 
-	}
-	else thispin->initialized=1;
-	return err; 
-}	
-
-int init_pin2( iopin *thispin, unsigned pin, unsigned mode  ) {
-	thispin->pin=pin;
-     thispin->mode=mode;
-	 
-	return init_pin(thispin); 
-}	
-
-
-typedef struct cce_1pins_struct {
-	iopin mux_out_s0;
-	iopin mux_out_s1;
-	iopin mux_out_s2;
-	iopin led[8];
-} cce_1pins;
-
-
-cce_1pins iopins;
-
-
+// standard input for FPGA 
+int  Dpins[] = {  13, 26,19,6,11,10,9,5 };
 
 #endif 

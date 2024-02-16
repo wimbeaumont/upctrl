@@ -22,7 +22,7 @@ $ sudo ./rbpi_and_2a
 
 
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])       //argc is the number of arguments (default is 1, the name of the program), argv is an array containing the arguments
 {
 
    /* command line parameters */

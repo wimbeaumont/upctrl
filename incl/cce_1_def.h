@@ -186,6 +186,7 @@ void set_outputs( unsigned pins[], const int nrpins , int value ){
 	
 }
 
+
 void set_D_outputs( const int nrpins, int value) {
 		unsigned pinnr[nrpins];
 		for ( int pcnt=0;pcnt < nrpins; pcnt++ ) {
@@ -193,6 +194,24 @@ void set_D_outputs( const int nrpins, int value) {
 		}
 		set_outputs( pinnr , nrpins, value);
 }
+
+// set a number of outputs depending on the array  value ( each element is a bit , 0 = 0 else 1 
+void set_outputsB( unsigned pins[], const int nrpins , int value[] ){
+		for (int pincnt=0; pincnt < nrpins; pincnt++) {
+				int bitvalue=0;
+				if ( value[pincnt] > 0) bitvalue=1;
+				gpioWrite( pins[pincnt], bitvalue );
+		}
+}
+
+void set_D_outputsB( const int nrpins, int value[] ) {
+		unsigned pinnr[nrpins];
+		for ( int pcnt=0;pcnt < nrpins; pcnt++ ) {
+				pinnr[pcnt]=Ds[pcnt].pin;
+		}
+		set_outputsB( pinnr , nrpins, value);
+}
+
 
 int set_muxout2( int a, int nrinp ) {
 	int err=0; 

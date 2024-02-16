@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 		return err; 
 	}
     set_muxout( 'A' );  // set the routing of the signals on the FPGA board 
-	gpioSetMode(D6, PI_OUTPUT); // SetD6 == GPIO8 .
+	gpioSetMode(D6, PI_OUTPUT); // SetD6 == GPIO8 ->9? .           //PI_OUPUT is a pigpio command
 	
 for (;;)
   {

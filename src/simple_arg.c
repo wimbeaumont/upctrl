@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 	int intarg[nr_arg_expected];
 	// first check if there are enough arguments, we expect 2 
 	// the program call itself is always the first argument so 
-	// we need more then 2 
+	// we need more than 2 
     if ( argc > nr_arg_expected ) {		
 		for ( int nr_arg=0; nr_arg < nr_arg_expected ; nr_arg++) {
 			intarg[nr_arg] = atoi(argv[nr_arg+1]);

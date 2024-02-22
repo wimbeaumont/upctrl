@@ -1,5 +1,6 @@
 import pigpio
 from cce_1_def import *
+import pr_utils 
 # Assuming pigpio is initialized and available as pi
 pi = pigpio.pi()
 
@@ -12,7 +13,7 @@ def init_cce_1():
     if err < 0:
         return err
     for cnt in range(8):
-        err = pi.set_mode(ledpinnr[cnt], pigpio.OUTPUT)
+        err = pi.set_mode(ledpinnr[cnt], pigpio.INPUT)
         if err < 0:
             return err
     return err
@@ -30,6 +31,7 @@ def get_led_status_bin(size):
     ls = []
     for cnt in range(size):
         ls.append(pi.read(ledpinnr[cnt]))
+    #print(ls)
     return ls
 
 def get_inp_status_bin(stat, pinno, size):
@@ -56,7 +58,7 @@ def setup_output_array(pinarry, size):
     return err
 
 def set_outputs(pins, nrpins, value):
-    value_array = decvalue2binar(value, nrpins)
+    err,value_array = pr_utils.decvalue2binar(value, nrpins)
     for pincnt in range(nrpins):
         pi.write(pins[pincnt], value_array[pincnt])
 

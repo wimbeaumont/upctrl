@@ -27,11 +27,16 @@ def inv_bin_array(ar):
     for cnt in range(size):
         ar[cnt] = 0 if ar[cnt] else 1
 
-def print_bin_arry_status(ar):
+def print_bin_arry_status(ar, length):
     size = len(ar)
-    for cnt in range(size - 1, -1, -1):
-        print("-1" if ar[cnt] else "-0")
-    print("-")
+    # fill smaller arrays with '0'
+    for cnt in range(length - 1, -1, -1):
+        if cnt > size-1 :
+           bit=0
+        else :
+           bit = ar[cnt]
+        print("-1" if bit else "-0", end='')
+    print("- ",end='')
 
 def print_dec_as_bin_array_status(value, nr_bits):
     err, print_ar = decvalue2binar(value, nr_bits)

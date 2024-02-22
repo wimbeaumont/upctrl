@@ -11,4 +11,6 @@ bin : destination code for the executables
 doc : additional documentation of the project
 		- picute of the setup 
 firmware :  VHDL code used in the project 
+python :  files in python.  based on the C++ files 
+
  

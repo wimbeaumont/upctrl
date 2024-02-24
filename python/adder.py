@@ -74,7 +74,7 @@ def main():
         pr_utils.print_bin_arry_status(simulations_inputsB, nr_inputs)
         print(f"out={A+B} outp: {ledoutdec}:", end='')
         pr_utils.print_bin_arry_status(bin_outp_arry, nr_inputs)
-        print(f"simout: {A+B}:", end='')
+        print(f"simout: {simoutdec}:", end='')
         pr_utils.print_bin_arry_status(simulations_outputsA,nr_inputs)
         print()
         # Give some time to check the LEDs on the FPGA board

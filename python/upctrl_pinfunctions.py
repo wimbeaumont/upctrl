@@ -41,10 +41,10 @@ def get_inp_status_bin(stat, pinno, size):
 def print_led_status(print_flag):
     ls = get_led_status_bin(8)
     if print_flag > 0:
-        print_bin_arry_status(ls)
+        pr_utils.print_bin_arry_status(ls,len(ls))
     if print_flag > 1:
         print("\n\r")
-    return ar2decvalue(ls)
+    return pr_utils.ar2decvalue(ls)
 
 def setup_output_array(pinarry, size):
     err = 0

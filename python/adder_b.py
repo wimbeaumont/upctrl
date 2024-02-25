@@ -81,7 +81,6 @@ def main():
         time.sleep(1)
     print("done")
     pi.stop()
-    
 if __name__ == "__main__":
     main()
 

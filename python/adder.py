@@ -24,7 +24,7 @@ def my_logic_function(inpA, inpB):
 def main():
 	
     print("start program ", {__file__})
-    err = init_cce_1()
+    pi,err = init_cce_1()
     if err:
        print("initialization of hardware failed with err ", err)
        exit(err)

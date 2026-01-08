@@ -1,6 +1,6 @@
 import sys
 import time
-import pigpio
+#import pigpio
 
 from upctrl_pinfunctions import *
 
@@ -8,7 +8,7 @@ from upctrl_pinfunctions import *
 def main():
     print("start program", sys.argv[0])
 
-    err = init_cce_1()
+    pi,err = init_cce_1()
     if err:
         print("initialization of hardware failed with err", err)
         return err
@@ -19,8 +19,10 @@ def main():
     try:
         while True:
             pi.write(D6, 1)  # On
+            print( "Ledd on")
             time.sleep(1)  # seconds
             pi.write(D6, 0)  # Off
+            print( "Ledd off")
             time.sleep(1)
     except KeyboardInterrupt:
         pass

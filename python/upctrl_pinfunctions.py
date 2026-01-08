@@ -1,9 +1,9 @@
-import pigpio
+#import pigpiodummy as pigpio
+import pigpio as pigpio
 from cce_1_def import *
 import pr_utils 
 # Assuming pigpio is initialized and available as pi
 pi = pigpio.pi()
-
 
 def init_cce_1():
     err = pi.set_mode(SEL0, pigpio.OUTPUT)
@@ -11,21 +11,21 @@ def init_cce_1():
         return err
     err = pi.set_mode(SEL1, pigpio.OUTPUT)
     if err < 0:
-        return err
+        return None, err
     for cnt in range(8):
         err = pi.set_mode(ledpinnr[cnt], pigpio.INPUT)
         if err < 0:
-            return err
-    return err
+            return None ,err
+    return pi,err
 
 def init_cce_2():
-    err = init_cce_1()
+    pi,err = init_cce_1()
     if err < 0:
-        return err
+        return None, err
     err = pi.set_mode(SEL2, pigpio.OUTPUT)
     if err < 0:
-        return err
-    return err
+        return None, err
+    return pi,err
 
 def get_led_status_bin(size):
     ls = []

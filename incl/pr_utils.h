@@ -16,7 +16,7 @@
 	If the size doesn't corresponds with the width of the array the program can crash 
 	or other not predictable beheviour 
 */
-int ar2decvalue( int ar[] , int size ){
+unsigned int ar2decvalue(unsigned  int ar[] , int size ){
 	
 		int value =0 ;
 		for( int cnt=size-1 ; cnt >= 0 ; cnt--) {			

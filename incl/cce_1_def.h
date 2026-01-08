@@ -62,6 +62,6 @@ const int GPIO22=22;
 const unsigned ledpinnr[8] ={ 21 ,16,7 ,25,20,12,8,24 };
 
 // standard input for FPGA 
-int  Dpins[] = {  13, 26,19,6,11,10,9,5 };
+unsigned int  Dpins[] = {  13, 26,19,6,11,10,9,5 };
 
 #endif 

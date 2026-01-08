@@ -42,20 +42,20 @@ int main(int argc, char *argv[]){
 	
 	// load the values 
     set_muxout2( 0,4); // Pulse time 
-	set_outputs(Dpins, 8 , 4) ;
+	set_outputs(Dpins, 8 , 2) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 1,4); // wait time 
-	set_outputs(Dpins, 8 , 100) ;
+	set_outputs(Dpins, 8 , 10) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register 
     set_muxout2( 2,4); // Nr pulse 
-	set_outputs(Dpins, 8 , 5) ;
+	set_outputs(Dpins, 8 , 257) ;
 	gpioWrite (datavalid , 1) ;gpioWrite (datavalid , 0) ;	 //fill register
 
 	gpioWrite ( start,1) ;
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));
 	gpioWrite ( start,0) ;
 	printf( "set start == GPIO%d to %d \n\r",start ,gpioRead(start));
-	sleep( 10);
+	sleep( 1);
 	gpioWrite ( ready,1) ;
 	printf( "set ready == GPIO%d to %d \n\r",ready ,gpioRead(ready));
 	gpioWrite ( ready,0) ;

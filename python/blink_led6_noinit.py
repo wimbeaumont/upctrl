@@ -7,19 +7,23 @@ def main():
 
 
     pi = pigpio.pi()
+    if not pi.connected:
+       exit()
     #set mux 
     pi.set_mode(SEL0, pigpio.OUTPUT)
     pi.set_mode(SEL1, pigpio.OUTPUT)
-    pi.set_mode(D6, pigpio.OUTPUT)  # GPIO8 is equivalent to D6
+    pi.set_mode(D6, pigpio.OUTPUT)  # GPIO9 is equivalent to D6
     pi.write(SEL0,0)
     pi.write(SEL1,0)
 
     try:
         while True:
             pi.write(D6, 1)  # On
-            time.sleep(1)  # seconds
+            print( "Ledd on")
+            time.sleep(2)  # seconds
             pi.write(D6, 0)  # Off
-            time.sleep(1)
+            print( "Ledd off")
+            time.sleep(2)
     except KeyboardInterrupt:
         pass
     finally:

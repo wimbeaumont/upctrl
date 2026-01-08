@@ -21,10 +21,10 @@ int main(int argc, char *argv[]){
 	int clkdiv=200;
     if ( argc > 1) {
 			clkdiv= atoi(argv[1]);
-			if( clkdiv < 1 || clkdiv >256 ) clkdiv=200;
+			if( clkdiv < 0 || clkdiv >256 ) clkdiv=200;
 	}
 	printf("start program with %s clkdiv %d\n\r", argv[0], clkdiv);
-	int err= init_cce_2();
+	int err= init_cce_2();  
 	if (err) {
 		printf("initialization of hardware failed with err %d \n\r", err);
 		return err; 

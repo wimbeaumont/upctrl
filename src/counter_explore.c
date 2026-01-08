@@ -62,6 +62,7 @@ int main(int argc, char *argv[]){
 	//either the inverted output of the flip-flop (if DSEL==1), or a starting value for the counter given by D0-D3 (if DSEL==0).
 
 	gpioSetMode( DSEL , PI_OUTPUT);
+	//CHANGED from 0 to 1 to see gray code (hopefully).
 	gpioWrite (DSEL, 0) ;	
 	const int DCE= D4;  // count enable signal
 	gpioSetMode( DCE  , PI_OUTPUT);
@@ -73,8 +74,13 @@ int main(int argc, char *argv[]){
 	// the mux control  for the mux4_2
 	const int m42SEL= GPIO22 ;						//m42SEL switches between CB4CLE or Counter4. ->deze moet op 1 voor de tellerfunctie.
 	gpioSetMode( m42SEL  , PI_OUTPUT);
+	//CHANGED from 1 to 0
 	gpioWrite (m42SEL, 1) ;			//Multiplexer op 0, dus er wordt een constante input (pins D0-D3) op de flip-flops gezet.
 									//De klokpulsen in de for-lus veranderen niets aan de output.
+	
+	const int SEL0 = SEL0;
+	gpioSetMode (SEL0, PI_OUTPUT);
+	gpioWrite (SEL0, 1);
 
 	set_outputs( inputs, nr_inputs , 4) ;	
 	const int nr_status=8; 
@@ -82,10 +88,10 @@ int main(int argc, char *argv[]){
 
 
 // -- here start the test 	
-	for (int cnt =0;cnt < 20;cnt++){
+	for (int cnt =0;cnt < 20000;cnt++){
 		gpioWrite (clk1, 0) ;	
-		printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
-		print_led_status (2);
+		//printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
+		//print_led_status (2);
 		
 		sleep(1);
 		

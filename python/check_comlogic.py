@@ -1,5 +1,4 @@
 import time
-import pigpio
 from pr_utils import *
 from upctrl_pinfunctions import *
 
@@ -18,7 +17,7 @@ def my_logic_function(inp, outp):
     return 0
 
 def main():
-    err = init_cce_1()
+    pi,err = init_cce_1()
     if err:
         print("initialization of hardware failed with err", err)
         return err

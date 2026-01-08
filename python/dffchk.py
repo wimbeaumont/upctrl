@@ -10,12 +10,11 @@ def read_print_status(rp, size):
     print("current status : Qb:",Pstat[4]," Qa:",Pstat[3]," D:",Pstat[2]," CE:",Pstat[1]," clk:",Pstat[0],"\n")
 
 def main():
-    print("start program {__file__}")
-    err = init_cce_1()
+    print("start program ", {__file__})
+    pi,err = init_cce_1()
     if err:
         print("initialization of hardware failed with err {err}\n")
         return err
-
     set_muxout('A')
     pi.set_mode(D2, pigpio.OUTPUT)
     pi.write(D2, 1)
@@ -48,18 +47,23 @@ def main():
     input("push the rst button press enter when done what you expect as outputs on the LED (2 and 3)\n")
 
     lc = 0
-    while True:
-        if (lc % 10) == 0:
-            pi.write(D3, not pi.read(P3))
-        lc += 1
-        pi.write(clk3, 0)
-        time.sleep(0.2)
-        pi.write(clk3, 1)
-        time.sleep(0.2)
-        pi.write(clk3, 0)
-        read_print_status(pr, 5)
+    try :
+       while True:
+          if (lc % 10) == 0:
+              pi.write(D3, not pi.read(P3))
+          lc += 1
+          pi.write(clk3, 0)
+          time.sleep(0.2)
+          pi.write(clk3, 1)
+          time.sleep(0.2)
+          pi.write(clk3, 0)
+          read_print_status(pr, 5)
 
-    gpioTerminate()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        pi.stop()
+
 
 if __name__ == "__main__":
     main()

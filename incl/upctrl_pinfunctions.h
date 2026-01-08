@@ -27,7 +27,7 @@ int init_cce_2() {
 	return err;
 }
 
-void  get_led_status_bin( unsigned* ls, int size ){
+void  get_led_status_bin( unsigned int* ls, int size ){
 	for ( int cnt=0 ; cnt<size  ; cnt++) {
 		*ls++ = gpioRead( ledpinnr[cnt]); 
 	}
@@ -44,16 +44,16 @@ void get_inp_status_bin( unsigned *stat, int *pinno, int size ) {
 // no check if it is initialized for the moment 
 int print_led_status (int print) {
 	
-	unsigned ls[8] ;
+	unsigned int ls[8] ;
 	get_led_status_bin( ls, 8 ); 
 	if( print > 0) {  print_bin_arry_status ((int*)ls, sizeof(ls)/sizeof(ls[0]));}
 	if( print > 1) { printf ( "\n\r" );}
-	return ar2decvalue((int*)ls, sizeof(ls)/sizeof(ls[0]));
+	return ar2decvalue(ls, sizeof(ls)/sizeof(ls[0]));
 }
 
 //iopin Ds[8]; 
 // function to initiate  a array of outputs  ( inputs for the FPGA) 
-int setup_output_array( int* pinarry , int size ) {
+int setup_output_array( unsigned int* pinarry , int size ) {
 	int err=0;
 	if ( size > 8 ) { err=-20; }
 	else {
@@ -71,7 +71,7 @@ int setup_output_array( int* pinarry , int size ) {
 	value : the decimal value to be set  rolls over at 2 to the power nr_pins
 */ 
 
-void set_outputs( unsigned pins[], const int nrpins , int value ){
+void set_outputs( unsigned int pins[], const int nrpins , int value ){
 		int value_array[nrpins];
 		decvalue2binar(value , value_array , nrpins) ;
 		for (int pincnt=0; pincnt < nrpins; pincnt++) {

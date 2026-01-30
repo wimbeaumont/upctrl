@@ -14,7 +14,7 @@ def main():
         return err
 
     set_muxout('A')  # set the routing of the signals on the FPGA board
-    pi.set_mode(D6, pigpio.OUTPUT)  # GPIO8 is equivalent to D6
+    pi.set_mode(D6, piwrap.OUTPUT)  # GPIO8 is equivalent to D6
 
     try:
         while True:

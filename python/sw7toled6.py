@@ -1,5 +1,4 @@
 import time
-import pigpio
 
 from upctrl_pinfunctions import *
 

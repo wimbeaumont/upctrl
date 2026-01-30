@@ -10,7 +10,7 @@ def main() :
         print(f"initialization of hardware failed with err {err}")
         return err
 
-   pi.set_mode(LEDgreen, pigpio.OUTPUT)  # Set GPIO18 as output.
+   pi.set_mode(LEDgreen, piwrap.OUTPUT)  # Set GPIO18 as output.
 
    try:
       while True:

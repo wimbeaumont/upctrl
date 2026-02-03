@@ -69,10 +69,10 @@ PORT(
 	RstN	:	IN	STD_LOGIC; 			
 	SYSCLK	:	IN	STD_LOGIC;
 			 
-			 -- outputs to check the inputs for the pulsers 
+			 -- outputs to check the inputs for the pulsers  on PMOD JA 
    Pout   :  OUT STD_LOGIC_Vector(3 downto 0);
 	Lid	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0);  -- ID LEDS 
-	-- debug sigals 
+	-- debug sigals on PMOD JE 
 	PoutAdd  : OUT STD_LOGIC_Vector(5 downto 0)
 	 );
 
@@ -113,27 +113,15 @@ byte_sel(1) <=clk1 ;
 -- diff to single 
 
 P0_IBUFDS : IBUFDS
- -- generic map(
- --   IOSTANDARD => "DEFAULT"
- -- )
-  port map(
-    I  => PextP(0),
-    IB => PextN(0),
-    O  => Pext_D(0)
-	 );
+ -- generic map(   IOSTANDARD => "DEFAULT" )
+  port map(  I  => PextP(0),IB => PextN(0), O  => Pext_D(0) );
 
 Pext(0) <=  Pext_D(0) when settings(4) = '0' else  not Pext_D(0);
 
 
 P1_IBUFDS : IBUFDS
---  generic map(
---    IOSTANDARD => "DEFAULT"
- -- )
-  port map(
-    I  => PextP(1),
-    IB => PextN(1),
-    O  => Pext_D(1)
-	 );
+--  generic map( IOSTANDARD => "DEFAULT")
+  port map( I  => PextP(1), IB => PextN(1), O  => Pext_D(1) );
 
 Pext(1) <=  Pext_D(1) when settings(5) = '0' else  not Pext_D(1);
 

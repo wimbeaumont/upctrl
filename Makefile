@@ -32,7 +32,7 @@ INCLPATH =  -I ./incl
 
 
 .PHONY: all
-all: adder_b adder blink_led6 check_and check_comlogic counterchk counter_explore  \
+all: adder_b adder blink_led6 check_and check_comlogic counterchk  counterchk4 counter_explore  \
      counting_polling dffchk  freq_count_1 get2comp rbpi_and2a rbpi_blink rbpi_blink_simple \
      rbpi_toglleall read_sw7 simple_arg statemachine_pulser sw7toled6 test test_muxout \
      digpr_pinchk

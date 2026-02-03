@@ -89,6 +89,15 @@ void set_outputsB( unsigned pins[], const int nrpins , int value[] ){
 		}
 }
 
+void set_D_outputsB( const int nrpins, int value[] ) {
+		unsigned pinnr[nrpins];
+		for ( int pcnt=0;pcnt < nrpins; pcnt++ ) {
+				pinnr[pcnt]=Dpins[pcnt];
+		}
+		set_outputsB( pinnr , nrpins, value);
+}
+
+
 int set_muxout2( int a, int nrinp ) {
 	int err=0; 
 	if (nrinp ==4 ) {	

@@ -1,38 +1,25 @@
 /*
  * Sample program for the practicum :  computer controlled experiments 
- * 
- * Copyright (c) 2012-2013 Gordon Henderson. <projects@drogon.net>
- * Copyright (c) 2018  Wim Beaumont Universiteit Antwerpen
- ***********************************************************************
- * This file use wiringPi:
- *	https://projects.drogon.net/raspberry-pi/wiringpi/
- *
- *    wiringPi is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU Lesser General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    wiringPi is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU Lesser General Public License for more details.
- *
- *    You should have received a copy of the GNU Lesser General Public License
- *    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
- ***********************************************************************
+ * V1.x  based on wiringpi lib
+ * V2.0   based on pigio lib 
  */
 
 #include <stdio.h>
-#include <wiringPi.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+
+#include <pigpio.h>
+
 
 #define LON   1   
 #define LOFF  0   
 
-
+/*
 void   checkgroup ( int first , int last , int *pin ){
 	for ( int lp=0 ; lp <4; lp++){
-		for (int  i=first ; i <last+1; i++){  	digitalWrite (i ,LON);	}
+		for (int  i=first ; i <last+1; i++){  	gpioWrite (i ,LON);	}
 		delay(1000);
 		for (int  i=first ; i <last+1; i++){  digitalWrite (i ,LOFF);}
 		delay(1000); 	
@@ -44,14 +31,19 @@ void   checkgroup ( int first , int last , int *pin ){
 		digitalWrite (i ,LOFF);
 	}
 }
-	
+*/	
 
 int main (void)
 {
-  printf ("Raspberry Pi computer gecontroleerde meetopstellingen  practicum opdracht 2  V1.0 \r\n") ;
- 
-  wiringPiSetupGpio() ;
-
+  printf ("Raspberry Pi computer gecontroleerde meetopstellingen    V2.0 \r\n") ;
+ printf( " debug status   ,use not connected to FPGA   \n\r");
+  return 0 ;
+  int err= gpioInitialise(); 
+  //int err= init_cce_1();
+  if (err < 0) {
+		printf("initialization of hardware failed with err %d \n\r", err);
+		return err; 
+  }
 //vmod connector names "
 
 char gpiocon[30][14];
@@ -105,7 +97,8 @@ strcpy(gpiocon[24],"JC-D1_P P10");
 // gpio to pin conversion 
 
 int PINGPIO[30];
-PINGPIO[   0 ]= 27 ;	
+// GPIO [x] is located on pin yy 
+PINGPIO[   0 ]= 27 ;	// special IO don't use 
 PINGPIO[   2 ]=  3 ;	
 PINGPIO[   3 ]=  5 ;	
 PINGPIO[   4 ]=  7 ;	
@@ -120,7 +113,7 @@ PINGPIO[  19 ]= 35 ;
 PINGPIO[  22 ]= 15 ;	
 PINGPIO[  26 ]= 37 ;	
 PINGPIO[  27 ]= 13 ;	
-PINGPIO[ 1   ]= 28 ;	
+PINGPIO[ 1   ]= 28 ;	// special IO don't use 
 PINGPIO[ 12  ]= 32 ;	
 PINGPIO[ 14  ]= 8  ;	
 PINGPIO[ 15  ]= 10 ;	
@@ -138,6 +131,7 @@ PINGPIO[ 8   ]= 24 ;
 
 // pin to gpio conversion 
 int pin[41]; // keep it simple pin 0 doesn't exist .. 
+pin[0]=95;
 pin[1]=98;
 pin[  3 ]=   2 ;
 pin[  5 ]=   3 ;
@@ -181,42 +175,51 @@ pin[ 40 ]= 21  ;
 	
 
 
-
-  for (int  i=0 ; i <28; i++) {  pinMode (i, OUTPUT) ; } // set all to output
-  for (int  i=4 ; i <28; i++) { digitalWrite (i ,LOFF);  }  // make all off 
-  /*for (int  i=1 ; i <41; i++) {
+int NrOfPins= sizeof(pin)/sizeof(pin[0]); 
+   // check consistence array data
+  for (int  i=0 ; i < NrOfPins ; i++)    {
+    if (pin[i] < 30 ) {
+        if ( i !=  PINGPIO[pin[i]] ) printf(" pin %d  ( GPIO ) %d gives  %d \n\r" , i, pin[i],PINGPIO[pin[i]] );
+    }
+  }
+  
+  
+  for (int  i=0 ; i < NrOfPins ; i++) { if (pin[i] < 30 )   gpioSetMode( pin[i], PI_OUTPUT  ); }// set all to output
+  for (int  i=0 ; i < NrOfPins; i++) {  if (pin[i] < 30 )   gpioWrite(pin[i] ,LOFF);  }  // make all off 
+  for (int  i=1 ; i <NrOfPins; i++) {
 	for (int  lc=0;lc <5; lc++) {
 	  if ( pin[i]> 29) { printf ("pin %d,  value %d \n\r",i , pin[i]); }
 	  else {	
 		printf( " pin %d vmod %s  GPIO %d , lc %d ON  \n\r",i,gpiocon[pin[i]],pin[i],lc);
-		digitalWrite (pin[i] ,LON);
-		delay(1000) ;	
+		gpioWrite(pin[i] ,LON);
+		usleep(1000) ;	
 		printf( " pin %d vmod %s  GPIO %d , lc %d OFF  \n\r",i,gpiocon[pin[i]],pin[i],lc);
-		digitalWrite (pin[i] ,LOFF);
-		delay(1000) ;	
+		gpioWrite(pin[i] ,LOFF);
+		usleep(1000) ;	
 	  }
   	}
   }
-*/
-  for (int  i=4 ; i <28; i++) { digitalWrite (i ,LOFF);  }  // make all off 
-  delay(1000) ;
-  for (int  i=4 ; i <28; i++) { digitalWrite (i ,LON);  }  // make all off 
-  delay(1000) ;	
-  for (int  i=4 ; i <28; i++) { digitalWrite (i ,LOFF);  }  // make all off 
-  delay(1000) ;
+
+  for (int  i=0 ; i < NrOfPins; i++) {  if (pin[i] < 30 ) gpioWrite(pin[i] ,LOFF);  }  // make all off 
+  usleep(1000) ;
+  for (int  i=0 ; i < NrOfPins; i++) {  if (pin[i] < 30 ) gpioWrite(pin[i] ,LON);  }  // make all on 
+  usleep(1000) ;
+   for (int  i=0 ; i < NrOfPins; i++) {  if (pin[i] < 30 ) gpioWrite(pin[i] ,LOFF);  }  // make all off 
+  usleep(1000) ;
+  
   // check first group 
-  printf("first group  \n\r" );
+/*  printf("first group  \n\r" );
   checkgroup ( 4 , 11, PINGPIO);
   printf("next group change switches \n\r" );
-  delay(1000) ;
+  usleep(1000) ;
   printf("started\n\r");
   checkgroup ( 12 ,19 ,PINGPIO);
   printf("next group change switches \n\r" );
-  delay(1000) ;
+  usleep(1000) ;
   printf("started\n\r");
   checkgroup ( 20 ,27,PINGPIO );
   printf("done !!\n\r");
-   	
-	
+ */  	
+  gpioTerminate();	
   return 0 ;
 }

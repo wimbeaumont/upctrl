@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o adder adder.c  -lpigpio -lpthread
@@ -75,37 +75,58 @@ int main(int argc, char *argv[]){
 	set_muxout('C');
 	err=0;	
 	// itterate  over all combinations 
-    for (int  inpcomb=0 ; inpcomb < nr_inpcomb ; inpcomb++) {
-		int A= inpcomb & 0xFF, B=0x38;
-		gpioWrite( SEL, 0);
-		set_outputs( inputs, nr_inputs , A) ;
-		gpioWrite( SEL, 1);
-		set_outputs( inputs, nr_inputs , B) ;
-		// convert to bin array for the simulation 
-		decvalue2binar(A ,simulations_inputsA  ,nr_inputs );
-		decvalue2binar(B ,simulations_inputsB  ,nr_inputs );
-		// simulate 
-		My_logic_function ( simulations_inputsA , simulations_inputsB ,nr_inputs, 
-							simulations_outputsA, simulations_outputsB, nr_outputs  );
-		// get the outputs of the circuit 
-		get_led_status_bin( bin_outp_arry, 8 ); 
-		// now we print all in a format so we can easy check it with the LED status 
-		printf ("input A:%3d: ",A );
-		print_bin_arry_status (simulations_inputsA , nr_inputs );
-		printf (" B:%3d : ",B );
-		print_bin_arry_status (simulations_inputsB , nr_inputs );
-		printf("\n\routput : ");
-		print_bin_arry_status (bin_outp_arry, nr_outputs);
-		printf(" %3d", ar2decvalue(bin_outp_arry ,8 ),A+B);
-		printf("\n\rsimout : ");
-		print_bin_arry_status (simulations_outputsA, nr_outputs);
-		printf(" %3d , %3d", ar2decvalue(simulations_outputsA ,8 ),A+B);
-		printf("\n\r");
-		//give some  time to check the LED's on the FPGA board 
-		sleep(1);
-		
-		
+    
+    
+    
+    //Choose A and B
+	const int nr_arg_expected =2;
+	int intarg[nr_arg_expected];
+	// first check if there are enough arguments, we expect 2 
+	// the program call itself is always the first argument so 
+	// we need more than 2 
+    if ( argc > nr_arg_expected ) {		
+		for ( int nr_arg=0; nr_arg < nr_arg_expected ; nr_arg++) {
+			intarg[nr_arg] = atoi(argv[nr_arg+1]);
+			// check here if the input is reasonable if not exit 
+		}
+	}else { printf(" program %s need at least %d arguments  \n\r", argv[0], nr_arg_expected );
+			return -1;
 	}
+	printf("start program %s with arguments :\n\r ", argv[0]);
+	int A = intarg[0];
+	int B = intarg[1];
+ 
+	printf("A: %d \t B:%d \n", A, B);
+
+	gpioWrite( SEL2, 0);
+	set_outputs( inputs, nr_inputs , A) ;
+	gpioWrite( SEL2, 1);
+	set_outputs( inputs, nr_inputs , B) ;
+	// convert to bin array for the simulation 
+	decvalue2binar(A ,simulations_inputsA  ,nr_inputs );
+	decvalue2binar(B ,simulations_inputsB  ,nr_inputs );
+	// simulate 
+	My_logic_function ( simulations_inputsA , simulations_inputsB ,nr_inputs, 
+						simulations_outputsA, simulations_outputsB, nr_outputs  );
+	// get the outputs of the circuit 
+	get_led_status_bin( bin_outp_arry, 8 ); 
+	// now we print all in a format so we can easy check it with the LED status 
+	printf ("input A:%3d: ",A );
+	print_bin_arry_status (simulations_inputsA , nr_inputs );
+	printf (" B:%3d : ",B );
+	print_bin_arry_status (simulations_inputsB , nr_inputs );
+	printf("\n\routput : ");
+	print_bin_arry_status (bin_outp_arry, nr_outputs);
+	printf(" %3d", ar2decvalue(bin_outp_arry ,8 ),A+B);
+	printf("\n\rsimout : ");
+	print_bin_arry_status (simulations_outputsA, nr_outputs);
+	printf(" %3d , %3d", ar2decvalue(simulations_outputsA ,8 ),A+B);
+	printf("\n\r");
+	//give some  time to check the LED's on the FPGA board 
+	sleep(1);
+		
+		
+	
 	 gpioTerminate();
 	return 0;  // will not be reached. 
 }

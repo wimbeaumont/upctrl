@@ -4,16 +4,17 @@
 #include <unistd.h>
 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o adder adder.c  -lpigpio -lpthread
-	
 */
 
 int My_logic_function ( int* inpA , int* inpB , int insize, int*  outpA, int* outpB, int outsize  ) {
 	if ( insize > 8 ) return -1; 
 	if ( outsize > 8 ) return -2; 
+
+	//Make sure output is only 1 or 0.
 	for ( int inpcnt=0; inpcnt < insize ; inpcnt++) {
 			inpA[inpcnt] = inpA[inpcnt] & 1;
 			inpB[inpcnt] = inpB[inpcnt] & 1;
@@ -66,7 +67,8 @@ int main(int argc, char *argv[]){
 	const int nr_outputs=8; 
 	
 // -- here start the test 	
-	int nr_inpcomb=1; nr_inpcomb= nr_inpcomb<<nr_inputs ;  // power of 2 
+	int nr_inpcomb=1; 
+	nr_inpcomb= nr_inpcomb<<nr_inputs ;  // power of 2 	// LOOP OVER ALL 256. 
 	int bin_outp_arry[nr_outputs];
 	int simulations_inputsA[nr_inputs];
 	int simulations_inputsB[nr_inputs];
@@ -103,9 +105,7 @@ int main(int argc, char *argv[]){
 		printf("\n\r");
 		//give some  time to check the LED's on the FPGA board 
 		sleep(1);
-		
-		
 	}
-	 gpioTerminate();
+	gpioTerminate();
 	return 0;  // will not be reached. 
 }

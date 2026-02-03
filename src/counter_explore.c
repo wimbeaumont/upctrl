@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o adder adder.c  -lpigpio -lpthread
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
 		printf("initialization of hardware failed with err %d \n\r", err);
 		return err; 
 	}
-	err=set_muxout( 'B' );  // mux_8_4 has tobe in position B to get the counters 
+	err=set_muxout( 'B' );  // mux_8_4 has to be in position B to get the counters			 -> this is not mux_4?
 	if (err) {
 		printf("can not set the output mux correctly for this test  err %d \n\r", err);
 		return err; 
@@ -58,29 +58,43 @@ int main(int argc, char *argv[]){
 		}
 	}
     // special  signals 
-	const int DSEL = D5 ; // is an output for loading a preset value 
+	const int DSEL = D5 ; // is an output for loading a preset value 		//Selector for the Multiplexer: The input of the flop-flop will be 
+	//either the inverted output of the flip-flop (if DSEL==1), or a starting value for the counter given by D0-D3 (if DSEL==0).
+
 	gpioSetMode( DSEL , PI_OUTPUT);
+	//CHANGED from 0 to 1 to see gray code (hopefully).
 	gpioWrite (DSEL, 0) ;	
 	const int DCE= D4;  // count enable signal
 	gpioSetMode( DCE  , PI_OUTPUT);
-	gpioWrite (DCE, 1) ;	 // has to be active
+	gpioWrite (DCE,1) ;	 // has to be active
     // the clock is an output for the RP 
 	gpioSetMode( clk1 , PI_OUTPUT);
-	gpioWrite (clk1, 0) ;	
+	gpioWrite (clk1, 0) ;
+
 	// the mux control  for the mux4_2
-	const int m42SEL= GPIO22 ;
+	const int m42SEL= GPIO22 ;						//m42SEL switches between CB4CLE or Counter4. ->deze moet op 1 voor de tellerfunctie.
 	gpioSetMode( m42SEL  , PI_OUTPUT);
-	gpioWrite (m42SEL, 0) ;	
+	//CHANGED from 1 to 0
+	gpioWrite (m42SEL, 1) ;			//Multiplexer op 0, dus er wordt een constante input (pins D0-D3) op de flip-flops gezet.
+									//De klokpulsen in de for-lus veranderen niets aan de output.
+	
+	const int SEL0 = SEL0;
+	gpioSetMode (SEL0, PI_OUTPUT);
+	gpioWrite (SEL0, 1);
 
 	set_outputs( inputs, nr_inputs , 4) ;	
 	const int nr_status=8; 
 	int bin_outp_arry[nr_status]; // result array 
+
+
 // -- here start the test 	
-	for (int cnt =0;cnt < 20;cnt++){
+	for (int cnt =0;cnt < 20000;cnt++){
 		gpioWrite (clk1, 0) ;	
-		printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
-		print_led_status (2);
-		//sleep(1);
+		//printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
+		//print_led_status (2);
+		
+		sleep(1);
+		
 		gpioWrite (clk1, 1) ;	
 		printf ("cnt = %3d , clk= %d ",cnt, gpioRead(clk1));
 		print_led_status (2);

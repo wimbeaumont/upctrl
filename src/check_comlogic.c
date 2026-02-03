@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o check_comlogic check_comlogic.c -lpigpio -lpthread
@@ -17,8 +17,8 @@ int My_logic_function ( int* inp , int insize, int*  outp, int outsize  ) {
 	for ( int inpcnt=0; inpcnt < insize ; inpcnt++) {
 			inp[inpcnt] = inp[inpcnt] & 1;
 	}
-	outp[0] = inp[0] & inp[1]; // bit wize or 
-	outp[1] = ! (outp[0]  | inp[2]) ; 
+	outp[0] = inp[0] & inp[1]; // bit wize and, output for P0
+	outp[1] = ! (outp[0]  | inp[2]) ; //this is the output for P1
 	return 0;
 } 
 	
@@ -57,7 +57,10 @@ int main(int argc, char *argv[]){
 	const int nr_outputs=2; 
 	
 // -- here start the test 	
-	int nr_inpcomb = 1;nr_inpcomb = nr_inpcomb<<nr_inputs ;  // 2 to the power of nr_inputs 
+	int nr_inpcomb = 1;
+	
+	nr_inpcomb = nr_inpcomb<<nr_inputs ;  // 2 to the power of nr_inputs 
+	
 	int bin_outp_arry[nr_outputs];
 	int simulations_inputs[nr_inputs];
 	int simulations_outputs[nr_outputs];

@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 
 /*
@@ -24,11 +24,19 @@ int main(int argc, char *argv[]) {
 		return err; 
 	}
     set_muxout( 'A' );  // set the routing of the signals on the FPGA board 
-	// gpioSetMode(P7, PI_INPUT); // this is already done in init-cce_1
-
+	gpioSetMode(P7, PI_INPUT); // this is already done in init-cce_1
+	gpioSetMode (D6, PI_OUTPUT);
 	int lc=0;
+	int P7status;
 	while(1)  {
-		"do something" 
+		P7status=gpioRead (P7) ;
+		if (P7status){
+			gpioWrite(D6, 1);
+		}else{
+			gpioWrite(D6, 0);
+		}
+		printf("%03d Sw 7 gives now %d \n\r",lc++,P7status);	
+		sleep (1) ;
 	}
 
 

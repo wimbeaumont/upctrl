@@ -19,17 +19,17 @@ int main(int argc, char *argv[]) {
 	int err= gpioInitialise(); 
 	if (err <0) return err; 
  
-   printf("Control Green LED ");
+   printf("Control Green LED \n");
  
 	gpioSetMode(LEDgreen, PI_OUTPUT); // Set GPIO18 as output.
 	
 for (;;)
   {
     gpioWrite (LEDgreen, 1) ;	// On
-    sleep (1) ;		// you need some time to see it 
+    usleep (15000) ;		// you need some time to see it 
 	// remove both  sleep  statements to see what happens 
     gpioWrite (LEDgreen, 0) ;	// Off
-    sleep (1) ;
+    usleep (15000) ;
   }
 
 

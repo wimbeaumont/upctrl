@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 
 /*
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
 	gpioWrite(clk3,1);read_print_status( pr, 5) ;
 	printf( " push the rst button press enter when done  what you expect as outputs on the LED ( 2 and 3)  \n\r") ;
 	scanf(" %s",dummy);
+	
 	int lc=0;
 	while(1) {
 		if( (lc++ % 10) == 0) { gpioWrite(D3, !gpioRead(P3)) ; }

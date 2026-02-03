@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #include "pr_utils.h" 
-#include "cce_1_def.h" 
+#include "upctrl_pinfunctions.h" 
 
 /*
 		gcc -o check_and check_and.c -lpigpio -lpthread
@@ -14,9 +14,9 @@
 int My_logic_function ( int* inp , int insize, int*  outp, int outsize  ) {
 	if ( insize > 2 ) return -1; 
 	if ( outsize > 2 ) return -2; 
-	for ( int inpcnt=0; inpcnt < insize ; inpcnt++) {
-			inp[inpcnt] = inp[inpcnt] & 1;
-	}
+	/*for ( int inpcnt=0; inpcnt < insize ; inpcnt++) {
+			//inp[inpcnt] = inp[inpcnt] & 1;
+	}*/
 	outp[0] = inp[0] & inp[1]; // bit wise or 
 	outp[1] = 0; 
 	return 0;
@@ -80,7 +80,7 @@ int main(int argc, char *argv[]){
 		print_bin_arry_status (simulations_outputs, nr_outputs);
 		printf("\n\r");
 		//give some  time to check the LED's on the FPGA board 
-		sleep(2);
+		//sleep(0.01);
 		
 		
 	}

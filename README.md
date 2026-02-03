@@ -5,10 +5,13 @@ These  programs are specific for practical exercises  for sudents physics to see
 
 directories :
 
+scripts :  some scripts that are used by the RP 
 src :  the C code of the programs
 incl:  C headers file 
 bin : destination code for the executables 
 doc : additional documentation of the project
 		- picute of the setup 
 firmware :  VHDL code used in the project 
+python :  files in python.  based on the C++ files 
+
  

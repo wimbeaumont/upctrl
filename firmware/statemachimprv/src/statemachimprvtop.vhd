@@ -1,21 +1,22 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: 	Univeristeit Antwerpen
+-- Engineer:   Wim Beaumont 
 -- 
 -- Create Date:    15:15:30 08/28/2019 
--- Design Name: 
+-- Design Name: 	 
 -- Module Name:    statemachtop - Behavioral 
--- Project Name: 
--- Target Devices: 
+-- Project Name:   statemachine / programeerbare pulser  
+-- Target Devices:  Atlys board 
 -- Tool versions: 
 -- Description: 
---
+-- Pulser with programable puse width and pulse train length
+-- Output goes to the JMOD extention boad  -> RP adaption board (check topdoc.png /svg) 
 -- Dependencies: 
 --
 -- Revision: 
 -- Revision 0.01 - File Created
 -- Additional Comments: 
---
+--20230308  changed  LedId to the common version
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -49,7 +50,7 @@ end statemachimprvtop;
 
 architecture Behavioral of statemachimprvtop is
 -- 
-constant  LIdset  :STD_LOGIC_VECTOR (2 downto 0) := "010";
+constant  LIdset  :STD_LOGIC_VECTOR (2 downto 0) := "111";
 -- name changes of input pins 
 alias  start : std_logic is GPIO14;
 alias  ready : std_logic is GPIO22;
@@ -57,21 +58,16 @@ alias  data_valid : std_logic is GPIO15;
 
 signal wait_s , Pon_i, LcntWait, LcntPon, LcntNr, load_ptime :STD_LOGIC;
 signal ptime, pcnt,  en_ptime, en_pcnt :STD_LOGIC;
-
-signal PulseTime, WaitTime, NrPulses  : STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
+signal PulseTime, WaitTime, NrPulses : STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 signal ptime_set :STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 
 signal CLK100, RST, clk4M    : std_logic; 
 alias  clk : std_logic is CLK4M;
 
 -- new signals 
-signal ltime ,en_ltime, load_ltime :STD_LOGIC;
-signal LowTime :STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
-
 
 begin
 RST <= not RstN	;
-
 
 statemach1: entity work.pulse_cntrl 
 port map (
@@ -82,7 +78,6 @@ port map (
   wait_s => wait_s,
   Pcnt => pcnt,
   Ptime => ptime,
-  Ltime => ltime,
   Ready =>  ready ,
   clk => clk,
   rst => rst,
@@ -97,7 +92,7 @@ settingsreg : entity work.Reg_4
 				Q0    => PulseTime,
 				Q1    => WaitTime,
 				Q2    => NrPulses,
-				Q3    => LowTime,
+				Q3    => open,
 				D     => D,
 				S0    => sel,
 				load  => data_valid,
@@ -126,23 +121,23 @@ cnt_ptime : entity  work.gen_down_cnt
 -- EXTRA  logic  just as place holder  if needed ,  
 -- logic will give perhaps not the right result 
 
-load_ltime <= ltime;
-en_ltime <= LcntPon; 
-cnt_ltime : entity  work.gen_down_cnt 
-		generic map ( 
-		  C_WIDTH => T_WIDTH ,
-		  CNT_EN => 2 ,
-		  LOAD_EN => 1 ,
-		  LRSTLVL => '1'
-		  )
-		port map (
-			rst => rst ,
-			clk => clk,
-			d => LowTime,
-			load => load_ltime,
-			cnt => en_ltime,
-			zero_bar => ltime
-		);
+
+--en_ltime <=  not Pon_i; --LcntPon; 
+--cnt_ltime : entity  work.gen_down_cnt 
+		-- generic map ( 
+		  -- C_WIDTH => T_WIDTH ,
+		  -- CNT_EN => 2 ,
+		  -- LOAD_EN => 1 ,
+		  -- LRSTLVL => '1'
+		  -- )
+		-- port map (
+			-- rst => RST ,
+			-- clk => clk,
+			-- d => LowTime,
+			-- load => load_ltime,
+			-- cnt => en_ltime,
+			-- zero_bar => ltime
+		-- );
 
 -- end Extra logic 
 
@@ -186,12 +181,12 @@ clksrc1 : entity  work.clksrc
     LOCKED => open);
 
 
-
  
 ledid1 : entity work.ledid 
 		port map ( Id => LidSet, 
 					 clk => clk4M,
 					 Lid =>Lid);
+
 
 LED(1) <= pcnt;
 LED(2) <=ptime;
@@ -207,7 +202,7 @@ P(3)  <=LcntWait;
 P(4) <= LcntPon;
 P(5)  <= en_ptime ;
 P(6)  <= en_pcnt	;
-P(7) <= Ltime;
+P(7) <= start;
 
 
  

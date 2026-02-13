@@ -1,4 +1,4 @@
--- Created by fizzim.pl version 5.20 on 2023:03:14 at 18:40:54 (www.fizzim.com)
+-- Created by fizzim.pl version 5.20 on 2023:03:10 at 13:54:22 (www.fizzim.com)
 
 library ieee;
 use IEEE.STD_LOGIC_1164.all;
@@ -11,7 +11,6 @@ port (
   LcntWait : out STD_LOGIC;
   Pon : out STD_LOGIC;
   wait_s : out STD_LOGIC;
-  Ltime : in STD_LOGIC;
   Pcnt : in STD_LOGIC;
   Ptime : in STD_LOGIC;
   Ready : in STD_LOGIC;
@@ -42,7 +41,7 @@ signal wait_s_internal: STD_LOGIC;
 
 -- comb always block
 begin
-  COMB: process(state,Ltime,Pcnt,Ptime,Ready,start,LcntNr_internal,LcntPon_internal,LcntWait_internal,Pon_internal,wait_s_internal) begin
+  COMB: process(state,Pcnt,Ptime,Ready,start,LcntNr_internal,LcntPon_internal,LcntWait_internal,Pon_internal,wait_s_internal) begin
     nextstate <= state; -- default to hold value because implied_loopback is set
     LcntNr_internal <= '0'; -- default
     LcntPon_internal <= '0'; -- default

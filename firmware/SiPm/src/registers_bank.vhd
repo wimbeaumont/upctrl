@@ -53,7 +53,7 @@ signal reg_sel  : STD_LOGIC_VECTOR  (N_Reg_MSB-1 downto 0);
 signal registers_loc : RegType;
 begin
 
-set_reg_sel :  process (clk) is 
+set_reg_sel :  process (clk, Rst) is 
 begin 
 	if (  rising_edge(clk) ) then 
 		if ( reg_set_sel = '1' and we= '1'  ) then 

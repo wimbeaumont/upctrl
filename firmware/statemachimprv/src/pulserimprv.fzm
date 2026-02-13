@@ -1,4 +1,4 @@
-## File last modified by Fizzim: 18:37:42 on 14/03/23
+## File last modified by Fizzim: 16:28:12 on 27/09/19
 <version>
    14.02.26
 </version>
@@ -622,62 +622,6 @@
          -1
          </page>
       </Ready>
-      <iLtime>
-            <status>
-            GLOBAL_FIXED
-            </status>
-         <value>
-         '0'
-            <status>
-            GLOBAL_VAR
-            </status>
-         </value>
-         <vis>
-         0
-            <status>
-            GLOBAL_VAR
-            </status>
-         </vis>
-         <type>
-         
-            <status>
-            GLOBAL_VAR
-            </status>
-         </type>
-         <comment>
-         
-            <status>
-            GLOBAL_VAR
-            </status>
-         </comment>
-         <color>
-         -16777216
-            <status>
-            GLOBAL_VAR
-            </status>
-         </color>
-         <useratts>
-         
-            <status>
-            GLOBAL_VAR
-            </status>
-         </useratts>
-         <resetval>
-         
-            <status>
-            GLOBAL_VAR
-            </status>
-         </resetval>
-         <x2Obj>
-         0
-         </x2Obj>
-         <y2Obj>
-         0
-         </y2Obj>
-         <page>
-         -1
-         </page>
-      </iLtime>
    </inputs>
    <outputs>
       <LcntPon>

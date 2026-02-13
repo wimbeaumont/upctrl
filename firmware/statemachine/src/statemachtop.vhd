@@ -57,7 +57,7 @@ alias  ready : std_logic is GPIO22;
 alias  data_valid : std_logic is GPIO15;
 
 signal wait_s , Pon_i, LcntWait, LcntPon, LcntNr, load_ptime :STD_LOGIC;
-signal ptime, pcnt,  en_ptime, en_pcnt :STD_LOGIC; 
+signal ptime, pcnt,  en_ptime, en_pcnt :STD_LOGIC;
 signal PulseTime, WaitTime, NrPulses : STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 signal ptime_set :STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 

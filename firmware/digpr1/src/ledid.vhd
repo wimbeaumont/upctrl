@@ -42,7 +42,7 @@ architecture Behavioral of ledid is
 
 begin
 
-  Id <=  "101";
+  Id <=  "011";
   Lid(2 downto 0 ) <= not Id; -- 0 == LED on 
 -- T FF 
 FDCE_inst : FDCE generic map ( INIT => '0') -- Initial value of register ('0' or '1')

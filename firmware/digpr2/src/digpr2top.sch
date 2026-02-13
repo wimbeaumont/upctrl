@@ -48,9 +48,6 @@
         <signal name="Pout4" />
         <signal name="GPIO18" />
         <signal name="clk3" />
-        <signal name="XLXN_359" />
-        <signal name="XLXN_364" />
-        <signal name="XLXN_374" />
         <port polarity="Input" name="GPIO22" />
         <port polarity="Output" name="P(7:0)" />
         <port polarity="Output" name="LED(7:0)" />
@@ -597,5 +594,6 @@
             <wire x2="608" y1="240" y2="240" x1="560" />
             <wire x2="560" y1="240" y2="384" x1="560" />
         </branch>
+        <text style="fontsize:28;fontname:Arial" x="1380" y="2596">clkout3 is 10MH !!!</text>
     </sheet>
 </drawing>

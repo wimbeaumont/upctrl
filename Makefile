@@ -21,7 +21,8 @@ TARGET_FLAG=__LINUX__
 
 SRC      = ./src/
 OBJ      = ./obj/
-PDevPath = ../PeripheralDevices/
+#PDevPath = ../PeripheralDevices/
+PDevPath = $(HOME)/elpc2/github/PeripheralDevices/
 INCLSIPM      = -I ./incl/ \
 			-I $(PDevPath)/I2Cinterfaces -I $(PDevPath)/DevInterfaces -I $(PDevPath)/LTC2633
 BIN		= ./bin/

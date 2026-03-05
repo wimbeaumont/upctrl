@@ -31,7 +31,7 @@ def main(argv):
     pi.write(SEL0, 0) # select settings register
     pi.write(SEL1, 1)
     # D0 =  Coincedence = AND at  input ,  D1,D2 1,1 input sel ext  ,  D3 =1 disable window timing 
-    settings=[0,0,0,1,0,0,0,0]
+    settings=[0,1,0,1,0,0,0,0]
     set_D_outputsB ( 8, settings)
     pi.write( RegDataValid, 1)
     pi.write( RegDataValid, 0)  

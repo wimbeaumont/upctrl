@@ -35,10 +35,8 @@ int main(int argc, char *argv[])
    int counts[6];
    int ls[8];// read status 
    printf("start program %s\n\r", argv[0]);
-  
-	gpioWrite (bytesel0, 0) ;	gpioWrite (bytesel1, 0);
-    
-    // reg sel for settings 
+   gpioWrite (bytesel0, 0) ;	gpioWrite (bytesel1, 0);
+     // reg 0 b10   for settings 
     gpioWrite ( SEL1, 1); gpioWrite ( SEL0, 0); 
     // D0 =  Coincedence = AND at  input ,  D1,D2 1,1 input sel ext  ,  D3 =1 disable window timing 
     int settings[8] = { 0,1,1,1,0,0,0,0};

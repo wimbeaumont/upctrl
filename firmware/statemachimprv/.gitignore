@@ -1,0 +1,16 @@
+# ignore all 
+* 
+/*
+
+# but not these files 
+!.gitignore
+
+!README.md
+!statemach.xise
+
+#and not these subdir's and the files in there 
+!/ipcore_dir
+!/ipcore_dir/*
+!/src
+!/src/*
+

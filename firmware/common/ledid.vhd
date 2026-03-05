@@ -30,13 +30,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity ledid is
-    Port ( clk : in  STD_LOGIC;
+    Port ( Id :  in  STD_LOGIC_VECTOR(2 downto 0) ;
+			  clk : in  STD_LOGIC;
            Lid : out  STD_LOGIC_VECTOR(3 downto 0) 
           );
 end ledid;
 
 architecture Behavioral of ledid is
- signal Id :STD_LOGIC_VECTOR(2 downto 0) ;
  signal q: STD_LOGIC;
 begin
 
@@ -47,7 +47,7 @@ begin
 	end if;
   end process togleff;
 	
-  Id <=  "001";
+  
   Lid(3)  <= q;
   Lid(2 downto 0 ) <= not Id; -- 0 == LED on 
 

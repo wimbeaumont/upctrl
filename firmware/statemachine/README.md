@@ -2,7 +2,10 @@
 
 This is the firmware for the statemachine  exercise 
 
-To start the project import pract2.xise into ise 14.7 
+
+Modify the firmware so you can set also the low time of the pulse train
+
+To start the project import statemachineimprv.xise into ise 14.7 
 
 You will informed about a missing   file clksrc.xise 
 

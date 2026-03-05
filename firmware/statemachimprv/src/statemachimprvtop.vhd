@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 
 
-entity statemachtop is
+entity statemachimprvtop is
 	 generic ( T_WIDTH : integer :=8 ); 
     port ( D : in  STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 			  SEL : in  STD_LOGIC_VECTOR (1 downto 0);
@@ -45,10 +45,10 @@ entity statemachtop is
 			  GPIO14	:	IN	STD_LOGIC;-- start signal
            SYSCLK	:	IN	STD_LOGIC
 			  );
-end statemachtop;
+end statemachimprvtop;
 
 
-architecture Behavioral of statemachtop is
+architecture Behavioral of statemachimprvtop is
 -- 
 constant  LIdset  :STD_LOGIC_VECTOR (2 downto 0) := "111";
 -- name changes of input pins 
@@ -63,6 +63,8 @@ signal ptime_set :STD_LOGIC_VECTOR (T_WIDTH-1 downto 0);
 
 signal CLK100, RST, clk4M    : std_logic; 
 alias  clk : std_logic is CLK4M;
+
+-- new signals 
 
 begin
 RST <= not RstN	;
@@ -115,6 +117,29 @@ cnt_ptime : entity  work.gen_down_cnt
 			cnt => en_ptime,
 			zero_bar => ptime
 		);
+
+-- EXTRA  logic  just as place holder  if needed ,  
+-- logic will give perhaps not the right result 
+
+
+--en_ltime <=  not Pon_i; --LcntPon; 
+--cnt_ltime : entity  work.gen_down_cnt 
+		-- generic map ( 
+		  -- C_WIDTH => T_WIDTH ,
+		  -- CNT_EN => 2 ,
+		  -- LOAD_EN => 1 ,
+		  -- LRSTLVL => '1'
+		  -- )
+		-- port map (
+			-- rst => RST ,
+			-- clk => clk,
+			-- d => LowTime,
+			-- load => load_ltime,
+			-- cnt => en_ltime,
+			-- zero_bar => ltime
+		-- );
+
+-- end Extra logic 
 
 cnt_nrpulses : entity  work.gen_down_cnt 
 		generic map ( 

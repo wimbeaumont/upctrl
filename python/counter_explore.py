@@ -1,5 +1,4 @@
 import time
-import pigpio
 from upctrl_pinfunctions import *
 import pr_utils 
 
@@ -33,19 +32,19 @@ def main():
     #either the inverted output of the flip-flop (if DSEL==1), or a starting value for the counter given by D0-D3 (if DSEL==0).
     DCE= D4
     m42SEL= GPIO22 
-    pi.set_mode(DSEL, pigpio.OUTPUT)
-    pi.set_mode(DCE, pigpio.OUTPUT)
-    pi.set_mode(clk1, pigpio.OUTPUT)
-    pi.set_mode(m42SEL, pigpio.OUTPUT)
+    pi.set_mode(DSEL, piwrap.OUTPUT)
+    pi.set_mode(DCE, piwrap.OUTPUT)
+    pi.set_mode(clk1, piwrap.OUTPUT)
+    pi.set_mode(m42SEL, piwrap.OUTPUT)
     
     pi.write(DSEL, 0)
     pi.write(DCE, 1)
     pi.write(clk1, 0)
-    pi.write(m42SEL, 1)
+    pi.write(m42SEL, 0)
     
-    inputs = [D0, D1, D2, D3]
-    for inpcnt in range(len(inputs)):
-        pi.set_mode(inputs[inpcnt], pigpio.OUTPUT)
+    inputs = [D0, D1, D2, D3] # preset inputs for the counter 
+    setup_output_array(inputs, 4)
+    set_outputs(inputs, 4, 0)
     
     bin_outp_arry = [0] * 8
     

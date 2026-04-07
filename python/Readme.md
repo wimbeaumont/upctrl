@@ -42,8 +42,9 @@ Problem is that the symbol setBiasVoltage  is not defined it the lib .
 To find the name to be used in the wrapper  
 do 
 $nm -D libSiPmCtrllib.so  | grep setBi
+$nm -D libSiPmCtrllib.so  | setDiscriminator
 the resonse is something like 0000000000003a38 T _Z14setBiasVoltageif
-For the wrapper use as lib symbol Z14setBiasVoltageif  .
+For the wrapper use as lib symbol _Z14setBiasVoltageif  .
 
 
 

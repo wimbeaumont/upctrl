@@ -31,6 +31,10 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity timewindow is
+	generic (  CNT_LENGTH : integer := 28 --;
+           	  --LRSTLVL : std_logic := '0'		  
+		  	        );
+
     Port ( clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
            TwHigh : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -40,7 +44,7 @@ entity timewindow is
 end timewindow;
 
 architecture Behavioral of timewindow is
-constant CNT_LENGTH : integer := 28;
+--constant CNT_LENGTH : integer := 28;
 signal Dset : STD_LOGIC_VECTOR (CNT_LENGTH-1 downto 0);
 signal WinActiveTime :STD_LOGIC;
 signal startpulse , start_d1 :STD_LOGIC;

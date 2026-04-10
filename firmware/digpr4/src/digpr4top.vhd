@@ -255,6 +255,7 @@ settingsreg : entity work.Reg_4
 
 
 timewindow1 : entity work.timewindow
+	generic map(  CNT_LENGTH => 28 )
    Port map  ( clk  => CLK4,
 					rst =>  RST,
 					TwHigh =>  TimeWinHigh ,

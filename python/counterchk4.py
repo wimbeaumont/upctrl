@@ -54,14 +54,6 @@ def main(argv):
         pi.write(D1, 0)
     pi.write(D2, 0)
 
-    # read the counters
-    for cnt in range(6):
-        set_muxout2(cnt, 8)
-        ls=get_led_status_bin( 8)
-        counts[cnt] = ar2decvalue(ls)
-    counts = [0] * 6
-    ls = [0] * 8
-
     for cnt in range(3):
         set_muxout2(cnt, 4)
         pi.write(bytesel0, 0)

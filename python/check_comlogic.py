@@ -27,7 +27,7 @@ def main():
     inputs = [D0, D1, D2]
     #these drive the inputs of the FPGA so have to defined as outputs 
     for Dx in inputs :
-        pi.set_mode(Dx, pigpio.OUTPUT)
+        pi.set_mode(Dx, piwrap.OUTPUT)
     nr_outputs = 2
     #the output are defined in the general hardware setup 		
     simulations_inputs = [0,0,0]

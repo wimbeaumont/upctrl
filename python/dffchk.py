@@ -41,15 +41,25 @@ def main():
     input("will set clk3 low what you will expect to see on the LED's?\n")
     pi.write(clk3, 0)
     read_print_status(pr, 5)
-    input("will set clk3 high what you will expect to see on the LED's?\n")
+    input("will set clk3 high and then low what you will expect to see on the LED's?\n")
     pi.write(clk3, 1)
+    time.sleep(0.2)
+    pi.write(clk3, 0)
+    read_print_status(pr, 5)
+    input("will set CE to 0 what you will expect to see on the LED's?\n")
+    pi.write(CE, 0)
+    read_print_status(pr, 5)
+    input("will set clk3 high and then low what you will expect to see on the LED's?\n")
+    pi.write(clk3, 1)
+    time.sleep(0.2)
+    pi.write(clk3, 0)
     read_print_status(pr, 5)
     input("push the rst button press enter when done what you expect as outputs on the LED (2 and 3)\n")
 
     lc = 0
     try :
        while True:
-          if (lc % 10) == 0:
+          if (lc % 5) == 0:
               pi.write(D3, not pi.read(P3))
           lc += 1
           pi.write(clk3, 0)

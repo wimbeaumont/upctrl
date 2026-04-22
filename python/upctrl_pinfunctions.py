@@ -76,10 +76,25 @@ def set_outputs(pins, nrpins, value):
     for pincnt in range(nrpins):
         pi.write(pins[pincnt], value_array[pincnt])
 
+def set_D_outputs(nrpins, value):
+    PINNR=[]
+    for pincnt in range(nrpins):
+        PINNR.append(Dpins[pincnt])
+        set_outputs(PINNR, nrpins, value)
+
+
 def set_outputsB(pins, nrpins, value):
     for pincnt in range(nrpins):
         bitvalue = 1 if value[pincnt] > 0 else 0
         pi.write(pins[pincnt], bitvalue)
+
+def set_D_outputsB(nrpins, value):
+    PINNR=[]
+    for pincnt in range(nrpins):
+        PINNR.append(Dpins[pincnt])
+    set_outputsB(PINNR, nrpins, value)
+
+
 
 def set_muxout2(a, nrinp):
     err = 0

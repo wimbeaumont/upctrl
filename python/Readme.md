@@ -13,23 +13,23 @@ pigpiod makes use of a client server  configuration so not very efficient.
 
 
 below is has to be cleaned up 
-Try to use gpiozero 
-set the environment variable export GPIOZERO_PIN_FACTORY=native 
+Try to use gpiozero  not comptible with the used structure. 
+
+instead use lgpio 
 user should be member of the gpio group 
 sudo adduser digpr gpio
+for python it  runs without deamon . 
+for python a wraper is written ( piwrapper.py ) so the lib can be used with the already existing code with a few adaptations .
 
-
-sudo apt install python3-lgpio
-
-(The following packages will be REMOVED:
-  rpi.gpio-common
-
-) 
+remove the standard installed obsolte lib  
 sudo apt remove python3-rpi.gpio
 
 python3 -m venv --system-site-packages uCtrl
 
 source uCtrl/bin/activate
+
+pip install lgpio 
+
 
  
 

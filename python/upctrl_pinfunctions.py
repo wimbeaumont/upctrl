@@ -1,28 +1,35 @@
-#import pigpiodummy as pigpio
-import pigpio as pigpio
+import pr_utils
 from cce_1_def import *
-import pr_utils 
-# Assuming pigpio is initialized and available as pi
-pi = pigpio.pi()
+from  piwrapper import piwrap
+
+
+pi=piwrap()
 
 def init_cce_1():
-    err = pi.set_mode(SEL0, pigpio.OUTPUT)
+    err=pi.geterr()
+    #handel=pi.return_chiphandl()
+    if err < 0:
+        return None,err
+    err = pi.set_mode(SEL0, piwrap.OUTPUT)
     if err < 0:
         return err
-    err = pi.set_mode(SEL1, pigpio.OUTPUT)
+    err = pi.set_mode(SEL1, piwrap.OUTPUT)
     if err < 0:
         return None, err
     for cnt in range(8):
-        err = pi.set_mode(ledpinnr[cnt], pigpio.INPUT)
+        err = pi.set_mode(ledpinnr[cnt], piwrap.INPUT)
         if err < 0:
             return None ,err
+    
+    #pi.group_claim_input(ledpinnr)
+    
     return pi,err
 
 def init_cce_2():
     pi,err = init_cce_1()
     if err < 0:
         return None, err
-    err = pi.set_mode(SEL2, pigpio.OUTPUT)
+    err = pi.set_mode(SEL2, piwrap.OUTPUT)
     if err < 0:
         return None, err
     return pi,err
@@ -32,6 +39,13 @@ def get_led_status_bin(size):
     for cnt in range(size):
         ls.append(pi.read(ledpinnr[cnt]))
     #print(ls)
+    """
+    rb_status=pi.group_read(ledpinnr[0]) #first pin is the ref for the group
+    if rb_status[0] >= 0 :  #readback size 
+        print (rb_status)
+        
+        #ls= (rb_status[1])[:size]
+    """
     return ls
 
 def get_inp_status_bin(stat, pinno, size):
@@ -52,7 +66,7 @@ def setup_output_array(pinarry, size):
         err = -20
     else:
         for c in range(size):
-            err = pi.set_mode(pinarry[c], pigpio.OUTPUT)
+            err = pi.set_mode(pinarry[c], piwrap.OUTPUT)
             if err:
                 break
     return err

@@ -1,18 +1,19 @@
 import sys
 import time
-import pigpio
-from cce_1_def import *
+from cce_1_def import *  #import pin definitions
+from  piwrapper import piwrap
 def main():
     print("start program", sys.argv[0])
 
 
-    pi = pigpio.pi()
-    if not pi.connected:
-       exit()
+    pi = piwrap()
+    if pi.geterr() < 0:
+        print(f"Error in initialization {pi.geterr()}")
+        return pi.geterr()
     #set mux 
-    pi.set_mode(SEL0, pigpio.OUTPUT)
-    pi.set_mode(SEL1, pigpio.OUTPUT)
-    pi.set_mode(D6, pigpio.OUTPUT)  # GPIO9 is equivalent to D6
+    pi.set_mode(SEL0, piwrap.OUTPUT)
+    pi.set_mode(SEL1, piwrap.OUTPUT)
+    pi.set_mode(D6, piwrap.OUTPUT)  # GPIO9 is equivalent to D6
     pi.write(SEL0,0)
     pi.write(SEL1,0)
 
@@ -20,10 +21,10 @@ def main():
         while True:
             pi.write(D6, 1)  # On
             print( "Ledd on")
-            time.sleep(2)  # seconds
+            time.sleep(1)  # seconds
             pi.write(D6, 0)  # Off
             print( "Ledd off")
-            time.sleep(2)
+            time.sleep(1)
     except KeyboardInterrupt:
         pass
     finally:

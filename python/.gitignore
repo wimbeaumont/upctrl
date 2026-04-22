@@ -1,5 +1,6 @@
 __pycache__
-
+*.pyc
+*tst.py
 #venv 
 uCtrl
 

@@ -1,7 +1,7 @@
 import sys
 from upctrl_pinfunctions import *
 
-def main():
+def main(argv):
     ls = [0] * 8  # read status led status
 
     clkdiv = 200
@@ -27,7 +27,8 @@ def main():
         return err
 
     set_outputs(Dpins, 8, clkdiv)  # set dividing value
-    pi.set_mode(GPIO15, pigpio.OUTPUT)
+    pi.set_mode(GPIO15, piwrap.OUTPUT)
+    pi.set_mode(2, piwrap.OUTPUT) # used for checking loop speed 
     pi.write(GPIO15, 1)  # enable writing register
     pi.write(GPIO15, 0)  # disable writing register
 
@@ -36,13 +37,15 @@ def main():
     onedet = [0, 0, 0]
 
     coinc = 0
-    c_onedet = 0
+    c_onedet = 0 
     andcnt = 0
 
-    while lcnt < int(3 * 1e4):
+    while lcnt < int(3 * 1e6):
         lcnt += 1
         #print("lcnt ", lcnt, "\r", end='')
+        pi.write(2,1)
         ls=get_led_status_bin( 3)  # led status == P
+        pi.write(2,0)
         for lc in range(3):  # there are pulse inputs
             if ls[lc]:
                 if onedet[lc] == 0:
@@ -71,5 +74,8 @@ def main():
 # init_cce_2(), set_muxout2(), setup_output_array(), set_outputs(), gpioSetMode(), gpioWrite(), get_led_status_bin(), gpioTerminate()
 # Dpins, GPIO15, PI_OUTPUT
 
+    
 if __name__ == "__main__":
-    main()
+    import sys
+    main(sys.argv)
+
